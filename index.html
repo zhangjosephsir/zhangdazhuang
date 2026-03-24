@@ -6,27 +6,67 @@
     <title>大壮律师 - 三十年民事诉讼经验</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif; background: #f5f5f5; line-height: 1.6; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        header { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 40px 20px; text-align: center; border-radius: 12px; margin-bottom: 30px; }
-        h1 { font-size: 2.5em; margin-bottom: 10px; }
-        .subtitle { font-size: 1.2em; opacity: 0.9; }
-        .tagline { background: #e94560; display: inline-block; padding: 8px 20px; border-radius: 20px; margin-top: 15px; font-weight: bold; }
-        .section { background: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .section h2 { color: #1a1a2e; border-bottom: 3px solid #e94560; padding-bottom: 10px; margin-bottom: 20px; }
-        .case { border-left: 4px solid #e94560; padding: 15px; margin-bottom: 15px; background: #fafafa; border-radius: 0 8px 8px 0; }
-        .case-title { font-weight: bold; color: #1a1a2e; margin-bottom: 8px; }
-        .case-content { color: #666; font-size: 0.95em; }
-        .case-comment { background: #fff3cd; padding: 12px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #ffc107; }
-        .case-comment strong { color: #856404; }
-        .contact { text-align: center; padding: 30px; }
-        .contact-btn { background: #e94560; color: white; padding: 15px 40px; border: none; border-radius: 30px; font-size: 1.1em; cursor: pointer; text-decoration: none; display: inline-block; }
-        .contact-btn:hover { background: #d63651; }
-        footer { text-align: center; padding: 20px; color: #999; font-size: 0.9em; }
-        .stats { display: flex; justify-content: space-around; margin: 20px 0; }
-        .stat { text-align: center; }
-        .stat-num { font-size: 2em; font-weight: bold; color: #e94560; }
-        .stat-label { font-size: 0.9em; color: #666; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif; background: #f8f9fa; line-height: 1.6; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        
+        /* 顶部导航 */
+        header { background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 40px 30px; text-align: center; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h1 { font-size: 2.8em; margin-bottom: 8px; font-weight: 700; }
+        .subtitle { font-size: 1.3em; opacity: 0.95; margin-bottom: 15px; }
+        .tagline { background: rgba(255,255,255,0.2); display: inline-block; padding: 10px 25px; border-radius: 25px; font-weight: 500; }
+        
+        /* 专业领域卡片 */
+        .section { background: white; padding: 30px; border-radius: 16px; margin-bottom: 24px; box-shadow: 0 2px 15px rgba(0,0,0,0.08); }
+        .section h2 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 12px; margin-bottom: 24px; font-size: 1.5em; }
+        
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .feature { text-align: center; padding: 20px; background: #f8f9fa; border-radius: 12px; transition: transform 0.2s; }
+        .feature:hover { transform: translateY(-3px); }
+        .feature-icon { font-size: 2.5em; margin-bottom: 10px; }
+        .feature-title { font-weight: 600; color: #2c3e50; margin-bottom: 5px; }
+        .feature-desc { font-size: 0.9em; color: #666; }
+        
+        /* 案例卡片 */
+        .case { border-left: 4px solid #3498db; padding: 18px; margin-bottom: 18px; background: #fafbfc; border-radius: 0 10px 10px 0; transition: box-shadow 0.2s; }
+        .case:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+        .case-title { font-weight: 600; color: #2c3e50; margin-bottom: 8px; font-size: 1.1em; }
+        .case-content { color: #555; margin-bottom: 10px; }
+        .case-comment { background: #fff8e1; padding: 14px; border-radius: 8px; border-left: 4px solid #ffc107; font-size: 0.95em; }
+        .case-comment strong { color: #f57c00; }
+        
+        /* 联系区域 - 简洁版 */
+        .contact-section { background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 40px 30px; border-radius: 16px; text-align: center; }
+        .contact-section h2 { color: white; border-bottom-color: rgba(255,255,255,0.3); }
+        
+        .contact-options { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin: 25px 0; }
+        .contact-item { background: rgba(255,255,255,0.15); padding: 20px 30px; border-radius: 12px; min-width: 200px; }
+        .contact-item-icon { font-size: 2em; margin-bottom: 8px; }
+        .contact-item-label { font-size: 0.9em; opacity: 0.9; margin-bottom: 5px; }
+        .contact-item-value { font-size: 1.1em; font-weight: 600; }
+        .contact-item a { color: white; text-decoration: none; }
+        .contact-item a:hover { text-decoration: underline; }
+        
+        /* 简洁表单 */
+        .quick-form { max-width: 500px; margin: 25px auto; text-align: left; background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; }
+        .quick-form .form-row { display: flex; gap: 15px; margin-bottom: 15px; }
+        .quick-form .form-group { flex: 1; }
+        .quick-form label { display: block; margin-bottom: 6px; font-size: 0.9em; opacity: 0.9; }
+        .quick-form input, .quick-form textarea { width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 1em; font-family: inherit; background: white; }
+        .quick-form textarea { min-height: 100px; resize: vertical; }
+        .quick-form input:focus, .quick-form textarea:focus { outline: 2px solid #ffc107; }
+        .quick-form button { width: 100%; background: #ffc107; color: #333; padding: 14px; border: none; border-radius: 8px; font-size: 1.1em; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .quick-form button:hover { background: #ffca28; }
+        
+        .form-note { font-size: 0.85em; opacity: 0.8; margin-top: 15px; text-align: center; }
+        
+        footer { text-align: center; padding: 25px; color: #888; font-size: 0.9em; }
+        
+        /* 响应式 */
+        @media (max-width: 600px) {
+            h1 { font-size: 2em; }
+            .contact-options { flex-direction: column; align-items: center; }
+            .quick-form .form-row { flex-direction: column; gap: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -34,57 +74,111 @@
         <header>
             <h1>大壮律师</h1>
             <p class="subtitle">资深律师 | 三十年民事诉讼司法经历</p>
-            <span class="tagline">专业 · 可靠 · 经验丰富</span>
+            <span class="tagline">💼 专业 · ⚖️ 公正 · ✨ 经验丰富</span>
         </header>
 
         <div class="section">
-            <h2>⚖️ 专业领域</h2>
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-num">30+</div>
-                    <div class="stat-label">年经验</div>
+            <h2>📋 专业领域</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">💼</div>
+                    <div class="feature-title">劳动争议</div>
+                    <div class="feature-desc">调岗降薪、社保维权、离职赔偿</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-num">1000+</div>
-                    <div class="stat-label">成功案例</div>
+                <div class="feature">
+                    <div class="feature-icon">🏠</div>
+                    <div class="feature-title">婚姻家庭</div>
+                    <div class="feature-desc">离婚纠纷、财产分割、子女抚养</div>
                 </div>
-                <div class="stat">
-                    <div class="stat-num">民事</div>
-                    <div class="stat-label">专长领域</div>
+                <div class="feature">
+                    <div class="feature-icon">📝</div>
+                    <div class="feature-title">合同纠纷</div>
+                    <div class="feature-desc">合同起草、违约维权、债务追偿</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-title">债务纠纷</div>
+                    <div class="feature-desc">民间借贷、催收维权、财产保全</div>
                 </div>
             </div>
         </div>
 
         <div class="section">
-            <h2>📋 案例点评</h2>
-            <div id="cases">
-                <div class="case">
-                    <div class="case-title">案例1：调岗降薪维权</div>
-                    <div class="case-content">公司单方面将员工从焊工岗（6000元）调岗至打磨岗（4900元），工资按2200元计算。员工能否要求2N赔偿金？</div>
-                    <div class="case-comment">
-                        <strong>大壮点评：</strong>一般情况下，公司调岗需经过员工同意。如果不经员工同意，单方改变劳动合同属于违约。如果用人单位明确不履行原合同，可以视为违法解除劳动合同，员工可以依法要求双倍赔偿金。结合本案，员工自己先离职，然后主张用人单位违法解除合同，这种主张不成立。
-                    </div>
+            <h2>⚖️ 案例点评</h2>
+            <div class="case">
+                <div class="case-title">案例1：调岗降薪维权</div>
+                <div class="case-content">公司单方面将员工从焊工岗（6000元）调岗至打磨岗（4900元），工资按2200元计算。员工能否要求2N赔偿金？</div>
+                <div class="case-comment">
+                    <strong>大壮点评：</strong>一般情况下，公司调岗需经过员工同意。如果不经员工同意，单方改变劳动合同属于违约。如果用人单位明确不履行原合同，可以视为违法解除劳动合同，员工可以依法要求双倍赔偿金。
                 </div>
-                
-                <div class="case">
-                    <div class="case-title">案例2：租车签霸王条款当天归还仍扣费</div>
-                    <div class="case-content">在"拍小租"平台签署霸王条款租车，当天车辆已归还，但平台仍要求扣费。</div>
-                    <div class="case-comment">
-                        <strong>大壮点评：</strong>根据《民法典》规定，霸王条款属于无效条款。保留好合同、聊天记录等证据，先协商，协商不成可向消费者协会投诉或法院起诉。
-                    </div>
+            </div>
+            
+            <div class="case">
+                <div class="case-title">案例2：租车签霸王条款当天归还仍扣费</div>
+                <div class="case-content">在"拍小租"平台签署霸王条款租车，当天车辆已归还，但平台仍要求扣费。</div>
+                <div class="case-comment">
+                    <strong>大壮点评：</strong>根据《民法典》规定，霸王条款属于无效条款。保留好合同、聊天记录等证据，先协商，协商不成可向消费者协会投诉或法院起诉。
                 </div>
             </div>
         </div>
 
-        <div class="section contact">
-            <h2>📞 联系我</h2>
-            <p style="margin-bottom: 20px; color: #666;">遇到法律问题？立即咨询专业律师</p>
-            <a href="tel:您的电话" class="contact-btn">立即咨询</a>
+        <div class="contact-section">
+            <h2>📬 快速咨询</h2>
+            <p style="opacity: 0.9; margin-bottom: 20px;">留下您的问题，我会尽快回复您</p>
+            
+            <div class="contact-options">
+                <div class="contact-item">
+                    <div class="contact-item-icon">✉️</div>
+                    <div class="contact-item-label">邮 件</div>
+                    <div class="contact-item-value"><a href="mailto:josephsir@sohu.com">josephsir@sohu.com</a></div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">📧</div>
+                    <div class="contact-item-label">备 用 邮 件</div>
+                    <div class="contact-item-value">376500950@qq.com</div>
+                </div>
+            </div>
+            
+            <div class="quick-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>您的姓名</label>
+                        <input type="text" id="name" placeholder="怎么称呼您">
+                    </div>
+                    <div class="form-group">
+                        <label>邮箱 *</label>
+                        <input type="email" id="email" placeholder="我会回复您">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>简要描述您的问题 *</label>
+                    <textarea id="message" placeholder="例如：朋友借我5万块钱不还怎么办？"></textarea>
+                </div>
+                <button onclick="sendMail()">📨 发送咨询</button>
+                <p class="form-note">点击按钮后会自动打开邮件客户端，填写后发送即可</p>
+            </div>
         </div>
 
         <footer>
             <p>© 2026 大壮律师 | 三十年民事诉讼经验</p>
         </footer>
     </div>
+
+    <script>
+    function sendMail() {
+        const name = document.getElementById('name').value || '访客';
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        
+        if (!email || !message) {
+            alert('请填写邮箱和您的问题');
+            return;
+        }
+        
+        const subject = encodeURIComponent('网站咨询：' + name);
+        const body = encodeURIComponent('姓名：' + name + '\n邮箱：' + email + '\n\n问题：\n' + message);
+        window.location.href = 'mailto:josephsir@sohu.com?subject=' + subject + '&body=' + body;
+    }
+    </script>
 </body>
 </html>
