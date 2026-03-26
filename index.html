@@ -486,6 +486,107 @@
         }
         .faq-answer { color: #666; line-height: 1.8; }
         
+        /* Pricing Section */
+        .pricing-section {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .pricing-section .section-title {
+            text-align: center;
+            color: #1a5f7a;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        .pricing-intro {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .pricing-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .pricing-card {
+            flex: 1;
+            min-width: 200px;
+            max-width: 280px;
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+        }
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        .pricing-card.featured {
+            background: linear-gradient(135deg, #e8f8f5, #d1f2eb);
+            border-color: #159895;
+            transform: scale(1.05);
+        }
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        .pricing-badge {
+            background: #159895;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .pricing-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        .pricing-card h3 {
+            color: #333;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        .pricing-card .price {
+            color: #1a5f7a;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .pricing-card p {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+        }
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        .pricing-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+        .pricing-features li:before {
+            content: "✓ ";
+            color: #159895;
+            font-weight: bold;
+        }
+        .pricing-note {
+            background: #fffbe6;
+            border: 1px solid #ffe58f;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 25px;
+            color: #666;
+            font-size: 0.95em;
+        }
+        
         /* Testimonials */
         .testimonials {
             background: linear-gradient(135deg, #1a5f7a, #159895);
@@ -702,6 +803,53 @@
                     <h3>收费透明</h3>
                     <p>合理透明，不乱收费，先服务后收费</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- Pricing -->
+        <div class="pricing-section">
+            <h2 class="section-title">💰 收费透明</h2>
+            <p class="pricing-intro">收费明明白白，不存在隐形消费</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-icon">📋</div>
+                    <h3>法律咨询</h3>
+                    <div class="price">免费</div>
+                    <p>首次邮件咨询免费</p>
+                    <ul class="pricing-features">
+                        <li>案件初步分析</li>
+                        <li>法律建议</li>
+                        <li>解决思路指导</li>
+                    </ul>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">推荐</div>
+                    <div class="pricing-icon">⚖️</div>
+                    <h3>代理诉讼</h3>
+                    <div class="price">面议</div>
+                    <p>根据案件复杂程度定价</p>
+                    <ul class="pricing-features">
+                        <li>全程代理</li>
+                        <li>证据收集指导</li>
+                        <li>出庭辩护</li>
+                        <li>文书起草</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-icon">📝</div>
+                    <h3>文书起草</h3>
+                    <div class="price">500元起</div>
+                    <p>根据文书类型定价</p>
+                    <ul class="pricing-features">
+                        <li>起诉状</li>
+                        <li>答辩状</li>
+                        <li>法律意见书</li>
+                        <li>合同审核</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pricing-note">
+                <p>💡 说明：代理诉讼收费根据案件复杂程度、标的金额、工作量等因素确定，具体面议。先办事后收费，不成功不收费。</p>
             </div>
         </div>
 
