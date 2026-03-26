@@ -661,9 +661,9 @@
         <div class="consultation-form">
             <div class="form-header">
                 <h2>⚡ 免费法律咨询</h2>
-                <p>填写以下信息，律师尽快与您联系（仅工作日回复）</p>
+                <p>填写以下信息，点击提交后打开邮箱发送咨询（仅工作日回复）</p>
             </div>
-            <form action="mailto:376500950@qq.com" method="post" enctype="multipart/form-data">
+            <form id="consultForm" onsubmit="submitForm(event)">
                 <div class="form-row">
                     <div class="form-group">
                         <label>👤 您是 <span class="required">*</span></label>
@@ -953,6 +953,30 @@
                 otherInput.style.display = 'none';
                 otherInput.removeAttribute('required');
             }
+        }
+        
+        function submitForm(event) {
+            event.preventDefault();
+            var form = document.getElementById('consultForm');
+            var formData = new FormData(form);
+            
+            var role = formData.get('role') || '';
+            var disputeType = formData.get('disputeType') || '';
+            var otherType = formData.get('disputeTypeOther') || '';
+            var caseDesc = formData.get('caseDesc') || '';
+            var demand = formData.get('demand') || '';
+            var phone = formData.get('phone') || '';
+            var email = formData.get('email') || '';
+            
+            var subject = '法律咨询 - ' + role + ' - ' + (disputeType === '其他' ? otherType : disputeType);
+            var body = '纠纷类型: ' + (disputeType === '其他' ? otherType : disputeType) + '%0A' +
+                       '原告/被告: ' + role + '%0A' +
+                       '案情经过: ' + caseDesc.replace(/\n/g, '%0A') + '%0A' +
+                       '诉讼请求: ' + demand.replace(/\n/g, '%0A') + '%0A' +
+                       '电话: ' + phone + '%0A' +
+                       '邮箱: ' + email;
+            
+            window.location.href = 'mailto:376500950@qq.com?subject=' + subject + '&body=' + body;
         }
     </script>
 </body>
