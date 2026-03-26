@@ -597,7 +597,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>📋 纠纷类型</label>
-                        <select name="dispute_type">
+                        <select name="dispute_type" id="disputeType" onchange="toggleOtherInput()">
                             <option value="">请选择纠纷类型</option>
                             <option value="民间借贷">民间借贷</option>
                             <option value="合同纠纷">合同纠纷</option>
@@ -605,8 +605,9 @@
                             <option value="婚姻家庭">婚姻家庭</option>
                             <option value="交通事故">交通事故</option>
                             <option value="房产纠纷">房产纠纷</option>
-                            <option value="其他">其他</option>
+                            <option value="其他">其他（请填写）</option>
                         </select>
+                        <input type="text" id="disputeTypeOther" name="dispute_type_other" placeholder="请输入纠纷类型" style="display:none; margin-top:10px;">
                     </div>
                 </div>
                 <div class="form-row">
@@ -832,5 +833,18 @@
             <p>专业 · 可靠 · 负责</p>
         </footer>
     </div>
+    <script>
+        function toggleOtherInput() {
+            var select = document.getElementById('disputeType');
+            var otherInput = document.getElementById('disputeTypeOther');
+            if (select.value === '其他') {
+                otherInput.style.display = 'block';
+                otherInput.setAttribute('required', 'required');
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.removeAttribute('required');
+            }
+        }
+    </script>
 </body>
 </html>
