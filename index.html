@@ -663,7 +663,7 @@
                 <h2>⚡ 免费法律咨询</h2>
                 <p>填写以下信息，律师尽快与您联系（仅工作日回复）</p>
             </div>
-            <form action="mailto:376500950@qq.com" method="post" enctype="text/plain">
+            <form action="mailto:376500950@qq.com" method="post" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="form-group">
                         <label>👤 您是 <span class="required">*</span></label>
@@ -715,7 +715,7 @@
                     <div class="form-group">
                         <label>📝 案情经过 <span class="tip">(时间、地点、人物、经过、结果)</span></label>
                         <textarea name="description" rows="4" placeholder="例如：2025年12月，我借给朋友10万元，约定2026年1月还款，但对方至今未还..."></textarea>
-                        <p class="input-hint">💡 建议详细描述，有助于律师准确判断</p>
+                        <p class="input-hint">💡 如有证据资料（合同、欠条、聊天记录等），请直接发送邮箱：376500950@qq.com</p>
                     </div>
                 </div>
                 <div class="form-row">
@@ -732,6 +732,13 @@
                     <div class="form-group">
                         <label>📧 邮箱 <span class="required">*</span></label>
                         <input type="email" name="contact" placeholder="请填写邮箱，我会回复您" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📎 添加附件 <span class="tip">(可选，支持 PDF、图片)</span></label>
+                        <input type="file" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.gif,.doc,.docx" multiple>
+                        <p class="input-hint">💡 可上传合同、欠条、证据等资料（PDF或图片格式）</p>
                     </div>
                 </div>
                 <div class="form-row">
