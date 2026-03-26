@@ -108,22 +108,35 @@
         
         /* Consultation Form */
         .consultation-form {
-            background: #fff;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: linear-gradient(135deg, #fff 0%, #f8fffe 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(21,152,149,0.15);
+            margin-bottom: 30px;
+            border: 2px solid #e8f8f5;
+        }
+        .consultation-form .form-header {
+            text-align: center;
             margin-bottom: 30px;
         }
-        .consultation-form h2 {
+        .consultation-form .form-header h2 {
             color: #1a5f7a;
-            font-size: 1.8em;
+            font-size: 2em;
             margin-bottom: 10px;
-            text-align: center;
         }
-        .consultation-form .form-desc {
-            text-align: center;
+        .consultation-form .form-header p {
             color: #666;
-            margin-bottom: 25px;
+            font-size: 1.05em;
+        }
+        .consultation-form .form-row {
+            margin-bottom: 20px;
+        }
+        .consultation-form .form-row-2 {
+            display: flex;
+            gap: 20px;
+        }
+        .consultation-form .form-row-2 .form-group {
+            flex: 1;
         }
         .consultation-form .form-group {
             margin-bottom: 20px;
@@ -131,71 +144,187 @@
         .consultation-form label {
             display: block;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #333;
+            font-size: 1.05em;
+        }
+        .consultation-form label .required {
+            color: #e74c3c;
+        }
+        .consultation-form label .tip {
+            font-weight: 400;
+            color: #888;
+            font-size: 0.9em;
         }
         .consultation-form input[type="text"],
         .consultation-form input[type="email"],
-        .consultation-form textarea {
+        .consultation-form input[type="tel"],
+        .consultation-form textarea,
+        .consultation-form select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 18px;
             border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1em;
             font-family: inherit;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            background: #fff;
         }
         .consultation-form input:focus,
-        .consultation-form textarea:focus {
+        .consultation-form textarea:focus,
+        .consultation-form select:focus {
             outline: none;
             border-color: #159895;
+            box-shadow: 0 0 0 4px rgba(21,152,149,0.1);
         }
         .consultation-form textarea {
             resize: vertical;
+            min-height: 100px;
         }
-        .consultation-form .input-tip {
+        .consultation-form .input-hint {
             font-size: 0.9em;
-            color: #888;
-            margin-top: 5px;
+            color: #159895;
+            margin-top: 8px;
+            background: #e8f8f5;
+            padding: 8px 12px;
+            border-radius: 8px;
         }
-        .consultation-form .radio-group {
+        
+        /* Role Selector */
+        .consultation-form .role-selector {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
         }
-        .consultation-form .radio-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .consultation-form .role-card {
+            flex: 1;
+            min-width: 120px;
             cursor: pointer;
         }
-        .consultation-form .radio-item input {
-            width: 20px;
-            height: 20px;
+        .consultation-form .role-card input {
+            display: none;
+        }
+        .consultation-form .role-card .role-content {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .consultation-form .role-card:hover .role-content {
+            border-color: #159895;
+            background: #f0fffe;
+        }
+        .consultation-form .role-card input:checked + .role-content {
+            border-color: #159895;
+            background: linear-gradient(135deg, #e8f8f5, #d1f2eb);
+            box-shadow: 0 4px 15px rgba(21,152,149,0.2);
+        }
+        .consultation-form .role-card .role-icon {
+            font-size: 2em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .consultation-form .role-card .role-text {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+            display: block;
+        }
+        .consultation-form .role-card .role-desc {
+            color: #888;
+            font-size: 0.85em;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        /* Privacy Check */
+        .consultation-form .privacy-check {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 400;
+            font-size: 0.95em;
+        }
+        .consultation-form .privacy-check input {
+            width: 18px;
+            height: 18px;
             accent-color: #159895;
         }
+        .consultation-form .privacy-check a {
+            color: #159895;
+            text-decoration: none;
+        }
+        
+        /* Submit Button */
         .consultation-form .submit-btn {
             width: 100%;
             background: linear-gradient(135deg, #1a5f7a, #159895);
             color: white;
-            padding: 15px;
+            padding: 18px;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
+            border-radius: 12px;
+            font-size: 1.15em;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
         }
         .consultation-form .submit-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(21,152,149,0.3);
         }
-        .consultation-form .form-note {
-            text-align: center;
-            color: #888;
-            font-size: 0.9em;
-            margin-top: 15px;
+        .consultation-form .submit-btn .btn-note {
+            font-size: 0.85em;
+            font-weight: 400;
+            opacity: 0.9;
         }
         
+        /* Quick Contact CTA */
+        .quick-contact {
+            background: #fff;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .quick-contact .cta-text { font-size: 1.2em; color: #333; font-weight: 600; }
+        .quick-contact .phone-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(231,76,60,0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .quick-contact .phone-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(231,76,60,0.5); }
+        .quick-contact .wechat-btn {
+            background: linear-gradient(135deg, #07c160, #06ad56);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(7,193,96,0.4);
+        }
+        
+        /* Stats */
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
         /* Stats */
         .stats {
             display: flex;
@@ -429,42 +558,93 @@
 
         <!-- Consultation Form -->
         <div class="consultation-form">
-            <h2>📋 免费法律咨询</h2>
-            <p class="form-desc">请填写以下信息，我会尽快与您联系（仅限工作日）</p>
+            <div class="form-header">
+                <h2>⚡ 免费法律咨询</h2>
+                <p>填写以下信息，律师尽快与您联系（仅工作日回复）</p>
+            </div>
             <form action="mailto:376500950@qq.com" method="post" enctype="text/plain">
-                <div class="form-group">
-                    <label>👤 您是（必选）</label>
-                    <div class="radio-group">
-                        <label class="radio-item">
-                            <input type="radio" name="role" value="原告" required>
-                            <span>原告（我要起诉）</span>
-                        </label>
-                        <label class="radio-item">
-                            <input type="radio" name="role" value="被告">
-                            <span>被告（被人起诉）</span>
-                        </label>
-                        <label class="radio-item">
-                            <input type="radio" name="role" value="其他">
-                            <span>其他咨询</span>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>👤 您是 <span class="required">*</span></label>
+                        <div class="role-selector">
+                            <label class="role-card">
+                                <input type="radio" name="role" value="原告" required>
+                                <div class="role-content">
+                                    <span class="role-icon">⚖️</span>
+                                    <span class="role-text">原告</span>
+                                    <span class="role-desc">我要起诉对方</span>
+                                </div>
+                            </label>
+                            <label class="role-card">
+                                <input type="radio" name="role" value="被告">
+                                <div class="role-content">
+                                    <span class="role-icon">🛡️</span>
+                                    <span class="role-text">被告</span>
+                                    <span class="role-desc">被人起诉</span>
+                                </div>
+                            </label>
+                            <label class="role-card">
+                                <input type="radio" name="role" value="其他">
+                                <div class="role-content">
+                                    <span class="role-icon">💬</span>
+                                    <span class="role-text">其他</span>
+                                    <span class="role-desc">法律咨询</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📋 纠纷类型</label>
+                        <select name="dispute_type">
+                            <option value="">请选择纠纷类型</option>
+                            <option value="民间借贷">民间借贷</option>
+                            <option value="合同纠纷">合同纠纷</option>
+                            <option value="劳动争议">劳动争议</option>
+                            <option value="婚姻家庭">婚姻家庭</option>
+                            <option value="交通事故">交通事故</option>
+                            <option value="房产纠纷">房产纠纷</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>📝 案情经过 <span class="tip">(时间、地点、人物、经过、结果)</span></label>
+                        <textarea name="description" rows="4" placeholder="例如：2025年12月，我借给朋友10万元，约定2026年1月还款，但对方至今未还..."></textarea>
+                        <p class="input-hint">💡 建议详细描述，有助于律师准确判断</p>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>🎯 您的诉求</label>
+                        <textarea name="诉求" rows="3" placeholder="例如：1.要求对方归还本金10万元；2.支付逾期利息..."></textarea>
+                    </div>
+                </div>
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label>📱 您的电话 <span class="tip">(选填)</span></label>
+                        <input type="tel" name="phone" placeholder="便于律师快速联系您">
+                    </div>
+                    <div class="form-group">
+                        <label>📧 邮箱 <span class="required">*</span></label>
+                        <input type="email" name="contact" placeholder="请填写邮箱，我会回复您" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="privacy-check">
+                            <input type="checkbox" required>
+                            <span>我已阅读并同意 <a href="#">《隐私保护声明》</a>，承诺所填信息真实有效</span>
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>📝 纠纷简述（时间、地点、经过、结果）</label>
-                    <textarea name="description" rows="4" placeholder="例如：2025年12月，我借给朋友10万元，约定2026年1月还款，但至今未还..."></textarea>
-                    <p class="input-tip">💡 支持语音输入，点击麦克风即可语音录入</p>
-                </div>
-                <div class="form-group">
-                    <label>🎯 您的诉求</label>
-                    <textarea name="诉求" rows="3" placeholder="例如：要求对方归还本金10万元及利息..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>📧 您的联系方式（必填）</label>
-                    <input type="email" name="contact" placeholder="请填写邮箱，我会回复您" required>
-                </div>
-                <button type="submit" class="submit-btn">📨 发送咨询</button>
+                <button type="submit" class="submit-btn">
+                    <span>📨 提交咨询</span>
+                    <span class="btn-note">承诺24小时内回复</span>
+                </button>
             </form>
-            <p class="form-note">提交后我会在1-2个工作日内回复您</p>
         </div>
 
         <!-- Stats -->
