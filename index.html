@@ -106,6 +106,96 @@
             box-shadow: 0 4px 15px rgba(7,193,96,0.4);
         }
         
+        /* Consultation Form */
+        .consultation-form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .consultation-form h2 {
+            color: #1a5f7a;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .consultation-form .form-desc {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .consultation-form .form-group {
+            margin-bottom: 20px;
+        }
+        .consultation-form label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        .consultation-form input[type="text"],
+        .consultation-form input[type="email"],
+        .consultation-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        .consultation-form input:focus,
+        .consultation-form textarea:focus {
+            outline: none;
+            border-color: #159895;
+        }
+        .consultation-form textarea {
+            resize: vertical;
+        }
+        .consultation-form .input-tip {
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 5px;
+        }
+        .consultation-form .radio-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .consultation-form .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .consultation-form .radio-item input {
+            width: 20px;
+            height: 20px;
+            accent-color: #159895;
+        }
+        .consultation-form .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1a5f7a, #159895);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .consultation-form .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        .consultation-form .form-note {
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 15px;
+        }
+        
         /* Stats */
         .stats {
             display: flex;
@@ -335,6 +425,46 @@
         <div class="quick-contact">
             <div class="cta-text">📢 遇到法律问题？立即咨询</div>
             <a href="mailto:376500950@qq.com" class="wechat-btn">💬 邮件咨询</a>
+        </div>
+
+        <!-- Consultation Form -->
+        <div class="consultation-form">
+            <h2>📋 免费法律咨询</h2>
+            <p class="form-desc">请填写以下信息，我会尽快与您联系（仅限工作日）</p>
+            <form action="mailto:376500950@qq.com" method="post" enctype="text/plain">
+                <div class="form-group">
+                    <label>👤 您是（必选）</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="role" value="原告" required>
+                            <span>原告（我要起诉）</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="role" value="被告">
+                            <span>被告（被人起诉）</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="role" value="其他">
+                            <span>其他咨询</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>📝 纠纷简述（时间、地点、经过、结果）</label>
+                    <textarea name="description" rows="4" placeholder="例如：2025年12月，我借给朋友10万元，约定2026年1月还款，但至今未还..."></textarea>
+                    <p class="input-tip">💡 支持语音输入，点击麦克风即可语音录入</p>
+                </div>
+                <div class="form-group">
+                    <label>🎯 您的诉求</label>
+                    <textarea name="诉求" rows="3" placeholder="例如：要求对方归还本金10万元及利息..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>📧 您的联系方式（必填）</label>
+                    <input type="email" name="contact" placeholder="请填写邮箱，我会回复您" required>
+                </div>
+                <button type="submit" class="submit-btn">📨 发送咨询</button>
+            </form>
+            <p class="form-note">提交后我会在1-2个工作日内回复您</p>
         </div>
 
         <!-- Stats -->
