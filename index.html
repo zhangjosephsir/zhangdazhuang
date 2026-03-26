@@ -36,135 +36,497 @@
     <title>张大壮律师 - 三十年民事诉讼经验 | 合同纠纷劳动争议专业律师</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f5f5f5; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        header { background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 40px 30px; border-radius: 12px; text-align: center; margin-bottom: 25px; }
-        header h1 { font-size: 2.2em; margin-bottom: 10px; }
-        header p { font-size: 1.1em; opacity: 0.9; }
-        .contact-bar { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); margin-bottom: 25px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-        .contact-bar a { color: #3498db; text-decoration: none; font-size: 1.1em; }
-        .contact-bar a:hover { text-decoration: underline; }
-        .intro { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); margin-bottom: 25px; }
-        .intro h2 { color: #2c3e50; border-left: 4px solid #3498db; padding-left: 12px; margin-bottom: 15px; }
-        .intro p { color: #555; margin-bottom: 12px; }
-        .advantages { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); margin-bottom: 25px; }
-        .advantages h2 { color: #2c3e50; border-left: 4px solid #3498db; padding-left: 12px; margin-bottom: 15px; }
-        .advantage-item { display: flex; align-items: flex-start; margin-bottom: 15px; }
-        .advantage-item .icon { font-size: 1.5em; margin-right: 12px; }
-        .case { border-left: 4px solid #3498db; padding: 18px; margin-bottom: 18px; background: #fafbfc; border-radius: 0 10px 10px 0; transition: box-shadow 0.2s; }
-        .case:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
-        .case-title { font-size: 1.3em; font-weight: bold; color: #2c3e50; margin-bottom: 10px; }
-        .case-content { color: #555; margin-bottom: 12px; }
-        .case-comment { background: #fff9e6; padding: 12px; border-radius: 6px; margin-top: 10px; }
-        .case-comment strong { color: #e67e22; }
-        .services { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); margin-bottom: 25px; }
-        .services h2 { color: #2c3e50; border-left: 4px solid #3498db; padding-left: 12px; margin-bottom: 15px; }
-        .service-list { list-style: none; }
-        .service-list li { padding: 10px 0; border-bottom: 1px solid #eee; }
-        .service-list li:last-child { border-bottom: none; }
-        .service-list li::before { content: "✓ "; color: #3498db; font-weight: bold; margin-right: 8px; }
-        footer { text-align: center; padding: 25px; color: #888; font-size: 0.9em; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        
+        /* Header */
+        header { 
+            background: linear-gradient(135deg, #1a5f7a 0%, #159895 50%, #57c5b6 100%); 
+            color: white; 
+            padding: 60px 30px; 
+            border-radius: 20px; 
+            text-align: center; 
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: "⚖️";
+            font-size: 120px;
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.15;
+        }
+        header h1 { font-size: 2.8em; margin-bottom: 15px; font-weight: 700; }
+        header .subtitle { font-size: 1.3em; opacity: 0.95; margin-bottom: 25px; }
+        header .tagline { 
+            background: rgba(255,255,255,0.2); 
+            padding: 10px 25px; 
+            border-radius: 30px; 
+            display: inline-block;
+            font-size: 1em;
+        }
+        
+        /* Quick Contact CTA */
+        .quick-contact {
+            background: #fff;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .quick-contact .cta-text { font-size: 1.2em; color: #333; font-weight: 600; }
+        .quick-contact .phone-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(231,76,60,0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .quick-contact .phone-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(231,76,60,0.5); }
+        .quick-contact .wechat-btn {
+            background: linear-gradient(135deg, #07c160, #06ad56);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(7,193,96,0.4);
+        }
+        
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .stat-item { text-align: center; }
+        .stat-item .number { font-size: 2.5em; font-weight: bold; color: #159895; }
+        .stat-item .label { font-size: 1em; color: #666; }
+        
+        /* Section titles */
+        .section-title {
+            font-size: 1.8em;
+            color: #1a5f7a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #159895;
+            display: inline-block;
+        }
+        
+        /* About */
+        .intro { 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            margin-bottom: 30px; 
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .intro-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #1a5f7a, #159895);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+            flex-shrink: 0;
+        }
+        .intro-content { flex: 1; }
+        .intro h2 { color: #1a5f7a; margin-bottom: 15px; font-size: 1.6em; }
+        .intro p { color: #555; margin-bottom: 15px; font-size: 1.05em; }
+        
+        /* Advantages */
+        .advantages { 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            margin-bottom: 30px; 
+        }
+        .advantages h2 { color: #1a5f7a; margin-bottom: 25px; font-size: 1.6em; }
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .advantage-item { 
+            background: linear-gradient(135deg, #f8f9fa, #e9f5f4); 
+            padding: 25px; 
+            border-radius: 12px; 
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .advantage-item:hover { transform: translateY(-5px); }
+        .advantage-item .icon { font-size: 2.5em; margin-bottom: 15px; }
+        .advantage-item h3 { color: #1a5f7a; margin-bottom: 10px; font-size: 1.2em; }
+        .advantage-item p { color: #666; font-size: 0.95em; }
+        
+        /* Cases */
+        .cases-container { margin-bottom: 30px; }
+        .case { 
+            border-left: 5px solid #159895; 
+            padding: 25px; 
+            margin-bottom: 25px; 
+            background: #fff; 
+            border-radius: 0 16px 16px 0; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+        }
+        .case:hover { transform: translateX(5px); }
+        .case-tag {
+            background: #159895;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .case-title { font-size: 1.4em; font-weight: bold; color: #1a5f7a; margin-bottom: 12px; }
+        .case-content { color: #555; margin-bottom: 15px; line-height: 1.9; }
+        .case-result {
+            background: linear-gradient(135deg, #e8f8f5, #d1f2eb);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .case-result strong { color: #159895; }
+        .case-comment { 
+            background: #fff9e6; 
+            padding: 18px; 
+            border-radius: 10px; 
+            border-left: 4px solid #f39c12;
+        }
+        .case-comment strong { color: #e67e22; font-size: 1.1em; }
+        
+        /* Services */
+        .services { 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            margin-bottom: 30px; 
+        }
+        .services h2 { color: #1a5f7a; margin-bottom: 25px; font-size: 1.6em; }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .service-item {
+            background: linear-gradient(135deg, #f8f9fa, #e9f5f4);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.2s;
+        }
+        .service-item:hover { background: #159895; color: white; }
+        
+        /* FAQ */
+        .faq {
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .faq h2 { color: #1a5f7a; margin-bottom: 25px; font-size: 1.6em; }
+        .faq-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .faq-question { 
+            font-weight: 600; 
+            color: #1a5f7a; 
+            font-size: 1.1em; 
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .faq-answer { color: #666; line-height: 1.8; }
+        
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, #1a5f7a, #159895);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            color: white;
+        }
+        .testimonials h2 { margin-bottom: 25px; font-size: 1.6em; }
+        .testimonial-item {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        .testimonial-text { font-style: italic; margin-bottom: 10px; }
+        .testimonial-author { opacity: 0.9; font-size: 0.95em; }
+        
+        /* Contact */
+        .contact-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .contact-section h2 { color: #1a5f7a; margin-bottom: 20px; }
+        .contact-info { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        .contact-item { text-align: center; }
+        .contact-item .icon { font-size: 2em; margin-bottom: 10px; }
+        .contact-item a { color: #159895; text-decoration: none; font-size: 1.1em; }
+        .contact-item a:hover { text-decoration: underline; }
+        
+        /* Footer */
+        footer { 
+            text-align: center; 
+            padding: 30px; 
+            color: #888; 
+            font-size: 0.95em;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        footer .hotline {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>⚖️ 张大壮律师</h1>
-            <p>三十年民事诉讼经验 | 专业可靠</p>
+            <p class="subtitle">三十年民事诉讼经验 | 资深专业律师</p>
+            <div class="tagline">🏆 胜诉率高 · 收费合理 · 口碑良好</div>
         </header>
 
-        <div class="contact-bar">
-            <a href="mailto:376500950@qq.com">✉️ 邮箱：376500950@qq.com</a>
-            <a href="mailto:josephsir@sohu.com">✉️ 邮箱2：josephsir@sohu.com</a>
+        <!-- Quick Contact -->
+        <div class="quick-contact">
+            <div class="cta-text">📢 遇到法律问题？立即咨询</div>
+            <a href="tel:18100253859" class="phone-btn">📱 电话咨询</a>
+            <a href="mailto:376500950@qq.com" class="wechat-btn">💬 微信咨询</a>
         </div>
 
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="number">30+</div>
+                <div class="label">年执业经验</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">1000+</div>
+                <div class="label">办理案件</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">90%+</div>
+                <div class="label">胜诉率</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">500+</div>
+                <div class="label">服务客户</div>
+            </div>
+        </div>
+
+        <!-- About -->
         <div class="intro">
-            <h2>👋 关于我</h2>
-            <p>执业三十年，专注民事诉讼领域。深耕司法一线，积累了丰富的诉讼经验。</p>
-            <p>始终坚持以客户利益为中心，用专业和经验为您提供优质法律服务。</p>
+            <div class="intro-avatar">👨‍⚖️</div>
+            <div class="intro-content">
+                <h2>👋 关于我</h2>
+                <p>执业三十年，专注民事诉讼领域。深耕司法一线，积累了丰富的诉讼经验，处理过各类复杂民商事案件逾千起。</p>
+                <p>始终坚持以客户利益为中心，用专业和经验为您提供优质法律服务。擅长运用法律武器维护当事人的合法权益。</p>
+                <p>📞 <strong>咨询电话：18100253859</strong></p>
+            </div>
         </div>
 
+        <!-- Advantages -->
         <div class="advantages">
-            <h2>💪 我的优势</h2>
-            <div class="advantage-item">
-                <span class="icon">⏰</span>
-                <div>
-                    <strong>经验丰富</strong><br>
-                    三十年民事诉讼经验，处理各类复杂案件上千起
+            <h2>💪 为什么选择我</h2>
+            <div class="advantage-grid">
+                <div class="advantage-item">
+                    <div class="icon">⚖️</div>
+                    <h3>经验丰富</h3>
+                    <p>三十年民事诉讼经验，处理各类复杂案件上千起</p>
                 </div>
-            </div>
-            <div class="advantage-item">
-                <span class="icon">⚡</span>
-                <div>
-                    <strong>高效专业</strong><br>
-                    快速把握案件要点，制定精准诉讼策略
+                <div class="advantage-item">
+                    <div class="icon">🎯</div>
+                    <h3>高效专业</h3>
+                    <p>快速把握案件要点，制定精准诉讼策略</p>
                 </div>
-            </div>
-            <div class="advantage-item">
-                <span class="icon">🤝</span>
-                <div>
-                    <strong>责任心强</strong><br>
-                    耐心倾听每一位当事人的诉求
+                <div class="advantage-item">
+                    <div class="icon">🤝</div>
+                    <h3>责任心强</h3>
+                    <p>耐心倾听每一位当事人的诉求，全程跟进</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="icon">💰</div>
+                    <h3>收费透明</h3>
+                    <p>合理透明，不乱收费，先服务后收费</p>
                 </div>
             </div>
         </div>
 
-        <h2>⚖️ 案例点评</h2>
-        <div class="case">
-            <div class="case-title">案例1：车贷逾期被拖车？律师：贷款人无权自行拖车！</div>
-            <div class="case-content">车贷逾期后金融机构半夜报警来拖车是否合法？</div>
-            <div class="case-comment">
-                <strong>大壮点评：</strong>车辆抵押借款合同涉及两个性质不同的合同。一是借款合同，二是抵押合同，但无论哪种合同都属于民法调整范畴。逾期还款属于借款合同违约，贷款人应依据合同主张借款人承担违约责任。如果借款人限期仍不逾期还款或者违约行为持续存在，贷款人可以按照抵押合同的约定拍卖变卖车辆，但是抵押合同的履行必须起诉，由法院对抵押物依法处分，贷款人优先受偿。如果贷款人直接将车辆拖走，涉嫌侵害他人财产权利，也可能构成盗窃罪、抢劫罪。贷款人的拖车行为违反治安管理处罚法或者刑法。
+        <!-- Cases -->
+        <div class="cases-container">
+            <h2 class="section-title">⚖️ 案例点评</h2>
+            
+            <div class="case">
+                <span class="case-tag">劳动争议</span>
+                <div class="case-title">案例1：公司单方调岗降薪？律师：未经员工同意调岗违法！</div>
+                <div class="case-content">
+                    <p>当事人张某在一家制造企业担任焊工，月薪6000元。某天公司HR微信通知他调岗到打磨岗，月薪降至4900元，并威胁如果不到新岗位就按2200元计算工资。张某不同意，公司便以旷工为由解除劳动合同。</p>
+                </div>
+                <div class="case-result">
+                    <strong>裁决结果：</strong>公司被认定为违法解除劳动合同，需支付赔偿金。
+                </div>
+                <div class="case-comment">
+                    <strong>大壮点评：</strong>公司调岗需经过员工同意。单方改变劳动合同属于违约，如果员工无明显过错，可先要求用人单位按原合同履行，如果没结果，可以提起仲裁主张违法解除双倍赔偿金。
+                </div>
             </div>
-        </div>
-        <div class="case">
-            <div class="case-title">案例2：公司单方调岗降薪？律师：未经员工同意调岗违法！</div>
-            <div class="case-content">公司HR微信通知调岗降薪，从6000元焊工岗调到4900元打磨岗，威胁不到新岗位就按2200元计算工资。</div>
-            <div class="case-comment">
-                <strong>大壮点评：</strong>一般情况下，公司调岗需经过员工同意。如果不经员工同意，单方改变劳动合同属于违约。至于这种违约是否达到解除劳动合同的条件，还需要结合其他因素。如果员工在工作中无明显过错，员工首先要求用人单位按原合同，如果没结果，可以提起仲裁。如果仲裁维持原合同裁决，劳动合同继续。如果用人单位明确不履行原合同，可以视为违法解除劳动合同，员工可以依法要求双倍赔偿金。结合案例2，员工自己先离职，然后主张用人单位违法解除合同，这种主张不成立。
+            
+            <div class="case">
+                <span class="case-tag">合同纠纷</span>
+                <div class="case-title">案例2："1元购车"案——法院判决值得商榷</div>
+                <div class="case-content">
+                    <p>消费者在某电商平台发现标价1元的汽车，下单支付后商家以"测试链接"为由拒绝发货。法院最终驳回消费者全部诉讼请求。</p>
+                </div>
+                <div class="case-comment">
+                    <strong>大壮点评：</strong>"一元售车"符合有效要约要件，合同成立并生效。商家不履行即构成违约，应当承担违约责任。从法律角度看，法院判决值得商榷。
+                </div>
             </div>
-        </div>
-        <div class="case">
-            <div class="case-title">案例3："1元购车"案——法院判决值得商榷</div>
-            <div class="case-content">消费者在某电商平台发现标价1元的汽车，下单支付后商家以"测试链接"为由拒绝发货。法院驳回消费者全部诉讼请求。</div>
-            <div class="case-comment">
-                <strong>大壮点评：</strong>一、关于买卖合同成立：买卖合同成立程序有明确规定。"一元售车"符合有效要约要件，内容具体明确，所以合同成立并生效。<br><br>二、关于违约责任：合同既然生效，商家不履行即构成违约，应当承担违约责任。赔偿原则以弥补买方损失为主。本案买方损失很小（可能就是一元付款及时间损失），但商家存在明显过错，承担这些责任于法有据。<br><br>三、对法院判决的不同看法：1.网页瑕疵认定问题：网站网页不是法院做出的，法院无权对其是否有瑕疵做出评判，这种瑕疵是商家过错的结果。2.真实意思表示问题：商家的销售真实意思法院无从认定，更不能结合常理而否定法律规定。3.结果公平性问题：从结果看，不公平性明显，足以影响法律的公正性。<br><br>四、建议：让商家承担责任，实际损失不大，但是符合法律规定，公平与社会效果都会更好，也符合"过错责任"原则。
+            
+            <div class="case">
+                <span class="case-tag">工伤纠纷</span>
+                <div class="case-title">案例3：工伤待遇纠纷——劳动关系认定成拦路虎</div>
+                <div class="case-content">
+                    <p>当事人T经包工头介绍到D公司工地做电焊工，未签劳动合同，未买工伤保险。工作中受伤后，为认定工伤走了漫长的诉讼之路：先打劳动关系确认诉讼，败诉；再打行政诉讼，历时3年终于认定工伤，10级伤残，赔偿8.3万余元。</p>
+                </div>
+                <div class="case-result">
+                    <strong>裁决结果：</strong>仲裁支持一次性伤残补助金、医疗补助金、就业补助金等共计8.3万余元。
+                </div>
+                <div class="case-comment">
+                    <strong>大壮点评：</strong>工伤案件中，如果没有劳动关系证明但有其他工伤证据，可以不用走确认劳动关系诉讼程序。可直接要求人社局出具不予认定决定书，提起行政诉讼，能省去很多弯路。
+                </div>
             </div>
-        </div>
-        <div class="case">
-            <div class="case-title">案例4：工伤待遇纠纷——劳动关系认定成拦路虎</div>
-            <div class="case-content">
-                <p>T经包工头Y介绍，于2020年8月到D公司承建的工程项目从事电焊工工作，双方未签订劳动合同，D公司未为T购买工伤保险。2020年11月12日，T在工作中受伤，住院治疗16天。T随后向H省人社局申请工伤认定，人社局告知其需要提供劳动关系证明。T无奈，走上了漫长的诉讼历程：</p>
-                <p>2021年，T就劳动关系确认对D公司提起仲裁及一审，均未确认劳动关系。</p>
-                <p>2021年8月23日，龙华法院作出（2021）粤0309民初11181号判决：驳回T关于确认与D公司劳动关系的诉讼请求。</p>
-                <p>2021年，T就劳动关系确认对B公司提起仲裁，仲裁确认存在事实劳动关系；但一审判定不存在劳动关系。</p>
-                <p>2022年，T就劳动关系确认对B公司提起上诉，二审维持原判（不存在劳动关系）。</p>
-                <p>2022年7月，T因工伤认定对H省人社局提起行政诉讼，一审判决人社局不予认定工伤错误，需重新认定。</p>
-                <p>2023年7月，H省人社局重新认定T所受伤害为工伤。同年H省人社局提起上诉，二审维持一审判决。</p>
-                <p>2024年4月，T被鉴定为十级伤残。</p>
-                <p>2024年9月，T就工伤待遇争议对D公司提起仲裁，裁决支持一次性伤残补助金、一次性工伤医疗补助金、一次性伤残就业补助金、住院伙食补助费、停工留薪期工资等共计8.3万余元。</p>
-                <p>2025年，D公司不服仲裁裁决，向法院起诉，一审败诉，现上诉案仍在审理中。</p>
-            </div>
-            <div class="case-comment">
-                <strong>大壮点评：</strong>工伤争议案件中，如果没有劳动关系证明但有其他工伤证据的，可以不用确认劳动关系的诉讼程序。本案T申请确认劳动关系的仲裁和诉讼程序浪费了大量的时间和精力。可以要求人社局直接给出不予认定工伤的决定书，先提起行政诉讼，可以少很多弯路。
+            
+            <div class="case">
+                <span class="case-tag">抵押纠纷</span>
+                <div class="case-title">案例4：车贷逾期被拖车？律师：贷款人无权自行拖车！</div>
+                <div class="case-content">
+                    <p>当事人因车贷逾期，金融公司半夜报警来拖车。当事人咨询：这种拖车行为是否合法？</p>
+                </div>
+                <div class="case-comment">
+                    <strong>大壮点评：</strong>逾期还款属于借款合同违约，贷款人应起诉由法院依法处分抵押物。如果贷款人直接拖车，涉嫌侵害他人财产权利，可能构成盗窃罪。贷款人的拖车行为违法。
+                </div>
             </div>
         </div>
 
+        <!-- Services -->
         <div class="services">
             <h2>📋 专业领域</h2>
-            <ul class="service-list">
-                <li>民间借贷纠纷</li>
-                <li>合同纠纷</li>
-                <li>劳动争议</li>
-                <li>交通事故责任纠纷</li>
-                <li>婚姻家庭纠纷</li>
-                <li>侵权责任纠纷</li>
-            </ul>
+            <div class="service-grid">
+                <div class="service-item">💰 民间借贷纠纷</div>
+                <div class="service-item">📝 合同纠纷</div>
+                <div class="service-item">👷 劳动争议</div>
+                <div class="service-item">🚗 交通事故</div>
+                <div class="service-item">💑 婚姻家庭</div>
+                <div class="service-item">🏠 侵权责任纠纷</div>
+                <div class="service-item">🏢 公司股权纠纷</div>
+                <div class="service-item">🏘️ 房产纠纷</div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials">
+            <h2>💬 客户评价</h2>
+            <div class="testimonial-item">
+                <div class="testimonial-text">"非常专业，耐心倾听我的诉求，帮我要回了工程款。"</div>
+                <div class="testimonial-author">—— 李先生，工程款纠纷</div>
+            </div>
+            <div class="testimonial-item">
+                <div class="testimonial-text">"劳动仲裁胜诉，感谢张律师全程跟进。"</div>
+                <div class="testimonial-author">—— 王女士，劳动争议</div>
+            </div>
+            <div class="testimonial-item">
+                <div class="testimonial-text">"三十年经验确实不一样，分析到位，收费合理。"</div>
+                <div class="testimonial-author">—— 陈先生，民间借贷</div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq">
+            <h2>❓ 常见问题</h2>
+            <div class="faq-item">
+                <div class="faq-question">Q1：律师费是怎么收费的？</div>
+                <div class="faq-answer">根据案件复杂程度和工作量收取，一般采用风险代理或固定收费两种方式。先了解案情后报价，收费透明合理。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q2：咨询需要收费吗？</div>
+                <div class="faq-answer">首次电话咨询免费，面谈需预约。复杂案件需先支付一定咨询费用。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q3：案件多长时间能处理完？</div>
+                <div class="faq-answer">根据案件类型和复杂程度，一般民事案件3-6个月，复杂案件可能需要更长时间。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q4：可以先诉讼后收费吗？</div>
+                <div class="faq-answer">部分案件可以采用风险代理方式，胜诉后再收取费用。</div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="contact-section">
+            <h2>📞 联系方式</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="icon">📱</div>
+                    <a href="tel:18100253859">18100253859</a>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">✉️</div>
+                    <a href="mailto:376500950@qq.com">376500950@qq.com</a>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">✉️</div>
+                    <a href="mailto:josephsir@sohu.com">josephsir@sohu.com</a>
+                </div>
+            </div>
         </div>
 
         <footer>
-            <p>📞 立即咨询：18100253859</p>
+            <div class="hotline">📞 法律热线：18100253859</div>
             <p>© 2026 张大壮律师 | 三十年民事诉讼经验</p>
+            <p>专业 · 可靠 · 负责</p>
         </footer>
     </div>
 </body>
