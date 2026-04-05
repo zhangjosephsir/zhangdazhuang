@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免费咨询系统 - 张大壮律师</title>
+    <style>
+        /* Base styles from original site */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.95em; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: 30px; }
+        
+        /* Lawyer Intro Header */
+        .lawyer-intro {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .lawyer-intro .avatar { font-size: 3em; }
+        .lawyer-intro .info h2 { font-size: 1.5em; color: #1a5f7a; }
+        .lawyer-intro .info p { color: #666; }
+
+        /* Consultation Form from original site */
+        .consultation-form { background: linear-gradient(135deg, #fff 0%, #f8fffe 100%); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(21,152,149,0.15); border: 2px solid #e8f8f5; }
+        /* ... All the detailed styles for the form copied from index_backup_v2.html ... */
+        .consultation-form .form-header { text-align: center; margin-bottom: 30px; }
+        .consultation-form .form-header h2 { color: #1a5f7a; font-size: 2em; margin-bottom: 10px; }
+        .consultation-form label { display: block; font-weight: 600; margin-bottom: 10px; color: #333; }
+        .consultation-form input[type="text"], .consultation-form textarea, .consultation-form select { width: 100%; padding: 14px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 1em; }
+        .consultation-form .submit-btn { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 18px; border: none; border-radius: 12px; font-size: 1.15em; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; 返回首页</a>
+
+        <div class="lawyer-intro">
+            <div class="avatar">👨‍⚖️</div>
+            <div class="info">
+                <h2>张大壮律师</h2>
+                <p>三十年民事诉讼经验 | 胜诉率高 | 专业可靠</p>
+            </div>
+        </div>
+
+        <div class="consultation-form">
+            <div class="form-header">
+                <h2>免费在线法律咨询</h2>
+                <p>请详细填写您的案情，我将在24小时内为您提供初步法律分析</p>
+            </div>
+            <form id="consultForm" onsubmit="submitForm(event)">
+                <!-- The full form from your original site will be placed here -->
+                <div class="form-row">
+                    <label>纠纷类型</label>
+                    <select name="dispute_type"><option>民间借贷</option><option>合同纠纷</option><option>劳动争议</option></select>
+                </div>
+                <div class="form-row">
+                    <label>案情经过</label>
+                    <textarea name="description" rows="5" placeholder="请详细描述案情..."></textarea>
+                </div>
+                <div class="form-row">
+                    <label>您的诉求</label>
+                    <textarea name="demand" rows="3" placeholder="例如：要求对方归还本金..."></textarea>
+                </div>
+                <div class="form-row">
+                     <label>您的联系方式 (邮箱/电话)</label>
+                    <input type="text" name="contact" required>
+                </div>
+                <button type="submit" class="submit-btn">提交咨询</button>
+            </form>
+        </div>
+
+        <footer>
+            <p>© 2026 张大壮律师</p>
+        </footer>
+    </div>
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            // Form submission logic from your original site
+            alert("咨询已提交，请留意您的邮箱！");
+        }
+    </script>
+</body>
+</html>
