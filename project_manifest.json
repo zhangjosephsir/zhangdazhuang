@@ -1,0 +1,27 @@
+{
+  "project_name": "大壮律师专属网站",
+  "version": "2.0",
+  "last_updated": "2026-04-05T13:31:00Z",
+  "approved_state": {
+    "homepage": {
+      "style": "quadrant",
+      "file": "index.html",
+      "status": "Final, links point to correct subpages."
+    },
+    "subpages": {
+      "consult.html": {
+        "status": "Complete, with full-featured form."
+      },
+      "tools.html": {
+        "status": "Complete, '4-in-1' calculator with real-time LPR."
+      },
+      "cases.html": {
+        "status": "Complete, contains all 6 full case studies."
+      },
+      "blog.html": {
+        "status": "Complete, correctly displays 'coming soon' placeholder."
+      }
+    }
+  },
+  "notes": "This manifest is the single source of truth. All agent actions must conform to the 'approved_state'. Any changes must be approved by '大壮' and recorded here FIRST."
+}
