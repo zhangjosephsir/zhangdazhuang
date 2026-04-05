@@ -3,974 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="张大壮律师，三十年民事诉讼经验，专业处理民间借贷、合同纠纷、劳动争议、交通事故、婚姻家庭等民事案件。">
-    <meta name="keywords" content="张大壮律师,民事诉讼,合同纠纷,劳动争议,民间借贷,婚姻家庭,交通事故,律师咨询,打赏,直播打赏,网络直播,赠与合同,调岗降薪,工伤认定,小产权房,抵押纠纷,离婚纠纷">
-    <meta name="author" content="张大壮律师">
-    <meta name="google-site-verification" content="wdZr4-cSaa4waXVzlE-FgIU43DpcpUCX382Ywgh2Lww" />
-    <meta name="msvalidate.01" content="6D4535563EE6230E7706CC45169C8BE6" />
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="张大壮律师 - 三十年民事诉讼经验">
-    <meta property="og:description" content="专业处理民间借贷、合同纠纷、劳动争议、交通事故、婚姻家庭等民事案件">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://zhangjosephsir.github.io/zhangdazhuang/">
-    
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Attorney",
-        "name": "张大壮律师",
-        "description": "三十年民事诉讼经验，专业处理民间借贷、合同纠纷、劳动争议、交通事故、婚姻家庭等民事案件",
-        "url": "https://zhangjosephsir.github.io/zhangdazhuang/",
-        "telephone": "",
-        "email": ["376500950@qq.com", "josephsir@sohu.com"],
-        "address": {
-            "@type": "PostalAddress",
-            "addressRegion": "中国"
-        },
-        "areaServed": "中国",
-        "priceRange": "$$",
-        "sameAs": []
-    }
-    </script>
-    
-    <title>张大壮律师 - 三十年民事诉讼经验 | 合同纠纷劳动争议专业律师</title>
+    <title>张大壮律师 - 四象限业务平台</title>
     <style>
+        /* Base styles from original site */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.6; background: #f4f6f9; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
         
-        /* Header */
         header { 
-            background: linear-gradient(135deg, #1a5f7a 0%, #159895 50%, #57c5b6 100%); 
-            color: white; 
-            padding: 60px 30px; 
-            border-radius: 20px; 
             text-align: center; 
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 50px;
         }
-        header::before {
-            content: "⚖️";
-            font-size: 120px;
-            position: absolute;
-            right: -20px;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.15;
+        header h1 { font-size: 3em; color: #2c3e50; margin-bottom: 10px; }
+        header p { font-size: 1.2em; color: #7f8c8d; }
+
+        /* Quadrant Layout */
+        .quadrant-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
         }
-        header h1 { font-size: 2.8em; margin-bottom: 15px; font-weight: 700; }
-        header .subtitle { font-size: 1.3em; opacity: 0.95; margin-bottom: 25px; }
-        header .tagline { 
-            background: rgba(255,255,255,0.2); 
-            padding: 10px 25px; 
-            border-radius: 30px; 
-            display: inline-block;
-            font-size: 1em;
-        }
-        
-        /* Quick Contact CTA */
-        .quick-contact {
+
+        .quadrant-card {
             background: #fff;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .quick-contact .cta-text { font-size: 1.2em; color: #333; font-weight: 600; }
-        .quick-contact .phone-btn {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(231,76,60,0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .quick-contact .phone-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(231,76,60,0.5); }
-        .quick-contact .wechat-btn {
-            background: linear-gradient(135deg, #07c160, #06ad56);
-            color: white;
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(7,193,96,0.4);
-        }
-        
-        /* Consultation Form */
-        .consultation-form {
-            background: linear-gradient(135deg, #fff 0%, #f8fffe 100%);
-            padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(21,152,149,0.15);
-            margin-bottom: 30px;
-            border: 2px solid #e8f8f5;
-        }
-        .consultation-form .form-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .consultation-form .form-header h2 {
-            color: #1a5f7a;
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        .consultation-form .form-header p {
-            color: #666;
-            font-size: 1.05em;
-        }
-        .consultation-form .form-row {
-            margin-bottom: 20px;
-        }
-        .consultation-form .form-row-2 {
-            display: flex;
-            gap: 20px;
-        }
-        .consultation-form .form-row-2 .form-group {
-            flex: 1;
-        }
-        .consultation-form .form-group {
-            margin-bottom: 20px;
-        }
-        .consultation-form label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #333;
-            font-size: 1.05em;
-        }
-        .consultation-form label .required {
-            color: #e74c3c;
-        }
-        .consultation-form label .tip {
-            font-weight: 400;
-            color: #888;
-            font-size: 0.9em;
-        }
-        .consultation-form input[type="text"],
-        .consultation-form input[type="email"],
-        .consultation-form input[type="tel"],
-        .consultation-form textarea,
-        .consultation-form select {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 1em;
-            font-family: inherit;
-            transition: all 0.3s;
-            background: #fff;
-        }
-        .consultation-form input:focus,
-        .consultation-form textarea:focus,
-        .consultation-form select:focus {
-            outline: none;
-            border-color: #159895;
-            box-shadow: 0 0 0 4px rgba(21,152,149,0.1);
-        }
-        .consultation-form textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        .consultation-form .input-hint {
-            font-size: 0.9em;
-            color: #159895;
-            margin-top: 8px;
-            background: #e8f8f5;
-            padding: 8px 12px;
-            border-radius: 8px;
-        }
-        
-        /* Role Selector */
-        .consultation-form .role-selector {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        .consultation-form .role-card {
-            flex: 1;
-            min-width: 120px;
-            cursor: pointer;
-        }
-        .consultation-form .role-card input {
-            display: none;
-        }
-        .consultation-form .role-card .role-content {
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px 15px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        .consultation-form .role-card:hover .role-content {
-            border-color: #159895;
-            background: #f0fffe;
-        }
-        .consultation-form .role-card input:checked + .role-content {
-            border-color: #159895;
-            background: linear-gradient(135deg, #e8f8f5, #d1f2eb);
-            box-shadow: 0 4px 15px rgba(21,152,149,0.2);
-        }
-        .consultation-form .role-card .role-icon {
-            font-size: 2em;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .consultation-form .role-card .role-text {
-            font-weight: 600;
-            color: #333;
-            font-size: 1.1em;
-            display: block;
-        }
-        .consultation-form .role-card .role-desc {
-            color: #888;
-            font-size: 0.85em;
-            display: block;
-            margin-top: 5px;
-        }
-        
-        /* Privacy Check */
-        .consultation-form .privacy-check {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 400;
-            font-size: 0.95em;
-        }
-        .consultation-form .privacy-check input {
-            width: 18px;
-            height: 18px;
-            accent-color: #159895;
-        }
-        .consultation-form .privacy-check a {
-            color: #159895;
-            text-decoration: none;
-        }
-        
-        /* Submit Button */
-        .consultation-form .submit-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #1a5f7a, #159895);
-            color: white;
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.15em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
-        }
-        .consultation-form .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(21,152,149,0.3);
-        }
-        .consultation-form .submit-btn .btn-note {
-            font-size: 0.85em;
-            font-weight: 400;
-            opacity: 0.9;
-        }
-        
-        /* Quick Contact CTA */
-        .quick-contact {
-            background: #fff;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .quick-contact .cta-text { font-size: 1.2em; color: #333; font-weight: 600; }
-        .quick-contact .phone-btn {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(231,76,60,0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .quick-contact .phone-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(231,76,60,0.5); }
-        .quick-contact .wechat-btn {
-            background: linear-gradient(135deg, #07c160, #06ad56);
-            color: white;
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(7,193,96,0.4);
-        }
-        
-        /* Stats */
             text-align: center;
-            color: #666;
+        }
+        .quadrant-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .quadrant-card .icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+        .quadrant-card h2 {
+            font-size: 1.6em;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        .quadrant-card p {
+            color: #7f8c8d;
+            flex-grow: 1;
             margin-bottom: 25px;
         }
-        /* Stats */
-        .stats {
-            display: flex;
-            justify-content: space-around;
-            background: #fff;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .stat-item { text-align: center; }
-        .stat-item .number { font-size: 2.5em; font-weight: bold; color: #159895; }
-        .stat-item .label { font-size: 1em; color: #666; }
-        
-        /* Section titles */
-        .section-title {
-            font-size: 1.8em;
-            color: #1a5f7a;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #159895;
-            display: inline-block;
-        }
-        
-        /* About */
-        .intro { 
-            background: #fff; 
-            padding: 30px; 
-            border-radius: 16px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
-            margin-bottom: 30px; 
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        .intro-avatar {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #1a5f7a, #159895);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3em;
+        .quadrant-card .cta-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
-            flex-shrink: 0;
-        }
-        .intro-content { flex: 1; }
-        .intro h2 { color: #1a5f7a; margin-bottom: 15px; font-size: 1.6em; }
-        .intro p { color: #555; margin-bottom: 15px; font-size: 1.05em; }
-        
-        /* Advantages */
-        .advantages { 
-            background: #fff; 
-            padding: 30px; 
-            border-radius: 16px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
-            margin-bottom: 30px; 
-        }
-        .advantages h2 { color: #1a5f7a; margin-bottom: 25px; font-size: 1.6em; }
-        .advantage-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .advantage-item { 
-            background: linear-gradient(135deg, #f8f9fa, #e9f5f4); 
-            padding: 25px; 
-            border-radius: 12px; 
-            text-align: center;
-            transition: transform 0.2s;
-        }
-        .advantage-item:hover { transform: translateY(-5px); }
-        .advantage-item .icon { font-size: 2.5em; margin-bottom: 15px; }
-        .advantage-item h3 { color: #1a5f7a; margin-bottom: 10px; font-size: 1.2em; }
-        .advantage-item p { color: #666; font-size: 0.95em; }
-        
-        /* Cases */
-        .cases-container { margin-bottom: 30px; }
-        .case { 
-            border-left: 5px solid #159895; 
-            padding: 25px; 
-            margin-bottom: 25px; 
-            background: #fff; 
-            border-radius: 0 16px 16px 0; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: transform 0.2s;
-        }
-        .case:hover { transform: translateX(5px); }
-        .case-tag {
-            background: #159895;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-        .case-title { font-size: 1.4em; font-weight: bold; color: #1a5f7a; margin-bottom: 12px; }
-        .case-content { color: #555; margin-bottom: 15px; line-height: 1.9; }
-        .case-result {
-            background: linear-gradient(135deg, #e8f8f5, #d1f2eb);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-        .case-result strong { color: #159895; }
-        .case-comment { 
-            background: #fff9e6; 
-            padding: 18px; 
-            border-radius: 10px; 
-            border-left: 4px solid #f39c12;
-        }
-        .case-comment strong { color: #e67e22; font-size: 1.1em; }
-        
-        /* Services */
-        .services { 
-            background: #fff; 
-            padding: 30px; 
-            border-radius: 16px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
-            margin-bottom: 30px; 
-        }
-        .services h2 { color: #1a5f7a; margin-bottom: 25px; font-size: 1.6em; }
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        .service-item {
-            background: linear-gradient(135deg, #f8f9fa, #e9f5f4);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: 500;
-            color: #333;
-            transition: all 0.2s;
-        }
-        .service-item:hover { background: #159895; color: white; }
-        
-        /* FAQ */
-        .faq {
-            background: #fff;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-        }
-        .faq h2 { color: #1a5f7a; margin-bottom: 25px; font-size: 1.6em; }
-        .faq-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
-        .faq-question { 
-            font-weight: 600; 
-            color: #1a5f7a; 
-            font-size: 1.1em; 
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-        .faq-answer { color: #666; line-height: 1.8; }
-        
-        /* Pricing Section */
-        .pricing-section {
-            background: #fff;
-            padding: 40px 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-        }
-        .pricing-section .section-title {
-            text-align: center;
-            color: #1a5f7a;
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-        .pricing-intro {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .pricing-grid {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .pricing-card {
-            flex: 1;
-            min-width: 200px;
-            max-width: 280px;
-            background: #f8f9fa;
-            border-radius: 16px;
-            padding: 25px;
-            text-align: center;
-            transition: transform 0.3s;
-            border: 2px solid transparent;
-        }
-        .pricing-card:hover {
-            transform: translateY(-5px);
-        }
-        .pricing-card.featured {
-            background: linear-gradient(135deg, #e8f8f5, #d1f2eb);
-            border-color: #159895;
-            transform: scale(1.05);
-        }
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-5px);
-        }
-        .pricing-badge {
-            background: #159895;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-        .pricing-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-        .pricing-card h3 {
-            color: #333;
-            font-size: 1.3em;
-            margin-bottom: 10px;
-        }
-        .pricing-card .price {
-            color: #1a5f7a;
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .pricing-card p {
-            color: #666;
-            font-size: 0.95em;
-            margin-bottom: 20px;
-        }
-        .pricing-features {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-        }
-        .pricing-features li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-            color: #555;
-        }
-        .pricing-features li:before {
-            content: "✓ ";
-            color: #159895;
-            font-weight: bold;
-        }
-        .pricing-note {
-            background: #fffbe6;
-            border: 1px solid #ffe58f;
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 25px;
-            color: #666;
-            font-size: 0.95em;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            background: linear-gradient(135deg, #1a5f7a, #159895);
-            padding: 30px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            color: white;
-        }
-        .testimonials h2 { margin-bottom: 25px; font-size: 1.6em; }
-        .testimonial-item {
-            background: rgba(255,255,255,0.15);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-        .testimonial-text { font-style: italic; margin-bottom: 10px; }
-        .testimonial-author { opacity: 0.9; font-size: 0.95em; }
-        
-        /* Contact */
-        .contact-section {
-            background: #fff;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .contact-section h2 { color: #1a5f7a; margin-bottom: 20px; }
-        .contact-info { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-        .contact-item { text-align: center; }
-        .contact-item .icon { font-size: 2em; margin-bottom: 10px; }
-        .contact-item a { color: #159895; text-decoration: none; font-size: 1.1em; }
-        .contact-item a:hover { text-decoration: underline; }
-        
-        /* Footer */
-        footer { 
-            text-align: center; 
-            padding: 30px; 
-            color: #888; 
-            font-size: 0.95em;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        footer .hotline {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 15px 30px;
+            padding: 12px 30px;
             border-radius: 50px;
-            display: inline-block;
-            margin-bottom: 15px;
-            font-size: 1.2em;
+            text-decoration: none;
             font-weight: bold;
+            transition: background 0.3s;
         }
+        .quadrant-card .cta-button:hover {
+             background: linear-gradient(135deg, #4aa3df, #3a90c8);
+        }
+        
+        /* Custom card colors */
+        #card-tools .icon { color: #e67e22; }
+        #card-tools .cta-button { background: linear-gradient(135deg, #e67e22, #d35400); }
+        #card-cases .icon { color: #27ae60; }
+        #card-cases .cta-button { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        #card-blog .icon { color: #8e44ad; }
+        #card-blog .cta-button { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+
+        footer { text-align: center; margin-top: 50px; color: #95a5a6; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>⚖️ 张大壮律师</h1>
-            <p class="subtitle">三十年民事诉讼经验 | 资深专业律师</p>
-            <div class="tagline">🏆 胜诉率高 · 口碑良好</div>
+            <h1>张大壮律师 | 业务平台</h1>
+            <p>三十年民事诉讼经验，为您提供专业、高效的法律服务</p>
         </header>
 
-        <!-- Quick Contact -->
-        <div class="quick-contact">
-            <div class="cta-text">📢 遇到法律问题？立即咨询</div>
-            <a href="tools.html" class="wechat-btn" style="background: linear-gradient(135deg, #3498db, #2980b9);">🛠️ 智能法律工具</a>
-            <a href="mailto:376500950@qq.com" class="phone-btn">💬 邮件咨询</a>
-        </div>
+        <div class="quadrant-container">
+            <!-- Card 1: About Me -->
+            <div class="quadrant-card" id="card-about">
+                <div class="icon">👨‍⚖️</div>
+                <h2>关于大壮律师</h2>
+                <p>三十年民事诉讼经验，处理各类复杂案件逾千起。始终以客户利益为中心，用专业和经验为您保驾护航。</p>
+                <a href="index_backup_v2.html#intro" class="cta-button">了解更多</a>
+            </div>
 
-        <!-- Consultation Form -->
-        <div class="consultation-form">
-            <div class="form-header">
-                <h2>⚡ 免费法律咨询</h2>
-                <p>填写以下信息，点击提交后打开邮箱发送咨询（仅工作日回复）</p>
+            <!-- Card 2: Legal Tools -->
+            <div class="quadrant-card" id="card-tools">
+                <div class="icon">🛠️</div>
+                <h2>律师费、违约金快速计算</h2>
+                <p>根据最新LPR及收费标准，快速估算您的诉讼成本与可得利益。简单、高效，心中有数。</p>
+                <a href="tools.html" class="cta-button">开始计算</a>
             </div>
-            <form id="consultForm" onsubmit="submitForm(event)" autocomplete="off">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>👤 您是 <span class="required">*</span></label>
-                        <div class="role-selector">
-                            <label class="role-card">
-                                <input type="radio" name="role" value="原告" required>
-                                <div class="role-content">
-                                    <span class="role-icon">⚖️</span>
-                                    <span class="role-text">原告</span>
-                                    <span class="role-desc">我要起诉对方</span>
-                                </div>
-                            </label>
-                            <label class="role-card">
-                                <input type="radio" name="role" value="被告">
-                                <div class="role-content">
-                                    <span class="role-icon">🛡️</span>
-                                    <span class="role-text">被告</span>
-                                    <span class="role-desc">被人起诉</span>
-                                </div>
-                            </label>
-                            <label class="role-card">
-                                <input type="radio" name="role" value="其他">
-                                <div class="role-content">
-                                    <span class="role-icon">💬</span>
-                                    <span class="role-text">其他</span>
-                                    <span class="role-desc">法律咨询</span>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>📋 纠纷类型</label>
-                        <select name="dispute_type" id="disputeType" onchange="toggleOtherInput()">
-                            <option value="">请选择纠纷类型</option>
-                            <option value="民间借贷">民间借贷</option>
-                            <option value="合同纠纷">合同纠纷</option>
-                            <option value="劳动争议">劳动争议</option>
-                            <option value="婚姻家庭">婚姻家庭</option>
-                            <option value="交通事故">交通事故</option>
-                            <option value="房产纠纷">房产纠纷</option>
-                            <option value="其他">其他（请填写）</option>
-                        </select>
-                        <input type="text" id="disputeTypeOther" name="dispute_type_other" placeholder="请输入纠纷类型" style="display:none; margin-top:10px;">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>📝 案情经过 <span class="tip">(时间、地点、人物、经过、结果)</span></label>
-                        <textarea name="description" rows="4" placeholder="例如：2025年12月，我借给朋友10万元，约定2026年1月还款，但对方至今未还..."></textarea>
-                        <p class="input-hint">💡 如有证据资料（合同、欠条、聊天记录等），请直接发送邮箱：376500950@qq.com</p>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>🎯 您的诉求</label>
-                        <textarea name="诉求" rows="3" placeholder="例如：1.要求对方归还本金10万元；2.支付逾期利息..."></textarea>
-                    </div>
-                </div>
-                <div class="form-row-2">
-                    <div class="form-group">
-                        <label>📱 您的电话 <span class="tip">(选填)</span></label>
-                        <input type="tel" name="phone" placeholder="便于律师快速联系您">
-                    </div>
-                    <div class="form-group">
-                        <label>📧 邮箱 <span class="required">*</span></label>
-                        <input type="email" name="contact" placeholder="请填写邮箱，我会回复您" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>📎 添加附件 <span class="tip">(可选，支持 PDF、图片)</span></label>
-                        <input type="file" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.gif,.doc,.docx" multiple>
-                        <p class="input-hint">💡 可上传合同、欠条、证据等资料（PDF或图片格式）</p>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="privacy-check">
-                            <input type="checkbox" required>
-                            <span>我已阅读并同意 <a href="#">《隐私保护声明》</a>，承诺所填信息真实有效</span>
-                        </label>
-                    </div>
-                </div>
-                <button type="submit" class="submit-btn">
-                    <span>📨 提交咨询</span>
-                    <span class="btn-note">承诺24小时内回复</span>
-                </button>
-            </form>
-        </div>
 
-        <!-- Stats -->
-        <div class="stats">
-            <div class="stat-item">
-                <div class="number">30+</div>
-                <div class="label">年执业经验</div>
+            <!-- Card 3: Case Studies -->
+            <div class="quadrant-card" id="card-cases">
+                <div class="icon">⚖️</div>
+                <h2>精选案例点评</h2>
+                <p>从真实案例出发，剖析法律关系，解读判决逻辑。以案说法，深入浅出，助您理解司法实践。</p>
+                <a href="index_backup_v2.html#cases" class="cta-button">查看所有案例</a>
             </div>
-            <div class="stat-item">
-                <div class="number">1000+</div>
-                <div class="label">办理案件</div>
-            </div>
-            <div class="stat-item">
-                <div class="number">90%+</div>
-                <div class="label">胜诉率</div>
-            </div>
-            <div class="stat-item">
-                <div class="number">500+</div>
-                <div class="label">服务客户</div>
-            </div>
-        </div>
 
-        <!-- About -->
-        <div class="intro">
-            <div class="intro-avatar">👨‍⚖️</div>
-            <div class="intro-content">
-                <h2>👋 关于我</h2>
-                <p>执业三十年，专注民事诉讼领域。深耕司法一线，积累了丰富的诉讼经验，处理过各类复杂民商事案件逾千起。</p>
-                <p>始终坚持以客户利益为中心，用专业和经验为您提供优质法律服务。擅长运用法律武器维护当事人的合法权益。</p>
-            </div>
-        </div>
-
-        <!-- Advantages -->
-        <div class="advantages">
-            <h2>💪 为什么选择我</h2>
-            <div class="advantage-grid">
-                <div class="advantage-item">
-                    <div class="icon">⚖️</div>
-                    <h3>经验丰富</h3>
-                    <p>三十年民事诉讼经验，处理各类复杂案件上千起</p>
-                </div>
-                <div class="advantage-item">
-                    <div class="icon">🎯</div>
-                    <h3>高效专业</h3>
-                    <p>快速把握案件要点，制定精准诉讼策略</p>
-                </div>
-                <div class="advantage-item">
-                    <div class="icon">🤝</div>
-                    <h3>责任心强</h3>
-                    <p>耐心倾听每一位当事人的诉求，全程跟进</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Cases -->
-        <div class="cases-container">
-            <h2 class="section-title">⚖️ 案例点评</h2>
-            
-            <div class="case">
-                <span class="case-tag">劳动争议</span>
-                <div class="case-title">案例1：公司单方调岗降薪？律师：未经员工同意调岗违法！</div>
-                <div class="case-content">
-                    <p>当事人张某在一家制造企业担任焊工，月薪6000元。某天公司HR微信通知他调岗到打磨岗，月薪降至4900元，并威胁如果不到新岗位就按2200元计算工资。张某不同意，公司便以旷工为由解除劳动合同。</p>
-                </div>
-                <div class="case-result">
-                    <strong>裁决结果：</strong>公司被认定为违法解除劳动合同，需支付赔偿金。
-                </div>
-                <div class="case-comment">
-                    <strong>大壮点评：</strong>公司调岗需经过员工同意。单方改变劳动合同属于违约，如果员工无明显过错，可先要求用人单位按原合同履行，如果没结果，可以提起仲裁主张违法解除双倍赔偿金。
-                </div>
-            </div>
-            
-            <div class="case">
-                <span class="case-tag">合同纠纷</span>
-                <div class="case-title">案例2："1元购车"案——法院判决值得商榷</div>
-                <div class="case-content">
-                    <p>消费者在某电商平台发现标价1元的汽车，下单支付后商家以"测试链接"为由拒绝发货。法院最终驳回消费者全部诉讼请求。</p>
-                </div>
-                <div class="case-comment">
-                    <strong>大壮点评：</strong>"一元售车"符合有效要约要件，合同成立并生效。商家不履行即构成违约，应当承担违约责任。从法律角度看，法院判决值得商榷。
-                </div>
-            </div>
-            
-            <div class="case">
-                <span class="case-tag">工伤纠纷</span>
-                <div class="case-title">案例3：工伤待遇纠纷——劳动关系认定成拦路虎</div>
-                <div class="case-content">
-                    <p>当事人T经包工头介绍到D公司工地做电焊工，未签劳动合同，未买工伤保险。工作中受伤后，为认定工伤走了漫长的诉讼之路：先打劳动关系确认诉讼，败诉；再打行政诉讼，历时3年终于认定工伤，10级伤残，赔偿8.3万余元。</p>
-                </div>
-                <div class="case-result">
-                    <strong>裁决结果：</strong>仲裁支持一次性伤残补助金、医疗补助金、就业补助金等共计8.3万余元。
-                </div>
-                <div class="case-comment">
-                    <strong>大壮点评：</strong>工伤案件中，如果没有劳动关系证明但有其他工伤证据，可以不用走确认劳动关系诉讼程序。可直接要求人社局出具不予认定决定书，提起行政诉讼，能省去很多弯路。
-                </div>
-            </div>
-            
-            <div class="case">
-                <span class="case-tag">抵押纠纷</span>
-                <div class="case-title">案例4：车贷逾期被拖车？律师：贷款人无权自行拖车！</div>
-                <div class="case-content">
-                    <p>当事人因车贷逾期，金融公司半夜报警来拖车。当事人咨询：这种拖车行为是否合法？</p>
-                </div>
-                <div class="case-comment">
-                    <strong>大壮点评：</strong>逾期还款属于借款合同违约，贷款人应起诉由法院依法处分抵押物。如果贷款人直接拖车，涉嫌侵害他人财产权利，可能构成盗窃罪。贷款人的拖车行为违法。
-                </div>
-            </div>
-            
-            <div class="case">
-                <span class="case-tag">婚姻家庭</span>
-                <div class="case-title">案例5：离婚纠纷中小产权房分割争议——二审驳回起诉被再审撤销</div>
-                <div class="case-content">
-                    <p>女方起诉离婚并要求分割夫妻共同财产——深圳市小产权房一栋（共七层27间房）。该房产2002年以"历史遗留违法私房"申报，无正式产权证。女方主张50%使用权，男方不同意分割。</p>
-                </div>
-                <div class="case-result">
-                    <strong>裁决结果：</strong>一审判决准予离婚，小产权房分层分割；二审撤销一审，驳回起诉；广东高院再审撤销二审，指令深圳中院再审。
-                </div>
-                <div class="case-comment">
-                    <strong>大壮点评：</strong>二审法院以"超越职权"为由驳回起诉，属于适用法律错误。《婚姻家庭编解释（一）》第77条明确规定：尚未取得完全所有权的房屋，法院虽不能判决所有权，但可以判决使用权。使用权分割≠所有权确认，这是法院对夫妻共同财产的合理处置权，不存在超越职权问题。广东高院认定二审适用法律错误，指令再审，符合法律规定。<br><br><strong>审判反思：</strong>本案耗时3年未终结，根本原因在于二审法院对法律理解有误，错误适用"超越职权"驳回起诉。如果二审能正确理解《婚姻家庭编解释（一）》第77条的规定，小产权房使用权完全可以依法分割，案件早已了结。法院应当提高司法能力，避免因法律理解偏差导致案件反复折腾，浪费司法资源，损害当事人权益。
-                </div>
-            </div>
-            
-            <div class="case">
-                <span class="case-tag">合同纠纷</span>
-                <div class="case-title">案例6：网络直播打赏的法律性质与效力分析</div>
-                <div class="case-content">
-                    <p><strong>案情简介：</strong>原告张三在某直播平台观看主播李四的直播期间，多次向主播打赏共计5万余元。后双方因聊天记录显示张三曾表示"如果你做我女朋友我就继续打赏"，李四未明确回应但继续收取打赏。嗣后张三要求返还全部打赏款项，理由是双方未形成赠与合同关系。</p>
-                    <p><strong>诉讼主张及审理程序：</strong>原告张三向被告主播李四、直播平台、公会提起诉讼，要求：确认打赏行为不构成赠与合同；判令各被告返还全部打赏款项。被告辩称：打赏是自愿行为，属于赠与合同，不可撤销。</p>
-                </div>
-                <div class="case-comment">
-                    <strong>大壮点评：</strong><strong>一、主体法律定位：</strong>参与网络直播打赏的主体包括：平台（营利性法人，提供网络服务）、公会/MCN（营利性法人，负责主播经纪）、主播（一般民事主体，提供直播服务）、粉丝（一般民事主体/消费者）。<br><br><strong>二、打赏行为的法律定性：</strong>网络直播是基于网络平台搭建的网络服务场所，由公会等组织主播在线表演，各方合作为一定营利目的网络表演活动。网络直播打赏不应简单定性为赠与合同，理由如下：1.主体错位——打赏资金并非直接进入主播账户，平台、公会均参与分成；2.粉丝的真实意思是"支持主播"还是"购买服务"并不清晰；3.缺乏赠与合意的直接性——传统赠与是一对一的财产转移，而打赏的赏金被多层分配。<br><br><strong>三、赠与合同成立的两种情形：</strong>1.事先说明型：平台在打赏前明确告知"打赏视为捐赠"、粉丝确认后打赏 → 赠与合同成立；2.附条件约定型：粉丝提出打赏附带特定条件（如"做我女朋友"），主播明确承诺接受 → 附条件赠与合同成立。<br><br><strong>四、不构成赠与合同的法律后果：</strong>除上述两种情形外，粉丝反悔的，有权要求各方返还。如存在欺诈、重大误解，可主张撤销。
-                </div>
-            </div>
-        </div>
-
-        <!-- Blog Posts -->
-        <div class="blog-container" style="margin-bottom: 30px;">
-            <h2 class="section-title" style="border-bottom-color: #8e44ad;">✍️ 律师随笔</h2>
-            
-            <div class="case" style="border-left-color: #8e44ad;">
-                <span class="case-tag" style="background-color: #8e44ad;">执业感悟</span>
-                <div class="case-title">我的第一次庭审经历：从紧张到从容</div>
-                <div class="case-content">
-                    <p>回顾我第一次作为代理律师站上法庭的那一天，心情至今记忆犹新。那是一个阳光明媚的下午，但我手心全是汗。准备了无数个日夜的案卷，在脑海里过了一遍又一遍...</p>
-                </div>
-                 <a href="#" style="color: #8e44ad; text-decoration: none; font-weight: bold;">阅读全文 &rarr;</a>
-            </div>
-            
-            <div class="case" style="border-left-color: #8e44ad;">
-                <span class="case-tag" style="background-color: #8e44ad;">法律思考</span>
-                <div class="case-title">关于《公司法》新修，中小企业主需要注意的几个“坑”</div>
-                <div class="case-content">
-                    <p>新《公司法》的修订，对所有市场主体都带来了深远影响，尤其是对于广大的中小企业主。其中，关于注册资本“五年实缴”的规定，无疑是悬在许多创始人头上的一把剑...</p>
-                </div>
-                 <a href="#" style="color: #8e44ad; text-decoration: none; font-weight: bold;">阅读全文 &rarr;</a>
-            </div>
-        </div>
-
-        <!-- Contact -->
-        <div class="contact-section">
-            <h2>📞 联系方式</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="icon">✉️</div>
-                    <a href="mailto:376500950@qq.com">376500950@qq.com</a>
-                </div>
-                <div class="contact-item">
-                    <div class="icon">✉️</div>
-                    <a href="mailto:josephsir@sohu.com">josephsir@sohu.com</a>
-                </div>
+            <!-- Card 4: Blog -->
+            <div class="quadrant-card" id="card-blog">
+                <div class="icon">✍️</div>
+                <h2>深度律师随笔</h2>
+                <p>分享执业感悟、法律思考与行业洞见。不止于办案，更在于对法治精神的传递与思考。</p>
+                <a href="index_backup_v2.html#blog" class="cta-button">阅读更多文章</a>
             </div>
         </div>
 
         <footer>
-            <p>© 2026 张大壮律师 | 三十年民事诉讼经验</p>
-            <p>专业 · 可靠 · 负责</p>
+            <p>© 2026 张大壮律师</p>
         </footer>
     </div>
-    <script>
-        function toggleOtherInput() {
-            var select = document.getElementById('disputeType');
-            var otherInput = document.getElementById('disputeTypeOther');
-            if (select.value === '其他') {
-                otherInput.style.display = 'block';
-                otherInput.setAttribute('required', 'required');
-            } else {
-                otherInput.style.display = 'none';
-                otherInput.removeAttribute('required');
-            }
-        }
-        
-        function submitForm(event) {
-            event.preventDefault();
-            var form = document.getElementById('consultForm');
-            var formData = new FormData(form);
-            
-            var role = formData.get('role') || '';
-            var disputeType = formData.get('disputeType') || '';
-            var otherType = formData.get('disputeTypeOther') || '';
-            var caseDesc = formData.get('caseDesc') || '';
-            var demand = formData.get('demand') || '';
-            var phone = formData.get('phone') || '';
-            var email = formData.get('email') || '';
-            
-            var subject = '法律咨询 - ' + role + ' - ' + (disputeType === '其他' ? otherType : disputeType);
-            var body = '纠纷类型: ' + (disputeType === '其他' ? otherType : disputeType) + '%0A' +
-                       '原告/被告: ' + role + '%0A' +
-                       '案情经过: ' + caseDesc.replace(/\n/g, '%0A') + '%0A' +
-                       '诉讼请求: ' + demand.replace(/\n/g, '%0A') + '%0A' +
-                       '电话: ' + phone + '%0A' +
-                       '邮箱: ' + email;
-            
-            window.location.href = 'mailto:376500950@qq.com?subject=' + subject + '&body=' + body;
-        }
-    </script>
 </body>
 </html>
