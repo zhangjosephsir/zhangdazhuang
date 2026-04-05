@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>诉讼费、律师费、利息计算器 - 张大壮律师</title>
     <style>
-        /* Styles remain the same, ensuring a consistent, professional look */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
         .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
         footer { text-align: center; padding: 30px; color: #888; font-size: 0.95em; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: 30px; }
         header { background: linear-gradient(135deg, #1a5f7a 0%, #159895 50%, #57c5b6 100%); color: white; padding: 40px 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
-        header h1 { font-size: 1.8em; } /* Adjusted for longer title */
+        header h1 { font-size: 1.8em; }
         .tool { background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; border-left: 5px solid #159895; }
         .tool h3 { font-size: 1.8em; color: #1a5f7a; margin-bottom: 25px; }
         .form-group { margin-bottom: 20px; }
@@ -20,7 +19,7 @@
         input[type="number"], input[type="date"], select { width: 100%; padding: 14px 18px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 1em; }
         button { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 18px; border: none; border-radius: 12px; font-size: 1.15em; font-weight: bold; cursor: pointer; }
         .result { margin-top: 25px; padding: 20px; background: linear-gradient(135deg, #e8f8f5, #d1f2eb); border-radius: 10px; border-left: 5px solid #159895; display: none; }
-        #lpr-status { font-size: 0.9em; color: #888; text-align: right; }
+        #lpr-status { font-size: 0.9em; color: #888; text-align: right; float: right; font-weight: normal;}
     </style>
 </head>
 <body>
@@ -28,7 +27,6 @@
         <a href="index.html" class="back-link">&larr; 返回首页</a>
         <header><h1>诉讼费、律师费、利息计算器</h1></header>
 
-        <!-- Litigation Fee Calculator -->
         <div class="tool" id="litigation-fee-tool">
             <h3>诉讼案件受理费计算器</h3>
             <div class="form-group">
@@ -39,7 +37,6 @@
             <div id="litigation-fee-result" class="result"></div>
         </div>
 
-        <!-- Property Preservation Fee Calculator -->
         <div class="tool" id="preservation-fee-tool">
             <h3>财产保全费计算器</h3>
             <div class="form-group">
@@ -50,68 +47,158 @@
             <div id="preservation-fee-result" class="result"></div>
         </div>
 
-        <!-- Lawyer Fee Calculator (Existing) -->
         <div class="tool" id="fee-calculator-tool">
              <h3>律师费估算器 (风险代理)</h3>
-             <!-- ... existing content ... -->
+             <div class="form-group">
+                <label for="lawyer-fee-amount">案件争议标的额 (元)</label>
+                <input type="number" id="lawyer-fee-amount" placeholder="请输入案件涉及金额">
+            </div>
+            <button onclick="calculateLawyerFee()">估算律师费</button>
+            <div id="lawyer-fee-result" class="result"></div>
         </div>
 
-        <!-- Penalty Calculator (Existing with Real-time LPR) -->
         <div class="tool" id="penalty-calculator-tool">
             <h3>违约金 / 逾期利息计算器 <span id="lpr-status">LPR加载中...</span></h3>
-            <!-- ... existing content ... -->
+            <div class="form-group"><label for="principal">本金 / 欠款金额 (元)</label><input type="number" id="principal" placeholder="请输入本金"></div>
+            <div class="form-group"><label for="start-date">开始计算日期</label><input type="date" id="start-date"></div>
+            <div class="form-group"><label for="end-date">计算截止日期</label><input type="date" id="end-date"></div>
+            <div class="form-group">
+                <label for="lpr-multiplier">LPR倍数 (银行同期LPR则为1倍)</label>
+                <input type="number" id="lpr-multiplier" value="1" step="0.1" placeholder="输入LPR的倍数，例如 1, 2, 4">
+            </div>
+            <button onclick="calculatePenalty()">开始计算</button>
+            <div id="penalty-result" class="result"></div>
         </div>
 
         <footer><p>© 2026 张大壮律师</p></footer>
     </div>
     <script>
-        // --- NEW: Litigation Fee Logic ---
         function calculateLitigationFee() {
             const amount = parseFloat(document.getElementById('case-amount').value);
             const resultDiv = document.getElementById('litigation-fee-result');
-            if (isNaN(amount) || amount < 0) { /* ... error handling ... */ return; }
-            let fee = 0;
-            if (amount <= 10000) {
-                fee = 50;
-            } else if (amount <= 100000) {
-                fee = 50 + (amount - 10000) * 0.025;
-            } else if (amount <= 200000) {
-                fee = 50 + 90000 * 0.025 + (amount - 100000) * 0.02;
-            } else if (amount <= 500000) {
-                fee = 50 + 90000 * 0.025 + 100000 * 0.02 + (amount - 200000) * 0.015;
-            } // ... and so on for all tiers based on official standards
-            else { // Simplified for brevity, real code has all tiers
-                 fee = 50 + 90000*0.025 + 100000*0.02 + 300000*0.015 + (amount-500000)*0.01;
+            if (isNaN(amount) || amount < 0) {
+                resultDiv.innerHTML = '<h4>错误</h4><p>请输入有效的案件金额。</p>';
+                resultDiv.style.display = 'block';
+                return;
             }
-            
-            resultDiv.innerHTML = \`<h4>案件受理费估算</h4>
-                               <p>受理费约为: <strong>¥ \${fee.toFixed(2)}</strong></p>
-                               <p>简易程序减半: <strong>¥ \${(fee/2).toFixed(2)}</strong></p>
-                               <small>依据《诉讼费用交纳办法》计算，仅供参考。</small>\`;
+            let fee;
+            if (amount <= 10000) fee = 50;
+            else if (amount <= 100000) fee = 50 + (amount - 10000) * 0.025;
+            else if (amount <= 200000) fee = 2300 + (amount - 100000) * 0.02;
+            else if (amount <= 500000) fee = 4300 + (amount - 200000) * 0.015;
+            else if (amount <= 1000000) fee = 8800 + (amount - 500000) * 0.01;
+            else if (amount <= 2000000) fee = 13800 + (amount - 1000000) * 0.009;
+            else if (amount <= 5000000) fee = 22800 + (amount - 2000000) * 0.008;
+            else if (amount <= 10000000) fee = 46800 + (amount - 5000000) * 0.007;
+            else if (amount <= 20000000) fee = 81800 + (amount - 10000000) * 0.006;
+            else fee = 141800 + (amount - 20000000) * 0.005;
+
+            resultDiv.innerHTML = `<h4>案件受理费估算</h4>
+                               <p>受理费约为: <strong>¥ ${fee.toFixed(2)}</strong></p>
+                               <p>简易程序减半: <strong>¥ ${(fee/2).toFixed(2)}</strong></p>
+                               <small>依据《诉讼费用交纳办法》计算，仅供参考。</small>`;
             resultDiv.style.display = 'block';
         }
 
-        // --- NEW: Property Preservation Fee Logic ---
         function calculatePreservationFee() {
             const amount = parseFloat(document.getElementById('preservation-amount').value);
             const resultDiv = document.getElementById('preservation-fee-result');
-            if (isNaN(amount) || amount <= 0) { /* ... error handling ... */ return; }
-            let fee = 0;
+            if (isNaN(amount) || amount <= 0) {
+                resultDiv.innerHTML = '<h4>错误</h4><p>请输入有效的保全金额。</p>';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            let fee;
             if (amount <= 1000) {
                 fee = 30;
             } else if (amount <= 100000) {
                 fee = 30 + (amount - 1000) * 0.01;
-            } else { // Max fee is 5000
-                fee = Math.min(5000, 30 + 99000 * 0.01 + (amount - 100000) * 0.005);
+            } else {
+                fee = 1020 + (amount - 100000) * 0.005;
             }
-            resultDiv.innerHTML = \`<h4>财产保全费估算</h4>
+            fee = Math.min(fee, 5000);
+            resultDiv.innerHTML = `<h4>财产保全费估算</h4>
                                <p>保全费最高不超过5000元。</p>
-                               <p>估算费用为: <strong>¥ \${fee.toFixed(2)}</strong></p>\`;
+                               <p>估算费用为: <strong>¥ ${fee.toFixed(2)}</strong></p>`;
             resultDiv.style.display = 'block';
         }
 
-        // --- Existing LPR and Lawyer Fee Logic ---
-        // ... (The unchanged code for LPR fetching and lawyer fee calculation goes here)
+        let currentLpr = 0.0345;
+        const LPR_API_URL = 'https://moonapi.com/api/lpr';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchLpr();
+        });
+
+        async function fetchLpr() {
+            const statusEl = document.getElementById('lpr-status');
+            try {
+                const response = await fetch(LPR_API_URL);
+                if (!response.ok) throw new Error('Network response was not ok.');
+                const data = await response.json();
+                if (data && data.data && data.data.length > 0) {
+                    const latestLprData = data.data.find(item => item.type === '1年');
+                    if(latestLprData) {
+                        currentLpr = parseFloat(latestLprData.rate) / 100;
+                        statusEl.textContent = `LPR (1年期) 已更新: ${(currentLpr * 100).toFixed(2)}%`;
+                        statusEl.style.color = '#159895';
+                    } else { throw new Error('1-year LPR not found'); }
+                } else { throw new Error('Invalid API response'); }
+            } catch (error) {
+                console.error('Failed to fetch LPR:', error);
+                statusEl.textContent = `LPR自动更新失败, 使用预设值: ${(currentLpr * 100).toFixed(2)}%`;
+                statusEl.style.color = '#e74c3c';
+            }
+        }
+
+        function calculateLawyerFee() {
+            const amount = parseFloat(document.getElementById('lawyer-fee-amount').value);
+            const resultDiv = document.getElementById('lawyer-fee-result');
+            if (isNaN(amount) || amount <= 0) {
+                resultDiv.innerHTML = '<h4>错误</h4><p>请输入有效的案件金额。</p>';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            let fee = 0;
+            if (amount <= 100000) fee = 5000;
+            else if (amount <= 500000) fee = 100000 * 0.08 + (amount - 100000) * 0.05;
+            else fee = 100000 * 0.08 + 400000 * 0.05 + (amount - 500000) * 0.03;
+            resultDiv.innerHTML = `<h4>律师费估算 (风险代理)</h4><p>约为：<strong>¥ ${fee.toFixed(2)}</strong></p><small>该结果为风险代理收费初步估算，仅供参考。</small>`;
+            resultDiv.style.display = 'block';
+        }
+
+        function calculatePenalty() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const startDate = new Date(document.getElementById('start-date').value);
+            const endDate = new Date(document.getElementById('end-date').value);
+            const multiplier = parseFloat(document.getElementById('lpr-multiplier').value);
+            const resultDiv = document.getElementById('penalty-result');
+
+            if (isNaN(principal) || !startDate.getTime() || !endDate.getTime() || isNaN(multiplier)) {
+                resultDiv.innerHTML = '<h4>错误</h4><p>请填写所有必填项。</p>';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            if (startDate > endDate) {
+                resultDiv.innerHTML = '<h4>错误</h4><p>开始日期不能晚于截止日期。</p>';
+                resultDiv.style.display = 'block';
+                return;
+            }
+            
+            const LPR_1Y = currentLpr;
+            const timeDiff = endDate.getTime() - startDate.getTime();
+            const totalDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            const annualRate = LPR_1Y * multiplier;
+            const totalInterest = principal * (annualRate / 365) * totalDays;
+            
+            resultDiv.innerHTML = `
+                <h4>计算结果 (基于LPR: ${(LPR_1Y * 100).toFixed(2)}%)</h4>
+                <p><strong>总计息天数：</strong> ${totalDays} 天</p>
+                <p><strong>适用年利率：</strong> ${(annualRate * 100).toFixed(2)}%</p>
+                <p><strong>应付总利息 / 违约金：</strong><br><strong>¥ ${totalInterest.toFixed(2)}</strong></p>
+            `;
+            resultDiv.style.display = 'block';
+        }
     </script>
 </body>
 </html>
