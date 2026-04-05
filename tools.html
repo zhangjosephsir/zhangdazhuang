@@ -123,30 +123,52 @@
             resultDiv.style.display = 'block';
         }
 
-        let currentLpr = 0.0345;
-        const LPR_API_URL = 'https://moonapi.com/api/lpr';
+        let currentLpr = 0.0345; // Fallback value
 
         document.addEventListener('DOMContentLoaded', function() {
-            fetchLpr();
+            fetchLprFromPbc();
         });
-
-        async function fetchLpr() {
+        
+        async function fetchLprFromPbc() {
             const statusEl = document.getElementById('lpr-status');
+            const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+            const PBC_LIST_URL = 'http://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125440/3876551/index.html';
+        
             try {
-                const response = await fetch(LPR_API_URL);
-                if (!response.ok) throw new Error('Network response was not ok.');
-                const data = await response.json();
-                if (data && data.data && data.data.length > 0) {
-                    const latestLprData = data.data.find(item => item.type === '1年');
-                    if(latestLprData) {
-                        currentLpr = parseFloat(latestLprData.rate) / 100;
-                        statusEl.textContent = `LPR (1年期) 已更新: ${(currentLpr * 100).toFixed(2)}%`;
-                        statusEl.style.color = '#159895';
-                    } else { throw new Error('1-year LPR not found'); }
-                } else { throw new Error('Invalid API response'); }
+                // Step 1: Fetch the list page to find the latest announcement URL
+                statusEl.textContent = '正在连接央行...';
+                const listResponse = await fetch(CORS_PROXY + encodeURIComponent(PBC_LIST_URL));
+                if (!listResponse.ok) throw new Error('Failed to fetch LPR list page.');
+                const listHtml = await listResponse.text();
+        
+                const parser = new DOMParser();
+                const listDoc = parser.parseFromString(listHtml, 'text/html');
+                const latestLink = listDoc.querySelector('a[title*="贷款市场报价利率（LPR）公告"]');
+                if (!latestLink) throw new Error('Could not find the latest LPR announcement link.');
+                
+                const announcementUrl = new URL(latestLink.href, 'http://www.pbc.gov.cn/').href;
+        
+                // Step 2: Fetch the announcement page to extract the LPR value
+                statusEl.textContent = '正在获取最新LPR...';
+                const announceResponse = await fetch(CORS_PROXY + encodeURIComponent(announcementUrl));
+                if (!announceResponse.ok) throw new Error('Failed to fetch LPR announcement page.');
+                const announceHtml = await announceResponse.text();
+                const announceDoc = parser.parseFromString(announceHtml, 'text/html');
+
+                const content = announceDoc.querySelector('#zoom').textContent;
+                const match = content.match(/1年期LPR为(\\d+\\.\\d+)%/);
+
+                if (match && match[1]) {
+                    currentLpr = parseFloat(match[1]) / 100;
+                    statusEl.textContent = `LPR(1年期)官网同步: ${(currentLpr * 100).toFixed(2)}%`;
+                    statusEl.style.color = '#159895';
+                } else {
+                    throw new Error('Could not parse LPR value from announcement.');
+                }
+        
             } catch (error) {
-                console.error('Failed to fetch LPR:', error);
-                statusEl.textContent = `LPR自动更新失败, 使用预设值: ${(currentLpr * 100).toFixed(2)}%`;
+                console.error('Failed to fetch LPR from PBC:', error);
+                statusEl.textContent = `官网同步失败, 使用预设值: ${(currentLpr * 100).toFixed(2)}%`;
                 statusEl.style.color = '#e74c3c';
             }
         }
@@ -159,10 +181,10 @@
                 resultDiv.style.display = 'block';
                 return;
             }
-            let fee = 0;
-            if (amount <= 100000) fee = 5000;
-            else if (amount <= 500000) fee = 100000 * 0.08 + (amount - 100000) * 0.05;
-            else fee = 100000 * 0.08 + 400000 * 0.05 + (amount - 500000) * 0.03;
+            let fee;
+            if (amount <= 100000) fee = 8000;
+            else if (amount <= 500000) fee = 8000 + (amount - 100000) * 0.05;
+            else fee = 28000 + (amount - 500000) * 0.03;
             resultDiv.innerHTML = `<h4>律师费估算 (风险代理)</h4><p>约为：<strong>¥ ${fee.toFixed(2)}</strong></p><small>该结果为风险代理收费初步估算，仅供参考。</small>`;
             resultDiv.style.display = 'block';
         }
