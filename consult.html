@@ -27,6 +27,32 @@
         .consultation-form .role-card input { display: none; }
         .consultation-form .role-card .role-content { border: 2px solid #e0e0e0; border-radius: 12px; padding: 20px 15px; text-align: center; transition: all 0.3s; }
         .consultation-form .role-card .role-icon { font-size: 2em; display: block; margin-bottom: 8px; }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+            padding: 40px 0;
+        }
+        .stat-item .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #159895;
+        }
+        .stat-item .label {
+            font-size: 1em;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .consultation-form {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -80,6 +106,25 @@
                 </div>
                 <button type="submit" class="submit-btn"><span>📨 提交咨询</span></button>
             </form>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-item">
+                <div class="number">30+</div>
+                <div class="label">年执业经验</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">1000+</div>
+                <div class="label">成功案例</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">90%+</div>
+                <div class="label">客户满意度</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">500+</div>
+                <div class="label">免费法律咨询</div>
+            </div>
         </div>
 
         <footer>
