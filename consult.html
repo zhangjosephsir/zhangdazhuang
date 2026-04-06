@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>免费咨询系统 - 张大壮律师</title>
     <style>
-        /* All original styles are preserved here */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
@@ -15,7 +14,6 @@
         .lawyer-intro .avatar { font-size: 3em; }
         .lawyer-intro .info h2 { font-size: 1.5em; color: #1a5f7a; }
         .lawyer-intro .info p { color: #666; }
-        /* Copied all consultation form styles from backup */
         .consultation-form { background: linear-gradient(135deg, #fff 0%, #f8fffe 100%); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(21,152,149,0.15); border: 2px solid #e8f8f5; }
         .consultation-form .form-header { text-align: center; margin-bottom: 30px; }
         .consultation-form .form-header h2 { color: #1a5f7a; font-size: 2em; margin-bottom: 10px; }
@@ -27,7 +25,6 @@
         .consultation-form .role-card input { display: none; }
         .consultation-form .role-card .role-content { border: 2px solid #e0e0e0; border-radius: 12px; padding: 20px 15px; text-align: center; transition: all 0.3s; }
         .consultation-form .role-card .role-icon { font-size: 2em; display: block; margin-bottom: 8px; }
-
         .stats-section {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -46,8 +43,10 @@
         }
 
         @media (max-width: 768px) {
+            .lawyer-intro { flex-direction: column; text-align: center; }
             .stats-section {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
             }
             .consultation-form {
                 padding: 20px;
@@ -67,14 +66,31 @@
             </div>
         </div>
         
-        <!-- The FULL, correct consultation form from the original site -->
+        <div class="stats-section">
+            <div class="stat-item">
+                <div class="number">30+</div>
+                <div class="label">年执业经验</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">1000+</div>
+                <div class="label">成功案例</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">90%+</div>
+                <div class="label">客户满意度</div>
+            </div>
+            <div class="stat-item">
+                <div class="number">500+</div>
+                <div class="label">免费法律咨询</div>
+            </div>
+        </div>
+
         <div class="consultation-form">
             <div class="form-header">
                 <h2>⚡ 免费法律咨询</h2>
                 <p>填写以下信息，点击提交后打开邮箱发送咨询（仅工作日回复）</p>
             </div>
             <form id="consultForm" onsubmit="submitForm(event)" autocomplete="off">
-                 <!-- Copied all form rows and groups exactly from backup -->
                  <div class="form-row">
                     <div class="form-group">
                         <label>👤 您是 <span class="required">*</span></label>
@@ -108,31 +124,16 @@
             </form>
         </div>
 
-        <div class="stats-section">
-            <div class="stat-item">
-                <div class="number">30+</div>
-                <div class="label">年执业经验</div>
-            </div>
-            <div class="stat-item">
-                <div class="number">1000+</div>
-                <div class="label">成功案例</div>
-            </div>
-            <div class="stat-item">
-                <div class="number">90%+</div>
-                <div class="label">客户满意度</div>
-            </div>
-            <div class="stat-item">
-                <div class="number">500+</div>
-                <div class="label">免费法律咨询</div>
-            </div>
-        </div>
-
         <footer>
             <p>© 2026 张大壮律师</p>
+            <p style="margin-top: 10px; font-size: 0.9em; color: #555;">
+                <span style="font-weight: bold;">本页被访问 <span id="busuanzi_value_page_pv"></span> 次</span> | 
+                <span style="font-weight: bold;">全站总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+            </p>
         </footer>
     </div>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <script>
-        // The FULL, correct JS logic from the original site
         function toggleOtherInput() {
             var select = document.getElementById('disputeType');
             var otherInput = document.getElementById('disputeTypeOther');
@@ -151,4 +152,4 @@
         }
     </script>
 </body>
-</html> 
+</html>
