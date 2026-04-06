@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诊断测试页面</title>
+    <style>
+        body { font-family: sans-serif; }
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+            padding: 40px;
+            max-width: 900px;
+            margin: 40px auto;
+            border: 2px dashed #159895;
+            background: #f8f9fa;
+            border-radius: 16px;
+        }
+        .stat-item .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #159895;
+        }
+        .stat-item .label {
+            font-size: 1em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Responsive styles for mobile */
+        @media (max-width: 768px) {
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>诊断测试页面</h1>
+    <p>下方是需要被修复的模块。请在手机上查看其是否能正确显示为“两行两列”。</p>
+
+    <div class="stats-section">
+        <div class="stat-item">
+            <div class="number">30+</div>
+            <div class="label">年执业经验</div>
+        </div>
+        <div class="stat-item">
+            <div class="number">1000+</div>
+            <div class="label">成功案例</div>
+        </div>
+        <div class="stat-item">
+            <div class="number">90%+</div>
+            <div class="label">客户满意度</div>
+        </div>
+        <div class="stat-item">
+            <div class="number">500+</div>
+            <div class="label">免费法律咨询</div>
+        </div>
+    </div>
+
+</body>
+</html>
