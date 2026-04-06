@@ -19,7 +19,7 @@
         input[type="number"], input[type="date"], select { width: 100%; padding: 14px 18px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 1em; }
         button { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 18px; border: none; border-radius: 12px; font-size: 1.15em; font-weight: bold; cursor: pointer; }
         .result { margin-top: 25px; padding: 20px; background: linear-gradient(135deg, #e8f8f5, #d1f2eb); border-radius: 10px; border-left: 5px solid #159895; display: none; }
-        #lpr-status { display: none; } /* No longer needed, hide it */
+        #lpr-status { display: none; } /* No longer needed */
         .calculation-details { font-size: 0.9em; margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 15px; }
         .calculation-details p { margin: 0; padding: 2px 0; }
         @media (max-width: 768px) {
@@ -30,10 +30,55 @@
 <body>
     <div class="container">
         <a href="index.html" class="back-link">&larr; 返回首页</a>
-        <header><h1>诉讼费、律师费、利息计算器</h1></header>
+        <header><h1>智能计算工具</h1></header>
 
+        <!-- Litigation Fee Calculator -->
+        <div class="tool">
+            <h3>诉讼费计算器</h3>
+            <div class="form-group">
+                <label for="case-type">案件类型</label>
+                <select id="case-type" onchange="toggleAmountInput()">
+                    <option value="property">财产案件</option>
+                    <option value="divorce">离婚案件</option>
+                    <option value="personality">人格权案件</option>
+                    <option value="intellectual">知识产权案件</option>
+                    <option value="labor">劳动争议案件</option>
+                    <option value="security">管辖权异议</option>
+                </select>
+            </div>
+            <div class="form-group" id="amount-group">
+                <label for="dispute-amount">争议金额 (元)</label>
+                <input type="number" id="dispute-amount" placeholder="请输入案件争议金额">
+            </div>
+            <button onclick="calculateLitigationFee()">计算诉讼费</button>
+            <div id="litigation-result" class="result"></div>
+        </div>
+
+        <!-- Preservation Fee Calculator -->
+        <div class="tool">
+            <h3>财产保全费计算器</h3>
+            <div class="form-group">
+                <label for="preservation-amount">保全财产金额 (元)</label>
+                <input type="number" id="preservation-amount" placeholder="请输入申请保全的财产金额">
+            </div>
+            <button onclick="calculatePreservationFee()">计算保全费</button>
+            <div id="preservation-result" class="result"></div>
+        </div>
+
+        <!-- Lawyer Fee Calculator -->
+        <div class="tool">
+            <h3>律师费估算器 (风险代理)</h3>
+            <div class="form-group">
+                <label for="lawyer-amount">案件标的额 (元)</label>
+                <input type="number" id="lawyer-amount" placeholder="请输入案件标的额">
+            </div>
+            <button onclick="calculateLawyerFee()">估算律师费</button>
+            <div id="lawyer-result" class="result"></div>
+        </div>
+
+        <!-- Penalty/Interest Calculator -->
         <div class="tool" id="penalty-calculator-tool">
-            <h3>违约金 / 逾期利息计算器 (专业版) <span id="lpr-status"></span></h3>
+            <h3>违约金 / 逾期利息计算器 (专业版)</h3>
             <div class="form-group"><label for="principal">本金 / 欠款金额 (元)</label><input type="number" id="principal" placeholder="请输入本金"></div>
             <div class="form-group"><label for="start-date">开始计算日期</label><input type="date" id="start-date"></div>
             <div class="form-group"><label for="end-date">计算截止日期</label><input type="date" id="end-date"></div>
@@ -55,77 +100,152 @@
     </div>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <script>
-        // --- HEART TRANSPLANT: START ---
-        // The external dependency is now removed. LPR data is permanently embedded.
+        // --- ALL-IN-ONE SCRIPT ---
+
+        // --- Litigation Fee Calculator Logic ---
+        function toggleAmountInput() {
+            const caseType = document.getElementById('case-type').value;
+            const amountGroup = document.getElementById('amount-group');
+            amountGroup.style.display = caseType === 'property' ? 'block' : 'none';
+        }
+
+        function calculateLitigationFee() {
+            const caseType = document.getElementById('case-type').value;
+            const amount = parseFloat(document.getElementById('dispute-amount').value) || 0;
+            const resultDiv = document.getElementById('litigation-result');
+            let fee = 0;
+            let description = '';
+
+            if (caseType === 'property') {
+                if (amount <= 10000) {
+                    fee = 50;
+                } else if (amount <= 100000) {
+                    fee = (amount - 10000) * 0.025 + 50;
+                } else if (amount <= 200000) {
+                    fee = (amount - 100000) * 0.02 + 2300;
+                } else if (amount <= 500000) {
+                    fee = (amount - 200000) * 0.015 + 4300;
+                } else if (amount <= 1000000) {
+                    fee = (amount - 500000) * 0.01 + 8800;
+                } else if (amount <= 2000000) {
+                    fee = (amount - 1000000) * 0.009 + 13800;
+                } else if (amount <= 5000000) {
+                    fee = (amount - 2000000) * 0.008 + 22800;
+                } else if (amount <= 10000000) {
+                    fee = (amount - 5000000) * 0.007 + 46800;
+                } else if (amount <= 20000000) {
+                    fee = (amount - 10000000) * 0.006 + 81800;
+                } else {
+                    fee = (amount - 20000000) * 0.005 + 141800;
+                }
+                description = `财产案件，诉讼标的额 ${amount.toFixed(2)} 元。`;
+            } else if (caseType === 'divorce') {
+                fee = 300;
+                if (amount > 200000) {
+                    fee += (amount - 200000) * 0.005;
+                }
+                description = '离婚案件。';
+            } else if (caseType === 'personality') {
+                fee = 400;
+                description = '人格权案件。';
+            } else if (caseType === 'intellectual') {
+                fee = 1000;
+                description = '知识产权案件。';
+            } else if (caseType === 'labor') {
+                fee = 10;
+                description = '劳动争议案件。';
+            } else if (caseType === 'security') {
+                fee = 100;
+                description = '管辖权异议。';
+            }
+            
+            resultDiv.innerHTML = `<h4>计算结果</h4><p>${description}</p><p><strong>预估诉讼费：¥ ${fee.toFixed(2)}</strong></p><p style="font-size:0.8em; color: #666; margin-top:10px;">* 案件受理费减半收取的，按50%计算。</p>`;
+            resultDiv.style.display = 'block';
+        }
+
+        // --- Preservation Fee Calculator Logic ---
+        function calculatePreservationFee() {
+            const amount = parseFloat(document.getElementById('preservation-amount').value) || 0;
+            const resultDiv = document.getElementById('preservation-result');
+            let fee = 0;
+
+            if (amount <= 1000) {
+                fee = 30;
+            } else if (amount <= 100000) {
+                fee = (amount - 1000) * 0.01 + 30;
+            } else {
+                fee = (amount - 100000) * 0.005 + 1020;
+            }
+            
+            if (fee > 5000) {
+                fee = 5000;
+            }
+
+            resultDiv.innerHTML = `<h4>计算结果</h4><p>保全财产金额 ${amount.toFixed(2)} 元。</p><p><strong>预估保全费：¥ ${fee.toFixed(2)}</strong></p>`;
+            resultDiv.style.display = 'block';
+        }
+
+        // --- Lawyer Fee Calculator Logic ---
+        function calculateLawyerFee() {
+            const amount = parseFloat(document.getElementById('lawyer-amount').value) || 0;
+            const resultDiv = document.getElementById('lawyer-result');
+            let fee = 0;
+
+            if (amount <= 100000) {
+                fee = amount * 0.06;
+            } else if (amount <= 500000) {
+                fee = 100000 * 0.06 + (amount - 100000) * 0.05;
+            } else if (amount <= 1000000) {
+                fee = 100000 * 0.06 + 400000 * 0.05 + (amount - 500000) * 0.04;
+            } else if (amount <= 5000000) {
+                fee = 100000 * 0.06 + 400000 * 0.05 + 500000 * 0.04 + (amount - 1000000) * 0.03;
+            } else {
+                fee = 100000 * 0.06 + 400000 * 0.05 + 500000 * 0.04 + 4000000 * 0.03 + (amount - 5000000) * 0.02;
+            }
+            
+            resultDiv.innerHTML = `<h4>计算结果</h4><p>案件标的额 ${amount.toFixed(2)} 元。</p><p><strong>风险代理律师费（胜诉后）：¥ ${fee.toFixed(2)}</strong></p><p style="font-size:0.8em; color: #666; margin-top:10px;">* 此为参考标准，具体费用需与律师协商确定。</p>`;
+            resultDiv.style.display = 'block';
+        }
+
+        // --- LPR Penalty/Interest Calculator Logic (HEART TRANSPLANT) ---
         const lprHistory = [
-            { date: "2019-08-20", rate: 4.25 },
-            { date: "2019-09-20", rate: 4.20 },
-            { date: "2019-10-21", rate: 4.20 },
-            { date: "2019-11-20", rate: 4.15 },
-            { date: "2019-12-20", rate: 4.15 },
-            { date: "2020-01-20", rate: 4.15 },
-            { date: "2020-02-20", rate: 4.05 },
-            { date: "2020-03-20", rate: 4.05 },
-            { date: "2020-04-20", rate: 3.85 },
-            { date: "2020-05-20", rate: 3.85 },
-            { date: "2020-06-22", rate: 3.85 },
-            { date: "2020-07-20", rate: 3.85 },
-            { date: "2020-08-20", rate: 3.85 },
-            { date: "2020-09-21", rate: 3.85 },
-            { date: "2020-10-20", rate: 3.85 },
-            { date: "2020-11-20", rate: 3.85 },
-            { date: "2020-12-21", rate: 3.85 },
-            { date: "2021-01-20", rate: 3.85 },
-            { date: "2021-02-22", rate: 3.85 },
-            { date: "2021-03-22", rate: 3.85 },
-            { date: "2021-04-20", rate: 3.85 },
-            { date: "2021-05-20", rate: 3.85 },
-            { date: "2021-06-21", rate: 3.85 },
-            { date: "2021-07-20", rate: 3.85 },
-            { date: "2021-08-20", rate: 3.85 },
-            { date: "2021-09-22", rate: 3.85 },
-            { date: "2021-10-20", rate: 3.85 },
-            { date: "2021-11-22", rate: 3.85 },
-            { date: "2021-12-20", rate: 3.80 },
-            { date: "2022-01-20", rate: 3.70 },
-            { date: "2022-02-21", rate: 3.70 },
-            { date: "2022-03-21", rate: 3.70 },
-            { date: "2022-04-20", rate: 3.70 },
-            { date: "2022-05-20", rate: 3.70 },
-            { date: "2022-06-20", rate: 3.70 },
-            { date: "2022-07-20", rate: 3.70 },
-            { date: "2022-08-22", rate: 3.65 },
-            { date: "2022-09-20", rate: 3.65 },
-            { date: "2022-10-20", rate: 3.65 },
-            { date: "2022-11-21", rate: 3.65 },
-            { date: "2022-12-20", rate: 3.65 },
-            { date: "2023-01-20", rate: 3.65 },
-            { date: "2023-02-20", rate: 3.65 },
-            { date: "2023-03-20", rate: 3.65 },
-            { date: "2023-04-20", rate: 3.65 },
-            { date: "2023-05-22", rate: 3.65 },
-            { date: "2023-06-20", rate: 3.55 },
-            { date: "2023-07-20", rate: 3.55 },
-            { date: "2023-08-21", rate: 3.45 },
-            { date: "2023-09-20", rate: 3.45 },
-            { date: "2023-10-20", rate: 3.45 },
-            { date: "2023-11-20", rate: 3.45 },
-            { date: "2023-12-20", rate: 3.45 },
-            { date: "2024-01-22", rate: 3.45 },
-            { date: "2024-02-20", rate: 3.45 },
-            { date: "2024-03-20", rate: 3.45 },
-            // Future-proofing: Add more entries here as they are released.
-            // The logic will correctly handle future dates.
+            { date: "2019-08-20", rate: 4.25 }, { date: "2019-09-20", rate: 4.20 },
+            { date: "2019-10-21", rate: 4.20 }, { date: "2019-11-20", rate: 4.15 },
+            { date: "2019-12-20", rate: 4.15 }, { date: "2020-01-20", rate: 4.15 },
+            { date: "2020-02-20", rate: 4.05 }, { date: "2020-03-20", rate: 4.05 },
+            { date: "2020-04-20", rate: 3.85 }, { date: "2020-05-20", rate: 3.85 },
+            { date: "2020-06-22", rate: 3.85 }, { date: "2020-07-20", rate: 3.85 },
+            { date: "2020-08-20", rate: 3.85 }, { date: "2020-09-21", rate: 3.85 },
+            { date: "2020-10-20", rate: 3.85 }, { date: "2020-11-20", rate: 3.85 },
+            { date: "2020-12-21", rate: 3.85 }, { date: "2021-01-20", rate: 3.85 },
+            { date: "2021-02-22", rate: 3.85 }, { date: "2021-03-22", rate: 3.85 },
+            { date: "2021-04-20", rate: 3.85 }, { date: "2021-05-20", rate: 3.85 },
+            { date: "2021-06-21", rate: 3.85 }, { date: "2021-07-20", rate: 3.85 },
+            { date: "2021-08-20", rate: 3.85 }, { date: "2021-09-22", rate: 3.85 },
+            { date: "2021-10-20", rate: 3.85 }, { date: "2021-11-22", rate: 3.85 },
+            { date: "2021-12-20", rate: 3.80 }, { date: "2022-01-20", rate: 3.70 },
+            { date: "2022-02-21", rate: 3.70 }, { date: "2022-03-21", rate: 3.70 },
+            { date: "2022-04-20", rate: 3.70 }, { date: "2022-05-20", rate: 3.70 },
+            { date: "2022-06-20", rate: 3.70 }, { date: "2022-07-20", rate: 3.70 },
+            { date: "2022-08-22", rate: 3.65 }, { date: "2022-09-20", rate: 3.65 },
+            { date: "2022-10-20", rate: 3.65 }, { date: "2022-11-21", rate: 3.65 },
+            { date: "2022-12-20", rate: 3.65 }, { date: "2023-01-20", rate: 3.65 },
+            { date: "2023-02-20", rate: 3.65 }, { date: "2023-03-20", rate: 3.65 },
+            { date: "2023-04-20", rate: 3.65 }, { date: "2023-05-22", rate: 3.65 },
+            { date: "2023-06-20", rate: 3.55 }, { date: "2023-07-20", rate: 3.55 },
+            { date: "2023-08-21", rate: 3.45 }, { date: "2023-09-20", rate: 3.45 },
+            { date: "2023-10-20", rate: 3.45 }, { date: "2023-11-20", rate: 3.45 },
+            { date: "2023-12-20", rate: 3.45 }, { date: "2024-01-22", rate: 3.45 },
+            { date: "2024-02-20", rate: 3.45 }, { date: "2024-03-20", rate: 3.45 },
         ].map(item => ({ date: new Date(item.date), rate: item.rate }));
-        // --- HEART TRANSPLANT: END ---
 
         function getLprForDate(date) {
-            let applicableLpr = lprHistory[0].rate; // Default to earliest available
+            let applicableLpr = lprHistory[0].rate;
             for (const record of lprHistory) {
                 if (date >= record.date) {
                     applicableLpr = record.rate;
                 } else {
-                    break; // History is sorted, so we can stop
+                    break;
                 }
             }
             return applicableLpr;
@@ -162,34 +282,35 @@
                 ...lprHistory.map(h => h.date.toISOString().split('T')[0])
             ])]
             .map(d => new Date(d))
-            .filter(d => d >= startDate && d <= endDate)
+            .filter(d => d >= startDate && d < endDate)
             .sort((a, b) => a - b);
+            
+            segmentPoints.push(endDate);
+            const uniqueSegmentPoints = [...new Set(segmentPoints.map(d=>d.getTime()))].map(t => new Date(t)).sort((a,b)=>a-b);
 
-            for (let i = 0; i < segmentPoints.length - 1; i++) {
-                let segmentStart = segmentPoints[i];
-                let segmentEnd = segmentPoints[i+1];
+
+            for (let i = 0; i < uniqueSegmentPoints.length - 1; i++) {
+                let segmentStart = uniqueSegmentPoints[i];
+                let segmentEnd = uniqueSegmentPoints[i+1];
                 
-                if (segmentEnd <= segmentStart) continue;
-
                 const lprRate = getLprForDate(segmentStart);
                 const annualRate = (lprRate / 100) * multiplier;
                 
                 const timeDiff = segmentEnd.getTime() - segmentStart.getTime();
-                const daysInSegment = Math.round(timeDiff / (1000 * 3600 * 24));
+                const daysInSegment = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
                 if (daysInSegment <= 0) continue;
 
                 const segmentInterest = principal * (annualRate / 365) * daysInSegment;
                 totalInterest += segmentInterest;
                 
-                calculationHtml += `<p>${segmentStart.toISOString().substring(0,10)} 至 ${new Date(segmentEnd.getTime() - 86400000).toISOString().substring(0,10)} (${daysInSegment}天) @ ${lprRate.toFixed(2)}% (x${multiplier}) = ¥ ${segmentInterest.toFixed(2)}</p>`;
-            }
+                let displayEndDate = new Date(segmentEnd.getTime() - 86400000); // minus one day for display
+                if (segmentEnd.getTime() === endDate.getTime()) {
+                    displayEndDate = endDate;
+                }
 
-            // Handle the final day
-            const finalLprRate = getLprForDate(endDate);
-            const finalAnnualRate = (finalLprRate / 100) * multiplier;
-            const finalDayInterest = principal * (finalAnnualRate / 365) * 1;
-            // This logic is simplified; the loop above should already cover it. Let's refine.
+                calculationHtml += `<p>${segmentStart.toISOString().substring(0,10)} 至 ${displayEndDate.toISOString().substring(0,10)} (${daysInSegment}天) @ ${lprRate.toFixed(2)}% (x${multiplier}) = ¥ ${segmentInterest.toFixed(2)}</p>`;
+            }
 
             calculationHtml += '</div>';
 
