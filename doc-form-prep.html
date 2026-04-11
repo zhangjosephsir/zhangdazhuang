@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开庭前准备清单 - 张大壮律师</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
+        header { background: linear-gradient(135deg, #1a5f7a 0%, #159895 50%, #57c5b6 100%); color: white; padding: 40px 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 1.6em; }
+        .form-card { background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .section-title { color: #1a5f7a; font-size: 1.1em; margin: 25px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #57c5b6; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; color: #333; }
+        label .required { color: #e74c3c; }
+        input[type="text"], input[type="number"], input[type="date"], textarea, select { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1em; font-family: inherit; }
+        textarea { min-height: 100px; resize: vertical; }
+        .btn { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 18px; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
+        .btn:hover { opacity: 0.9; }
+        .preview-btn { background: #666; margin-top: 15px; }
+        .result { margin-top: 30px; padding: 20px; background: #f0f9f8; border-radius: 12px; border-left: 4px solid #159895; display: none; }
+        .result h4 { color: #1a5f7a; margin-bottom: 10px; }
+        .result pre { white-space: pre-wrap; font-size: 0.95em; line-height: 2; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.95em; background: #fff; border-radius: 16px; margin-top: 30px; }
+        @media (max-width: 768px) { .form-card { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="documents.html" class="back-link">← 返回文书列表</a>
+        <header>
+            <h1>📑 开庭前准备清单</h1>
+        </header>
+
+        <div class="form-card">
+            <div class="form-group">
+                <label>案号</label>
+                <input type="text" id="caseNo" placeholder="如：（2026）粤01民初123号">
+            </div>
+            <div class="form-group">
+                <label>案由</label>
+                <input type="text" id="caseType" placeholder="如：民间借贷纠纷">
+            </div>
+            <div class="form-group">
+                <label>开庭日期</label>
+                <input type="date" id="hearingDate">
+            </div>
+
+            <div class="section-title">👤 当事人信息</div>
+            <div class="form-group">
+                <label>原告/上诉人</label>
+                <input type="text" id="party1" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>被告/被上诉人</label>
+                <input type="text" id="party2" placeholder="">
+            </div>
+
+            <div class="section-title">📋 案件要点</div>
+            <div class="form-group">
+                <label>争议焦点 <span class="required">*</span></label>
+                <textarea id="disputePoints" placeholder="本案主要争议焦点有哪些？"></textarea>
+            </div>
+            <div class="form-group">
+                <label>我方核心观点 <span class="required">*</span></label>
+                <textarea id="coreArguments" placeholder="我方的主要观点和立场"></textarea>
+            </div>
+            <div class="form-group">
+                <label>对方可能的攻击点</label>
+                <textarea id="opponentPoints" placeholder="对方可能提出的反驳和攻击点"></textarea>
+            </div>
+
+            <div class="section-title">📎 证据准备</div>
+            <div class="form-group">
+                <label>我方已提交证据</label>
+                <textarea id="myEvidence" placeholder="已提交的证据清单"></textarea>
+            </div>
+            <div class="form-group">
+                <label>需补充的证据</label>
+                <textarea id="missingEvidence" placeholder="还需要补充哪些证据？"></textarea>
+            </div>
+            <div class="form-group">
+                <label>对方可能提交的证据</label>
+                <textarea id="opponentEvidence" placeholder="预判对方会提交什么证据"></textarea>
+            </div>
+
+            <div class="section-title">🎤 庭审提纲</div>
+            <div class="form-group">
+                <label>开场陈述要点</label>
+                <textarea id="openingStatement" placeholder="简述案情要点"></textarea>
+            </div>
+            <div class="form-group">
+                <label>需要向对方发问的问题</label>
+                <textarea id="questionsToAsk" placeholder="需要问对方的关键问题"></textarea>
+            </div>
+            <div class="form-group">
+                <label>需要申请法院调查的事项</label>
+                <textarea id="courtInvestigation" placeholder="需要法院调取的证据或事项"></textarea>
+            </div>
+
+            <div class="section-title">⚠️ 注意事项</div>
+            <div class="form-group">
+                <label>特别注意事项</label>
+                <textarea id="specialNotes" placeholder="其他需要注意的事项，如时效、管辖等"></textarea>
+            </div>
+
+            <button class="btn" onclick="generateDoc()">生成准备清单</button>
+        </div>
+
+        <div class="result" id="result">
+            <h4>📄 开庭前准备清单预览</h4>
+            <pre id="docPreview"></pre>
+            <button class="btn preview-btn" onclick="downloadDoc()">⬇️ 下载Word文档</button>
+        </div>
+
+        <footer>
+            <p>© 2026 张大壮律师 | 专业 · 可靠 · 负责</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentDoc = null;
+
+        function generateDoc() {
+            if (!document.getElementById('disputePoints').value.trim()) { alert('请填写争议焦点'); return; }
+            if (!document.getElementById('coreArguments').value.trim()) { alert('请填写我方核心观点'); return; }
+
+            const caseNo = document.getElementById('caseNo').value.trim();
+            const caseType = document.getElementById('caseType').value.trim();
+            const hearingDate = document.getElementById('hearingDate').value;
+            const party1 = document.getElementById('party1').value.trim();
+            const party2 = document.getElementById('party2').value.trim();
+            const disputePoints = document.getElementById('disputePoints').value.trim();
+            const coreArguments = document.getElementById('coreArguments').value.trim();
+            const opponentPoints = document.getElementById('opponentPoints').value.trim();
+            const myEvidence = document.getElementById('myEvidence').value.trim();
+            const missingEvidence = document.getElementById('missingEvidence').value.trim();
+            const opponentEvidence = document.getElementById('opponentEvidence').value.trim();
+            const openingStatement = document.getElementById('openingStatement').value.trim();
+            const questionsToAsk = document.getElementById('questionsToAsk').value.trim();
+            const courtInvestigation = document.getElementById('courtInvestigation').value.trim();
+            const specialNotes = document.getElementById('specialNotes').value.trim();
+
+            const today = new Date();
+            const dateStr = `${today.getFullYear()}年${today.getMonth() + 1}月${today.getDate()}日`;
+            const hearingDateStr = hearingDate ? new Date(hearingDate).toLocaleDateString('zh-CN') : '待定';
+
+            const docContent = `开庭前准备清单
+
+【基本信息】
+案号：${caseNo || '待填写'}
+案由：${caseType || '待填写'}
+开庭日期：${hearingDateStr}
+${party1 ? `原告/上诉人：${party1}` : ''}
+${party2 ? `被告/被上诉人：${party2}` : ''}
+生成日期：${dateStr}
+
+═══════════════════════════════════════════
+
+【一、案件要点】
+
+1. 争议焦点：
+${disputePoints}
+
+2. 我方核心观点：
+${coreArguments}
+
+${opponentPoints ? `3. 对方可能的攻击点：\n${opponentPoints}` : ''}
+
+═══════════════════════════════════════════
+
+【二、证据准备】
+
+1. 我方已提交证据：
+${myEvidence || '暂无'}
+
+2. 需补充的证据：
+${missingEvidence || '暂无'}
+
+${opponentEvidence ? `3. 对方可能提交的证据：\n${opponentEvidence}` : ''}
+
+═══════════════════════════════════════════
+
+【三、庭审提纲】
+
+1. 开场陈述要点：
+${openingStatement || '待准备'}
+
+2. 需要向对方发问的问题：
+${questionsToAsk || '暂无'}
+
+${courtInvestigation ? `3. 需要申请法院调查的事项：\n${courtInvestigation}` : ''}
+
+═══════════════════════════════════════════
+
+【四、特别注意事项】
+
+${specialNotes || '暂无'}
+
+═══════════════════════════════════════════
+
+【五、出庭前检查清单】
+
+□ 身份证件
+□ 律师执照
+□ 证据原件/复印件
+□ 代理手续（授权委托书、所函）
+□ 相关法律文书
+□ 开庭传票
+
+备注：开庭前30分钟到达法庭
+
+───────────────────────────────────────────
+整理人：__________    复核人：__________`;
+
+            document.getElementById('docPreview').textContent = docContent;
+            document.getElementById('result').style.display = 'block';
+            currentDoc = docContent;
+        }
+
+        function downloadDoc() {
+            if (!currentDoc) return;
+            const blob = new Blob(['\ufeff' + currentDoc], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `开庭前准备_${caseNo || new Date().toISOString().slice(0,10)}.doc`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
