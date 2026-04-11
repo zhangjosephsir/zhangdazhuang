@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>律师办案工具 - 张大壮律师 | 法律文书自动生成</title>
+    <meta name="description" content="张大壮律师智能办案工具，支持自动生成民事起诉状、答辩状、证据清单、开庭前准备清单、代理意见等法律文书，一键下载Word文档。">
+    <meta name="robots" content="index, follow">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
+        header { background: linear-gradient(135deg, #1a5f7a 0%, #159895 50%, #57c5b6 100%); color: white; padding: 40px 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 1.8em; }
+        .doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .doc-card { background: #fff; border-radius: 16px; padding: 30px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; text-decoration: none; color: inherit; }
+        .doc-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(21, 152, 149, 0.2); }
+        .doc-card .icon { font-size: 3em; margin-bottom: 15px; }
+        .doc-card h3 { color: #1a5f7a; margin-bottom: 10px; }
+        .doc-card p { color: #666; font-size: 0.9em; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.95em; background: #fff; border-radius: 16px; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← 返回首页</a>
+        <header>
+            <h1>📝 法律文书自动生成</h1>
+        </header>
+
+        <div class="doc-grid">
+            <div class="doc-card" onclick="goLawsuit()">
+                <div class="icon">📋</div>
+                <h3>民事起诉状</h3>
+                <p>自动生成标准格式起诉状，包含当事人信息、诉讼请求、事实与理由</p>
+            </div>
+            <div class="doc-card" onclick="goDefense()">
+                <div class="icon">🛡️</div>
+                <h3>答辩状</h3>
+                <p>针对原告起诉进行答辩，阐述答辩意见和理由</p>
+            </div>
+            <div class="doc-card" onclick="goEvidence()">
+                <div class="icon">📎</div>
+                <h3>证据清单</h3>
+                <p>规范整理案件证据材料，列明证据名称、来源、证明内容</p>
+            </div>
+            <div class="doc-card" onclick="goPrep()">
+                <div class="icon">📑</div>
+                <h3>开庭前准备</h3>
+                <p>系统化梳理案件要点、庭审提纲、需补充证据</p>
+            </div>
+            <div class="doc-card" onclick="goOpinion()">
+                <div class="icon">⚖️</div>
+                <h3>代理意见</h3>
+                <p>庭审后提交的专业代理意见，阐述法律观点</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 张大壮律师 | 专业 · 可靠 · 负责</p>
+        </footer>
+    </div>
+
+    <script>
+        function showForm(type) {
+            window.location.href = `doc-form-${type}.html`;
+        }
+        // 直接跳转，不用弹窗
+        function goLawsuit() { window.location.href = 'doc-form-lawsuit.html'; }
+        function goDefense() { window.location.href = 'doc-form-defense.html'; }
+        function goEvidence() { window.location.href = 'doc-form-evidence.html'; }
+        function goPrep() { window.location.href = 'doc-form-prep.html'; }
+        function goOpinion() { window.location.href = 'doc-form-opinion.html'; }
+    </script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>民事起诉状生成 - 张大壮律师</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
+        header { background: linear-gradient(135deg, #1a5f7a 0%, #159895 50%, #57c5b6 100%); color: white; padding: 40px 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 1.6em; }
+        .form-card { background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .section-title { color: #1a5f7a; font-size: 1.1em; margin: 25px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #57c5b6; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; color: #333; }
+        label .required { color: #e74c3c; }
+        input[type="text"], input[type="number"], input[type="date"], textarea, select { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1em; font-family: inherit; }
+        textarea { min-height: 100px; resize: vertical; }
+        .btn { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 18px; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
+        .btn:hover { opacity: 0.9; }
+        .preview-btn { background: #666; margin-top: 15px; }
+        .result { margin-top: 30px; padding: 20px; background: #f0f9f8; border-radius: 12px; border-left: 4px solid #159895; display: none; }
+        .result h4 { color: #1a5f7a; margin-bottom: 10px; }
+        .result pre { white-space: pre-wrap; font-size: 0.95em; line-height: 2; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.95em; background: #fff; border-radius: 16px; margin-top: 30px; }
+        @media (max-width: 768px) { .form-card { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="documents.html" class="back-link">← 返回文书列表</a>
+        <header>
+            <h1>📋 民事起诉状生成</h1>
+        </header>
+
+        <div class="form-card">
+            <!-- 案号（可选） -->
+            <div class="form-group">
+                <label>案号（选填，用于关联已有案件）</label>
+                <input type="text" id="caseNo" placeholder="如：（2026）粤01民初123号">
+            </div>
+
+            <!-- 原告信息 -->
+            <div class="section-title">👤 原告信息</div>
+            <div class="form-group">
+                <label>原告姓名/名称 <span class="required">*</span></label>
+                <input type="text" id="plaintiff" placeholder="自然人填写姓名，单位填写名称">
+            </div>
+            <div class="form-group">
+                <label>原告身份 <span class="required">*</span></label>
+                <select id="plaintiffType">
+                    <option value="自然人">自然人</option>
+                    <option value="法人">法人（公司等单位）</option>
+                    <option value="其他组织">非法人组织</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>原告住所地 <span class="required">*</span></label>
+                <input type="text" id="plaintiffAddr" placeholder="详细地址">
+            </div>
+            <div class="form-group">
+                <label>原告联系方式</label>
+                <input type="text" id="plaintiffTel" placeholder="电话或其他联系方式">
+            </div>
+
+            <!-- 被告信息 -->
+            <div class="section-title">👤 被告信息</div>
+            <div class="form-group">
+                <label>被告姓名/名称 <span class="required">*</span></label>
+                <input type="text" id="defendant" placeholder="自然人填写姓名，单位填写名称">
+            </div>
+            <div class="form-group">
+                <label>被告身份 <span class="required">*</span></label>
+                <select id="defendantType">
+                    <option value="自然人">自然人</option>
+                    <option value="法人">法人（公司等单位）</option>
+                    <option value="其他组织">非法人组织</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>被告住所地 <span class="required">*</span></label>
+                <input type="text" id="defendantAddr" placeholder="详细地址">
+            </div>
+            <div class="form-group">
+                <label>被告联系方式</label>
+                <input type="text" id="defendantTel" placeholder="电话或其他联系方式">
+            </div>
+
+            <!-- 诉讼请求 -->
+            <div class="section-title">📌 诉讼请求</div>
+            <div class="form-group">
+                <label>诉讼请求（1） <span class="required">*</span></label>
+                <textarea id="claim1" placeholder="如：判令被告归还借款本金人民币50,000元及利息"></textarea>
+            </div>
+            <div class="form-group">
+                <label>诉讼请求（2）</label>
+                <textarea id="claim2" placeholder="如：判令被告支付逾期利息（选填）"></textarea>
+            </div>
+            <div class="form-group">
+                <label>诉讼请求（3）</label>
+                <textarea id="claim3" placeholder="如：判令被告承担本案诉讼费用（选填）"></textarea>
+            </div>
+
+            <!-- 事实与理由 -->
+            <div class="section-title">📝 事实与理由</div>
+            <div class="form-group">
+                <label>事实经过 <span class="required">*</span></label>
+                <textarea id="facts" placeholder="简述案件事实经过，包括时间、地点、经过、结果"></textarea>
+            </div>
+            <div class="form-group">
+                <label>法律依据</label>
+                <textarea id="lawBasis" placeholder="引用相关法律条款，如《民法典》第X条"></textarea>
+            </div>
+
+            <!-- 证据 -->
+            <div class="section-title">📎 主要证据</div>
+            <div class="form-group">
+                <label>证据清单（每行一条）</label>
+                <textarea id="evidence" placeholder="1. 借条原件
+2. 银行转账记录
+3. 微信聊天记录截图"></textarea>
+            </div>
+
+            <button class="btn" onclick="generateDoc()">生成起诉状</button>
+        </div>
+
+        <div class="result" id="result">
+            <h4>📄 起诉状预览</h4>
+            <pre id="docPreview"></pre>
+            <button class="btn preview-btn" onclick="downloadDoc()">⬇️ 下载Word文档</button>
+        </div>
+
+        <footer>
+            <p>© 2026 张大壮律师 | 专业 · 可靠 · 负责</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.2.0/build/index.umd.js"></script>
+    <script>
+        let currentDoc = null;
+
+        function generateDoc() {
+            // 验证必填项
+            if (!document.getElementById('plaintiff').value.trim()) { alert('请填写原告姓名'); return; }
+            if (!document.getElementById('defendant').value.trim()) { alert('请填写被告姓名'); return; }
+            if (!document.getElementById('facts').value.trim()) { alert('请填写事实经过'); return; }
+            if (!document.getElementById('claim1').value.trim()) { alert('请填写至少一项诉讼请求'); return; }
+
+            // 获取表单数据
+            const caseNo = document.getElementById('caseNo').value.trim();
+            const plaintiff = document.getElementById('plaintiff').value.trim();
+            const plaintiffType = document.getElementById('plaintiffType').value;
+            const plaintiffAddr = document.getElementById('plaintiffAddr').value.trim();
+            const plaintiffTel = document.getElementById('plaintiffTel').value.trim();
+            const defendant = document.getElementById('defendant').value.trim();
+            const defendantType = document.getElementById('defendantType').value;
+            const defendantAddr = document.getElementById('defendantAddr').value.trim();
+            const defendantTel = document.getElementById('defendantTel').value.trim();
+            const claim1 = document.getElementById('claim1').value.trim();
+            const claim2 = document.getElementById('claim2').value.trim();
+            const claim3 = document.getElementById('claim3').value.trim();
+            const facts = document.getElementById('facts').value.trim();
+            const lawBasis = document.getElementById('lawBasis').value.trim();
+            const evidence = document.getElementById('evidence').value.trim();
+
+            // 组装诉讼请求
+            let claims = claim1;
+            if (claim2) claims += '\n    ' + (claim2.startsWith('、') ? claim2 : '、' + claim2);
+            if (claim3) claims += '\n    ' + (claim3.startsWith('、') ? claim3 : '、' + claim3);
+
+            // 组装证据
+            let evidenceList = '暂无';
+            if (evidence) {
+                evidenceList = evidence.split('\n').map((line, i) => `${i + 1}. ${line.replace(/^[0-9]+\.\s*/, '')}`).join('\n');
+            }
+
+            // 生成文档内容
+            const today = new Date();
+            const dateStr = `${today.getFullYear()}年${today.getMonth() + 1}月${today.getDate()}日`;
+
+            const docContent = `民事起诉状
+
+${caseNo ? `案号：${caseNo}\n` : ''}
+原告：${plaintiff}
+    ${plaintiffType === '自然人' ? '男/女' : ''}，${plaintiffType}
+    住所地：${plaintiffAddr || '略'}
+    联系方式：${plaintiffTel || '略'}
+
+被告：${defendant}
+    ${defendantType === '自然人' ? '男/女' : ''}，${defendantType}
+    住所地：${defendantAddr || '略'}
+    联系方式：${defendantTel || '略'}
+
+诉讼请求：
+
+    ${claims.replace(/\n/g, '\n    ')}
+
+事实与理由：
+
+    ${facts.replace(/\n/g, '\n    ')}
+
+${lawBasis ? `法律依据：\n    ${lawBasis.replace(/\n/g, '\n    ')}\n\n` : ''}证据：
+
+    ${evidenceList.split('\n').join('\n    ')}
+
+此致
+
+${defendantAddr ? (defendantAddr.includes('广州') ? '广州市' : '') : ''}人民法院
+
+起诉人（签名或盖章）：${plaintiff}
+${dateStr}`;
+
+            document.getElementById('docPreview').textContent = docContent;
+            document.getElementById('result').style.display = 'block';
+            currentDoc = docContent;
+        }
+
+        function downloadDoc() {
+            if (!currentDoc) return;
+            
+            const blob = new Blob(['\ufeff' + currentDoc], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `民事起诉状_${document.getElementById('plaintiff').value}_${new Date().toISOString().slice(0,10)}.doc`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
