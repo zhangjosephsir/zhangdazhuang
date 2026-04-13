@@ -58,7 +58,7 @@
             <div class="row-2">
                 <div class="form-group">
                     <label>当事人名称<span class="required">*</span></label>
-                    <input type="text" id="partyName" placeholder="如：张三 或 XX有限公司">
+                    <input type="text" id="partyName" placeholder="如：XXX 或 XX有限公司">
                 </div>
                 <div class="form-group">
                     <label>案件类型</label>
@@ -136,7 +136,7 @@
             tr.id = 'row_' + rowCount;
             tr.innerHTML =
                 '<td class="num-col">' + rowCount + '</td>' +
-                '<td class="item-col"><input type="text" id="item_' + rowCount + '" placeholder="如：民事起诉状"></td>' +
+                '<td class="item-col"><input type="text" id="item_' + rowCount + '" placeholder="如：起诉状（范本）"></td>' +
                 '<td class="qty-col"><input type="text" id="qty_' + rowCount + '" value="1" placeholder="份数"></td>' +
                 '<td class="ori-col"><select id="ori_' + rowCount + '"><option value="原件">原件</option><option value="复印件" selected>复印件</option><option value="原件+复印件">原件+复印件</option></select></td>' +
                 '<td class="note-col"><input type="text" id="note_' + rowCount + '" placeholder="备注"></td>';
@@ -214,7 +214,7 @@
         }
 
         // 默认添加常用材料行
-        var defaults = ['民事起诉状', '原告身份证明（身份证/营业执照）', '授权委托书及律师事务所函', '证据目录及证据材料', '送达地址确认书'];
+        var defaults = ['起诉状（范本）', '原告身份证明（身份证/营业执照）', '授权委托书及律师事务所函', '证据目录及证据材料', '送达地址确认书'];
         defaults.forEach(function(item) { addRow(); document.getElementById('item_' + rowCount).value = item; });
         document.getElementById('submitDate').valueAsDate = new Date();
     </script>
