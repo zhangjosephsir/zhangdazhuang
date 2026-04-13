@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>送达地址确认书（自然人） - 张大壮律师</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
+        header { background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 40px 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 1.6em; }
+        header p { font-size: 0.95em; margin-top: 8px; opacity: 0.9; }
+        .form-card { background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .section-title { color: #1a5f7a; font-size: 1em; margin: 25px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #57c5b6; font-weight: bold; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; color: #333; }
+        .required { color: #e74c3c; }
+        input, textarea, select { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1em; font-family: inherit; transition: border-color 0.3s; }
+        input:focus, textarea:focus, select:focus { border-color: #159895; outline: none; }
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+        .btn { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 16px; border: none; border-radius: 12px; font-size: 1.05em; font-weight: bold; cursor: pointer; transition: opacity 0.3s; }
+        .btn:hover { opacity: 0.88; }
+        .btn-secondary { background: #666; margin-top: 12px; }
+        .result { margin-top: 30px; padding: 25px; background: #f0f9f8; border-radius: 12px; border-left: 5px solid #159895; display: none; }
+        .result h4 { color: #1a5f7a; margin-bottom: 12px; }
+        .result pre { white-space: pre-wrap; font-size: 0.88em; line-height: 2; font-family: "Microsoft YaHei", monospace; background: #fff; padding: 15px; border-radius: 8px; overflow-x: auto; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.9em; }
+        .notice { background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 12px 16px; font-size: 0.9em; color: #856404; margin-bottom: 20px; }
+        @media (max-width: 600px) { .row-2, .row-3 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="documents.html" class="back-link">← 返回文书列表</a>
+
+        <header>
+            <h1>📮 送达地址确认书（自然人版）</h1>
+            <p>当事人确认法律文书送达地址，适用于各类民商事案件</p>
+        </header>
+
+        <div class="form-card">
+            <div class="notice">📌 提示：本确认书由当事人本人签署，地址变更需书面通知法院</div>
+
+            <!-- 案件信息 -->
+            <div class="section-title">📋 案件信息</div>
+            <div class="form-group">
+                <label>案号（如有）</label>
+                <input type="text" id="caseNum" placeholder="如：（2024）深华法民初字第1234号">
+            </div>
+            <div class="form-group">
+                <label>对方当事人名称</label>
+                <input type="text" id="otherParty" placeholder="如：XX有限公司">
+            </div>
+
+            <!-- 送达地址信息 -->
+            <div class="section-title">📮 送达地址信息（签署人）</div>
+            <div class="form-group">
+                <label>送达地址确认人姓名（本人）<span class="required">*</span></label>
+                <input type="text" id="name" placeholder="请输入本人真实姓名">
+            </div>
+            <div class="row-2">
+                <div class="form-group">
+                    <label>身份证号码</label>
+                    <input type="text" id="idCard" placeholder="18位身份证号码">
+                </div>
+                <div class="form-group">
+                    <label>联系电话<span class="required">*</span></label>
+                    <input type="text" id="tel" placeholder="手机号码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>送达详细地址<span class="required">*</span></label>
+                <input type="text" id="address" placeholder="省市区县街道门牌号，如：广东省深圳市龙华区龙华街道xxx路xx号xx栋xx室">
+            </div>
+            <div class="form-group">
+                <label>邮编</label>
+                <input type="text" id="zip" placeholder="6位邮政编码，如：518000">
+            </div>
+            <div class="form-group">
+                <label>电子送达（邮箱）</label>
+                <input type="text" id="email" placeholder="如：zhangsan@example.com">
+            </div>
+            <div class="form-group">
+                <label>电子送达（微信）</label>
+                <input type="text" id="wechat" placeholder="微信号或手机号">
+            </div>
+
+            <!-- 送达注意事项 -->
+            <div class="section-title">📌 送达约定</div>
+            <div class="form-group">
+                <label>送达生效约定</label>
+                <select id="effectType">
+                    <option value="快递签收日">快递签收日视为送达之日</option>
+                    <option value="邮件发出日">电子邮件发出之日视为送达之日</option>
+                    <option value="微信发送日">微信发送成功之日视为送达之日</option>
+                </select>
+            </div>
+
+            <button type="button" class="btn" onclick="generate()">🔍 生成预览</button>
+            <button type="button" class="btn btn-secondary" onclick="download()">📥 下载Word文档</button>
+
+            <div class="result" id="result">
+                <h4>📮 送达地址确认书 · 预览</h4>
+                <pre id="preview"></pre>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 张大壮律师 | 专业 · 可靠 · 负责</p>
+        </footer>
+    </div>
+
+    <script>
+        function generate() {
+            var name = document.getElementById('name').value.trim();
+            var tel = document.getElementById('tel').value.trim();
+            var address = document.getElementById('address').value.trim();
+            var idCard = document.getElementById('idCard').value.trim();
+            var zip = document.getElementById('zip').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var wechat = document.getElementById('wechat').value.trim();
+            var caseNum = document.getElementById('caseNum').value.trim();
+            var otherParty = document.getElementById('otherParty').value.trim();
+            var effectType = document.getElementById('effectType').value;
+            var today = new Date().toISOString().slice(0,10).replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$1年$2月$3日');
+
+            if (!name) { alert('请填写送达地址确认人姓名'); return; }
+            if (!tel) { alert('请填写联系电话'); return; }
+            if (!address) { alert('请填写送达详细地址'); return; }
+
+            var lines = [];
+            lines.push('送达地址确认书');
+            lines.push('');
+            if (caseNum) lines.push('案号：' + caseNum);
+            if (otherParty) lines.push('对方当事人：' + otherParty);
+            lines.push('');
+            lines.push('送达地址确认人（本人）信息');
+            lines.push('一、当事人信息');
+            lines.push('送达地址确认人（自然人）：' + name);
+            if (idCard) lines.push('身份证号码：' + idCard);
+            lines.push('联系电话：' + tel);
+            lines.push('');
+            lines.push('二、送达地址');
+            lines.push('送达详细地址：' + address);
+            if (zip) lines.push('邮政编码：' + zip);
+            lines.push('');
+            lines.push('三、电子送达方式');
+            if (email) lines.push('电子邮箱：' + email);
+            if (wechat) lines.push('微信号/手机号：' + wechat);
+            if (!email && !wechat) lines.push('（当事人暂不选择电子送达方式）');
+            lines.push('');
+            lines.push('四、送达约定');
+            lines.push('1. 本人确认，上述送达地址适用于本案一审、二审、执行（含终结本次执行程序）及再审全过程。');
+            lines.push('2. 本人确认，如上述地址发生变化，将书面通知受理法院，否则按原地址送达视为有效送达。');
+            lines.push('3. 本人选择 "' + effectType + '" 视为送达日期。');
+            lines.push('');
+            lines.push('送达地址确认人（签名）：' + name);
+            lines.push('签署日期：' + today);
+            lines.push('');
+            lines.push('【法院填写栏】');
+            lines.push('受送达人签名确认：____________');
+            lines.push('法院工作人员签名：____________');
+            lines.push('日期：____________');
+
+            var doc = lines.join('\n');
+            document.getElementById('preview').textContent = doc;
+            document.getElementById('result').style.display = 'block';
+            window.currentDoc = doc;
+        }
+
+        function download() {
+            if (!window.currentDoc) { alert('请先生成预览'); return; }
+            var dateStr = new Date().toISOString().slice(0,10);
+            var blob = new Blob(['\ufeff' + window.currentDoc], { type: 'application/msword' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = '送达地址确认书_自然人_' + dateStr + '.doc';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

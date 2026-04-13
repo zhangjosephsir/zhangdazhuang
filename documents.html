@@ -55,6 +55,22 @@
                 <h3>代理意见</h3>
                 <p>庭审后提交的专业代理意见，阐述法律观点</p>
             </div>
+            <div class="doc-card" onclick="goChecklist()">
+                <div class="icon">📋</div>
+                <h3>提交材料清单</h3>
+                <p>当事人立案/审理阶段提交材料清单</p>
+            </div>
+            <div class="doc-card" onclick="goAddress()">
+                <div class="icon">📮</div>
+                <h3>送达地址确认</h3>
+                <p>自然人版送达地址确认书</p>
+            </div>
+
+            <div class="doc-card" onclick="goEnforce()">
+                <div class="icon">⚡</div>
+                <h3>强制执行申请</h3>
+                <p>申请法院强制执行生效法律文书</p>
+            </div>
         </div>
 
         <footer>
@@ -68,6 +84,9 @@
         }
         // 直接跳转，不用弹窗
         function goLawsuit() { window.location.href = 'doc-form-lawsuit.html'; }
+        function goChecklist() { window.location.href = 'doc-form-checklist.html'; }
+        function goAddress() { window.location.href = 'doc-form-address-nat.html'; }
+        function goEnforce() { window.location.href = 'doc-form-enforce.html'; }
         function goDefense() { window.location.href = 'doc-form-defense.html'; }
         function goEvidence() { window.location.href = 'doc-form-evidence.html'; }
         function goPrep() { window.location.href = 'doc-form-prep.html'; }

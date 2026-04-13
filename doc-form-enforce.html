@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>强制执行申请书 - 张大壮律师</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
+        header { background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 40px 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 1.6em; }
+        header p { font-size: 0.95em; margin-top: 8px; opacity: 0.9; }
+        .form-card { background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .section-title { color: #1a5f7a; font-size: 1em; margin: 25px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #57c5b6; font-weight: bold; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; color: #333; }
+        .required { color: #e74c3c; }
+        input, textarea, select { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1em; font-family: inherit; transition: border-color 0.3s; }
+        input:focus, textarea:focus { border-color: #159895; outline: none; }
+        textarea { min-height: 90px; resize: vertical; }
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .btn { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 16px; border: none; border-radius: 12px; font-size: 1.05em; font-weight: bold; cursor: pointer; transition: opacity 0.3s; }
+        .btn:hover { opacity: 0.88; }
+        .btn-secondary { background: #666; margin-top: 12px; }
+        .result { margin-top: 30px; padding: 25px; background: #f0f9f8; border-radius: 12px; border-left: 5px solid #159895; display: none; }
+        .result h4 { color: #1a5f7a; margin-bottom: 12px; }
+        .result pre { white-space: pre-wrap; font-size: 0.88em; line-height: 2; font-family: "Microsoft YaHei", monospace; background: #fff; padding: 15px; border-radius: 8px; overflow-x: auto; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.9em; }
+        @media (max-width: 600px) { .row-2 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="documents.html" class="back-link">← 返回文书列表</a>
+
+        <header>
+            <h1>⚡ 强制执行申请书</h1>
+            <p>申请法院强制执行生效法律文书的正式文书</p>
+        </header>
+
+        <div class="form-card">
+            <!-- 申请人信息 -->
+            <div class="section-title">📋 申请人基本信息</div>
+            <div class="form-group">
+                <label>申请人（申请执行人）名称<span class="required">*</span></label>
+                <input type="text" id="appName" placeholder="如：张三 或 XX有限公司">
+            </div>
+            <div class="row-2">
+                <div class="form-group">
+                    <label>法定代表人 / 负责人</label>
+                    <input type="text" id="appRep" placeholder="如：李四">
+                </div>
+                <div class="form-group">
+                    <label>联系电话</label>
+                    <input type="text" id="appTel" placeholder="如：13800138000">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>住所地 / 地址</label>
+                <input type="text" id="appAddr" placeholder="如：广东省深圳市南山区xxx路xx号">
+            </div>
+
+            <!-- 被申请人信息 -->
+            <div class="section-title">📋 被申请人（被执行人）基本信息</div>
+            <div class="form-group">
+                <label>被申请人名称<span class="required">*</span></label>
+                <input type="text" id="respName" placeholder="如：李五 或 YY有限公司">
+            </div>
+            <div class="row-2">
+                <div class="form-group">
+                    <label>法定代表人 / 负责人</label>
+                    <input type="text" id="respRep" placeholder="如：王六">
+                </div>
+                <div class="form-group">
+                    <label>联系电话</label>
+                    <input type="text" id="respTel" placeholder="如：13900139000">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>住所地 / 地址</label>
+                <input type="text" id="respAddr" placeholder="如：广东省深圳市龙华区xxx路xx号">
+            </div>
+
+            <!-- 执行依据 -->
+            <div class="section-title">⚖️ 执行依据</div>
+            <div class="form-group">
+                <label>执行依据文号<span class="required">*</span></label>
+                <input type="text" id="basisNum" placeholder="如：（2024）深华法民初字第1234号">
+            </div>
+            <div class="form-group">
+                <label>执行依据生效日期</label>
+                <input type="date" id="basisDate">
+            </div>
+            <div class="form-group">
+                <label>执行依据内容摘要（判决/调解书主文）<span class="required">*</span></label>
+                <textarea id="basisContent" placeholder="简要描述判决/调解书/仲裁裁决等生效法律文书的主要内容，如：被告应于2024年x月x日前返还原告借款本金人民币xx万元及利息…"></textarea>
+            </div>
+
+            <!-- 执行请求 -->
+            <div class="section-title">📌 执行请求</div>
+            <div class="form-group">
+                <label>请求执行标的（金钱/行为/财产）<span class="required">*</span></label>
+                <textarea id="claim" placeholder="如：1. 请求强制被执行人支付借款本金人民币500,000元及利息（按LPR四倍计算，自2024年x月x日起至实际清偿之日止）；2. 请求加倍支付迟延履行期间的债务利息；3. 请求被执行人承担本案执行费用。"></textarea>
+            </div>
+            <div class="form-group">
+                <label>是否有财产线索</label>
+                <input type="text" id="clue" placeholder="如有，写明财产线索，如：被执行人名下银行账号：6222XXXXXXXX，或房产地址：深圳市龙华区xxx花园x栋x号">
+            </div>
+
+            <!-- 管辖法院 -->
+            <div class="section-title">🏛️ 管辖法院</div>
+            <div class="form-group">
+                <label>管辖法院<span class="required">*</span></label>
+                <input type="text" id="court" placeholder="如：广东省深圳市龙华区人民法院" value="广东省深圳市龙华区人民法院">
+            </div>
+
+            <button type="button" class="btn" onclick="generate()">🔍 生成预览</button>
+            <button type="button" class="btn btn-secondary" onclick="download()">📥 下载Word文档</button>
+
+            <div class="result" id="result">
+                <h4>📄 强制执行申请书 · 预览</h4>
+                <pre id="preview"></pre>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 张大壮律师 | 专业 · 可靠 · 负责</p>
+        </footer>
+    </div>
+
+    <script>
+        function generate() {
+            var appName = document.getElementById('appName').value.trim();
+            var appRep = document.getElementById('appRep').value.trim();
+            var appTel = document.getElementById('appTel').value.trim();
+            var appAddr = document.getElementById('appAddr').value.trim();
+            var respName = document.getElementById('respName').value.trim();
+            var respRep = document.getElementById('respRep').value.trim();
+            var respTel = document.getElementById('respTel').value.trim();
+            var respAddr = document.getElementById('respAddr').value.trim();
+            var basisNum = document.getElementById('basisNum').value.trim();
+            var basisDate = document.getElementById('basisDate').value;
+            var basisContent = document.getElementById('basisContent').value.trim();
+            var claim = document.getElementById('claim').value.trim();
+            var clue = document.getElementById('clue').value.trim();
+            var court = document.getElementById('court').value.trim();
+
+            if (!appName) { alert('请填写申请人名称'); return; }
+            if (!respName) { alert('请填写被申请人名称'); return; }
+            if (!basisNum) { alert('请填写执行依据文号'); return; }
+            if (!basisContent) { alert('请填写执行依据内容'); return; }
+            if (!claim) { alert('请填写执行请求'); return; }
+            if (!court) { alert('请填写管辖法院'); return; }
+
+            var dateStr = basisDate ? basisDate.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$1年$2月$3日') : '____年__月__日';
+            var today = new Date().toISOString().slice(0, 10).replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$1年$2月$3日');
+
+            var lines = [];
+            lines.push('强制执行申请书');
+            lines.push('');
+            lines.push('申请执行人（原告/债权人）：' + appName);
+            if (appRep) lines.push('法定代表人（负责人）：' + appRep);
+            if (appTel) lines.push('联系电话：' + appTel);
+            if (appAddr) lines.push('住所地（地址）：' + appAddr);
+            lines.push('');
+            lines.push('被申请执行人（被告/债务人）：' + respName);
+            if (respRep) lines.push('法定代表人（负责人）：' + respRep);
+            if (respTel) lines.push('联系电话：' + respTel);
+            if (respAddr) lines.push('住所地（地址）：' + respAddr);
+            lines.push('');
+            lines.push('执行依据：（' + basisNum + '），生效日期：' + dateStr);
+            lines.push('生效法律文书确定的内容：' + basisContent);
+            lines.push('');
+            lines.push('申请执行事项：');
+            lines.push(claim);
+            lines.push('');
+            if (clue) {
+                lines.push('附：被申请执行人财产线索');
+                lines.push(clue);
+                lines.push('');
+            }
+            lines.push('此致');
+            lines.push('');
+            lines.push(court);
+            lines.push('');
+            lines.push('申请执行人（签名或盖章）：' + appName);
+            lines.push('附：1. 执行依据副本（' + basisNum + '）1份');
+            if (clue) lines.push('      2. 财产线索清单及相关证据');
+            lines.push('      3. 申请执行人身份证明复印件');
+            lines.push('');
+            lines.push('提交日期：' + today);
+
+            var doc = lines.join('\n');
+            document.getElementById('preview').textContent = doc;
+            document.getElementById('result').style.display = 'block';
+            window.currentDoc = doc;
+        }
+
+        function download() {
+            if (!window.currentDoc) { alert('请先生成预览'); return; }
+            var dateStr = new Date().toISOString().slice(0, 10);
+            var blob = new Blob(['\ufeff' + window.currentDoc], { type: 'application/msword' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = '强制执行申请书_' + dateStr + '.doc';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        document.getElementById('basisDate').valueAsDate = new Date();
+    </script>
+</body>
+</html>

@@ -3,76 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>证据清单生成 - 张大壮律师</title>
+    <title>证据目录及说明 - 张大壮律师</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
         .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
         header { background: linear-gradient(135deg, #1a5f7a 0%, #159895 50%, #57c5b6 100%); color: white; padding: 40px 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
         header h1 { font-size: 1.6em; }
+        header p { font-size: 0.95em; margin-top: 8px; opacity: 0.9; }
         .form-card { background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; }
-        .section-title { color: #1a5f7a; font-size: 1.1em; margin: 25px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #57c5b6; }
-        .form-group { margin-bottom: 20px; }
+        .section-title { color: #1a5f7a; font-size: 1em; margin: 25px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #57c5b6; font-weight: bold; }
+        .form-group { margin-bottom: 18px; }
         label { display: block; font-weight: 600; margin-bottom: 8px; color: #333; }
-        label .required { color: #e74c3c; }
-        input[type="text"], input[type="number"], textarea, select { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1em; font-family: inherit; }
-        textarea { min-height: 100px; resize: vertical; }
-        .btn { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 18px; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; }
-        .btn:hover { opacity: 0.9; }
-        .preview-btn { background: #666; margin-top: 15px; }
-        .result { margin-top: 30px; padding: 20px; background: #f0f9f8; border-radius: 12px; border-left: 4px solid #159895; display: none; }
-        .result h4 { color: #1a5f7a; margin-bottom: 10px; }
-        .result pre { white-space: pre-wrap; font-size: 0.95em; line-height: 2; }
-        footer { text-align: center; padding: 30px; color: #888; font-size: 0.95em; background: #fff; border-radius: 16px; margin-top: 30px; }
-        @media (max-width: 768px) { .form-card { padding: 20px; } }
+        .required { color: #e74c3c; }
+        input, textarea, select { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1em; font-family: inherit; transition: border-color 0.3s; }
+        input:focus, textarea:focus, select:focus { border-color: #159895; outline: none; }
+        textarea { min-height: 80px; resize: vertical; }
+        .btn { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 16px; border: none; border-radius: 12px; font-size: 1.05em; font-weight: bold; cursor: pointer; transition: opacity 0.3s; }
+        .btn:hover { opacity: 0.88; }
+        .btn-secondary { background: #666; margin-top: 12px; }
+        .result { margin-top: 30px; padding: 25px; background: #f0f9f8; border-radius: 12px; border-left: 5px solid #159895; display: none; }
+        .result h4 { color: #1a5f7a; margin-bottom: 12px; }
+        .result pre { white-space: pre-wrap; font-size: 0.9em; line-height: 2; font-family: "Microsoft YaHei", monospace; background: #fff; padding: 15px; border-radius: 8px; overflow-x: auto; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.9em; }
+        /* 证据表格 */
+        .evi-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .evi-table th { background: #1a5f7a; color: white; padding: 10px 8px; text-align: center; font-size: 0.9em; }
+        .evi-table td { padding: 8px; border: 1px solid #ddd; }
+        .evi-table tr:nth-child(even) td { background: #f8f9f8; }
+        .evi-table input, .evi-table select { border: none; background: transparent; padding: 6px 4px; font-size: 0.95em; }
+        .evi-table input:focus, .evi-table select:focus { border: 1px solid #159895; border-radius: 4px; }
+        .evi-table .num-col { width: 50px; text-align: center; font-weight: bold; color: #1a5f7a; }
+        .evi-table .name-col { width: 22%; }
+        .evi-table .content-col { width: 38%; }
+        .evi-table .page-col { width: 60px; text-align: center; }
+        .evi-table .has-col { width: 80px; text-align: center; }
+        .add-row-btn { width: 100%; padding: 10px; background: #e8f4f3; color: #159895; border: 2px dashed #159895; border-radius: 10px; font-size: 0.95em; cursor: pointer; margin-top: 8px; }
+        .add-row-btn:hover { background: #d0eeec; }
+        .result-title { text-align: center; font-size: 1.1em; font-weight: bold; color: #333; margin-bottom: 15px; }
+        .no-print { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        @media (max-width: 768px) {
+            .form-card { padding: 20px; }
+            .evi-table { font-size: 0.85em; }
+            .evi-table .name-col, .evi-table .content-col { width: auto; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="documents.html" class="back-link">← 返回文书列表</a>
+
         <header>
-            <h1>📎 证据清单生成</h1>
+            <h1>📎 证据目录及说明</h1>
+            <p>按真实范本格式：序号 | 证据名称 | 证明内容 | 页码 | 是否有原件</p>
         </header>
 
         <div class="form-card">
+            <div class="section-title">📋 基本信息</div>
             <div class="form-group">
-                <label>案号</label>
-                <input type="text" id="caseNo" placeholder="如：（2026）粤01民初123号">
+                <label>提交人（原告/被告）<span class="required">*</span></label>
+                <input type="text" id="submitter" placeholder="如：李勋宝">
             </div>
             <div class="form-group">
-                <label>案由</label>
-                <input type="text" id="caseType" placeholder="如：民间借贷纠纷">
+                <label>案件名称<span class="required">*</span></label>
+                <input type="text" id="caseName" placeholder="如：李勋宝诉杨丽、陈瑞奇不当得利纠纷">
             </div>
 
-            <div class="section-title">👤 原告信息</div>
-            <div class="form-group">
-                <label>原告 <span class="required">*</span></label>
-                <input type="text" id="plaintiff" placeholder="">
+            <div class="section-title">📑 证据明细（按范本格式）</div>
+            <table class="evi-table no-print">
+                <thead>
+                    <tr>
+                        <th class="num-col">序号</th>
+                        <th class="name-col">证据名称</th>
+                        <th class="content-col">证明内容</th>
+                        <th class="page-col">页码</th>
+                        <th class="has-col">原件</th>
+                    </tr>
+                </thead>
+                <tbody id="evidenceTbody">
+                </tbody>
+            </table>
+            <button type="button" class="add-row-btn" onclick="addRow()">+ 添加证据项</button>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <label>提交日期</label>
+                <input type="date" id="submitDate">
             </div>
 
-            <div class="section-title">👤 被告信息</div>
-            <div class="form-group">
-                <label>被告 <span class="required">*</span></label>
-                <input type="text" id="defendant" placeholder="">
+            <button type="button" class="btn" onclick="generate()">🔍 生成预览</button>
+            <button type="button" class="btn btn-secondary" onclick="download()">📥 下载Word文档</button>
+
+            <div class="result" id="result">
+                <h4>📄 证据目录及说明 · 预览</h4>
+                <pre id="preview"></pre>
             </div>
-
-            <div class="section-title">📋 证据列表</div>
-            <div class="form-group">
-                <label>证据（格式：证据名称 | 来源 | 证明内容 | 页码）</label>
-                <textarea id="evidenceItems" placeholder="格式示例：
-借条原件 | 原告提供 | 证明被告向原告借款5万元 | P1-2
-银行转账记录 | 原告提供 | 证明原告已交付借款 | P3
-微信聊天记录 | 原告提供 | 证明被告承认欠款 | P4-5"></textarea>
-            </div>
-
-            <button class="btn" onclick="generateDoc()">生成证据清单</button>
-        </div>
-
-        <div class="result" id="result">
-            <h4>📄 证据清单预览</h4>
-            <pre id="docPreview"></pre>
-            <button class="btn preview-btn" onclick="downloadDoc()">⬇️ 下载Word文档</button>
         </div>
 
         <footer>
@@ -81,72 +106,123 @@
     </div>
 
     <script>
-        let currentDoc = null;
+        let rowCount = 0;
+        var currentDoc = '';
 
-        function generateDoc() {
-            if (!document.getElementById('plaintiff').value.trim()) { alert('请填写原告'); return; }
-            if (!document.getElementById('defendant').value.trim()) { alert('请填写被告'); return; }
-            if (!document.getElementById('evidenceItems').value.trim()) { alert('请填写证据清单'); return; }
-
-            const caseNo = document.getElementById('caseNo').value.trim();
-            const caseType = document.getElementById('caseType').value.trim();
-            const plaintiff = document.getElementById('plaintiff').value.trim();
-            const defendant = document.getElementById('defendant').value.trim();
-            const evidenceItems = document.getElementById('evidenceItems').value.trim();
-
-            // 解析证据
-            const lines = evidenceItems.split('\n').filter(l => l.trim());
-            let evidenceTable = '';
-            lines.forEach((line, i) => {
-                const parts = line.split('|').map(p => p.trim());
-                const name = parts[0] || '';
-                const source = parts[1] || '';
-                const content = parts[2] || '';
-                const page = parts[3] || '';
-                evidenceTable += `${i + 1}  | ${name.padEnd(15)} | ${source.padEnd(10)} | ${content.padEnd(20)} | ${page}\n`;
-            });
-
-            const today = new Date();
-            const dateStr = `${today.getFullYear()}年${today.getMonth() + 1}月${today.getDate()}日`;
-
-            const docContent = `证据清单
-
-${caseNo ? `案号：${caseNo}` : ''}${caseType ? `    案由：${caseType}` : ''}
-
-原告：${plaintiff}
-被告：${defendant}
-
-┌────┬────────────────┬────────────┬──────────────────────┬───────┐
-│序号│ 证据名称        │ 证据来源   │ 证明内容             │ 页码  │
-├────┼────────────────┼────────────┼──────────────────────┼───────┤
-${lines.map((line, i) => {
-    const parts = line.split('|').map(p => p.trim());
-    return `│${String(i+1).padStart(2)} │${(parts[0]||'').padEnd(14)} │${(parts[1]||'').padEnd(10)} │${(parts[2]||'').padEnd(20)} │${(parts[3]||'').padEnd(6)} │`;
-}).join('\n')}
-└────┴────────────────┴────────────┴──────────────────────┴───────┘
-
-共 ${lines.length} 项证据
-
-证据提交人（签名）：________
-${dateStr}
-
-附：证据原件存放于第___页起` ;
-
-            document.getElementById('docPreview').textContent = docContent;
-            document.getElementById('result').style.display = 'block';
-            currentDoc = docContent;
+        function addRow() {
+            var tbody = document.getElementById('evidenceTbody');
+            var tr = document.createElement('tr');
+            rowCount++;
+            tr.id = 'row_' + rowCount;
+            tr.innerHTML =
+                '<td class="num-col">' + rowCount + '</td>' +
+                '<td class="name-col"><input type="text" id="name_' + rowCount + '" placeholder="如：李勋宝转账凭证"></td>' +
+                '<td class="content-col"><input type="text" id="content_' + rowCount + '" placeholder="详细描述证明内容…"></td>' +
+                '<td class="page-col"><input type="text" id="page_' + rowCount + '" placeholder="如：1 或 1-5"></td>' +
+                '<td class="has-col"><select id="has_' + rowCount + '"><option value="有">有</option><option value="无">无</option></select></td>';
+            tbody.appendChild(tr);
         }
 
-        function downloadDoc() {
-            if (!currentDoc) return;
-            const blob = new Blob(['\ufeff' + currentDoc], { type: 'application/msword' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
+        function getRows() {
+            var rows = [];
+            for (var i = 1; i <= rowCount; i++) {
+                var nameEl = document.getElementById('name_' + i);
+                var contentEl = document.getElementById('content_' + i);
+                var pageEl = document.getElementById('page_' + i);
+                var hasEl = document.getElementById('has_' + i);
+                if (nameEl && nameEl.value.trim()) {
+                    rows.push({
+                        num: i,
+                        name: nameEl.value.trim(),
+                        content: contentEl ? contentEl.value.trim() : '',
+                        page: pageEl ? pageEl.value.trim() : '',
+                        has: hasEl ? hasEl.value : '—'
+                    });
+                }
+            }
+            return rows;
+        }
+
+        function padStr(str, len) {
+            str = String(str);
+            while (str.length < len) str += ' ';
+            return str.substring(0, len);
+        }
+
+        function generate() {
+            var submitter = document.getElementById('submitter').value.trim();
+            var caseName = document.getElementById('caseName').value.trim();
+            var dateVal = document.getElementById('submitDate').value;
+            var dateStr = dateVal ? dateVal.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$1年$2月$3日') : '____年__月__日';
+
+            if (!submitter) { alert('请填写"提交人"'); return; }
+            if (!caseName) { alert('请填写"案件名称"'); return; }
+
+            var rows = getRows();
+            if (rows.length === 0) { alert('请至少填写一项证据'); return; }
+
+            // ========== 按范本格式生成 ==========
+            var lines = [];
+            lines.push('证据目录及说明');
+            lines.push('');
+            lines.push('提交人：' + submitter);
+            lines.push('案件：' + caseName);
+            lines.push('');
+            lines.push('┌────┬────────────────┬──────────────────────┬───────┬───────────┐');
+            lines.push('│ 序号 │     证据名称     │        证明内容         │  页码  │ 是否有原件 │');
+            lines.push('├────┼────────────────┼──────────────────────┼───────┼───────────┤');
+
+            rows.forEach(function(r) {
+                var num = String(r.num).padStart(4);
+                var name = padStr(r.name, 14);
+                var content = padStr(r.content, 20);
+                var page = padStr(r.page || '—', 5);
+                var has = padStr(r.has, 7);
+                lines.push('│' + num + ' │' + name + ' │' + content + ' │' + page + ' │' + has + ' │');
+            });
+
+            lines.push('└────┴────────────────┴──────────────────────┴───────┴───────────┘');
+            lines.push('');
+            lines.push('共 ' + rows.length + ' 项证据');
+            lines.push('');
+
+            // 证据详情（每项的完整证明内容）
+            rows.forEach(function(r, idx) {
+                if (r.content) {
+                    lines.push('【证据 ' + (idx + 1) + '】' + r.name);
+                    lines.push(r.content);
+                    lines.push('');
+                }
+            });
+
+            // 落款
+            lines.push('提交人（签名）：' + submitter);
+            lines.push('接收人（签名）：________________');
+            lines.push('提交日期：' + dateStr);
+
+            var doc = lines.join('\n');
+            document.getElementById('preview').textContent = doc;
+            document.getElementById('result').style.display = 'block';
+            currentDoc = doc;
+        }
+
+        function download() {
+            if (!currentDoc) { alert('请先生成预览'); return; }
+            var submitter = document.getElementById('submitter').value.trim() || '证据清单';
+            var dateStr = new Date().toISOString().slice(0, 10);
+            var content = '\ufeff' + currentDoc;
+            var blob = new Blob([content], { type: 'application/msword' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
             a.href = url;
-            a.download = `证据清单_${document.getElementById('plaintiff').value}_${new Date().toISOString().slice(0,10)}.doc`;
+            a.download = '证据目录_' + submitter + '_' + dateStr + '.doc';
             a.click();
             URL.revokeObjectURL(url);
         }
+
+        // 初始化3个空行 + 默认日期
+        for (var i = 0; i < 3; i++) addRow();
+        document.getElementById('submitDate').valueAsDate = new Date();
     </script>
 </body>
 </html>

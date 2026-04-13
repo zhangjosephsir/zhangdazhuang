@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>当事人提交材料清单 - 张大壮律师</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
+        header { background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 40px 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 1.6em; }
+        header p { font-size: 0.95em; margin-top: 8px; opacity: 0.9; }
+        .form-card { background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .section-title { color: #1a5f7a; font-size: 1em; margin: 25px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #57c5b6; font-weight: bold; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; color: #333; }
+        .required { color: #e74c3c; }
+        input, textarea, select { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1em; font-family: inherit; transition: border-color 0.3s; }
+        input:focus, textarea:focus { border-color: #159895; outline: none; }
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .btn { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 16px; border: none; border-radius: 12px; font-size: 1.05em; font-weight: bold; cursor: pointer; transition: opacity 0.3s; }
+        .btn:hover { opacity: 0.88; }
+        .btn-secondary { background: #666; margin-top: 12px; }
+        .result { margin-top: 30px; padding: 25px; background: #f0f9f8; border-radius: 12px; border-left: 5px solid #159895; display: none; }
+        .result h4 { color: #1a5f7a; margin-bottom: 12px; }
+        .result pre { white-space: pre-wrap; font-size: 0.88em; line-height: 2; font-family: "Microsoft YaHei", monospace; background: #fff; padding: 15px; border-radius: 8px; overflow-x: auto; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.9em; }
+        /* 清单表格 */
+        .ck-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .ck-table th { background: #1a5f7a; color: white; padding: 10px 8px; text-align: center; font-size: 0.88em; }
+        .ck-table td { padding: 8px; border: 1px solid #ddd; }
+        .ck-table tr:nth-child(even) td { background: #f8f9f8; }
+        .ck-table input, .ck-table select { border: none; background: transparent; padding: 6px 4px; font-size: 0.95em; }
+        .ck-table input:focus { border: 1px solid #159895; border-radius: 4px; }
+        .ck-table .num-col { width: 45px; text-align: center; font-weight: bold; color: #1a5f7a; }
+        .ck-table .item-col { }
+        .ck-table .qty-col { width: 60px; text-align: center; }
+        .ck-table .ori-col { width: 80px; text-align: center; }
+        .ck-table .note-col { width: 120px; }
+        .add-row-btn { width: 100%; padding: 10px; background: #e8f4f3; color: #159895; border: 2px dashed #159895; border-radius: 10px; font-size: 0.95em; cursor: pointer; margin-top: 8px; }
+        .add-row-btn:hover { background: #d0eeec; }
+        @media (max-width: 600px) { .row-2 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="documents.html" class="back-link">← 返回文书列表</a>
+
+        <header>
+            <h1>📋 当事人提交材料清单</h1>
+            <p>立案/审理阶段提交材料标准清单，可勾选</p>
+        </header>
+
+        <div class="form-card">
+            <div class="section-title">📋 案件信息</div>
+            <div class="row-2">
+                <div class="form-group">
+                    <label>当事人名称<span class="required">*</span></label>
+                    <input type="text" id="partyName" placeholder="如：张三 或 XX有限公司">
+                </div>
+                <div class="form-group">
+                    <label>案件类型</label>
+                    <select id="caseType">
+                        <option value="民事一审">民事一审</option>
+                        <option value="民事二审">民事二审</option>
+                        <option value="执行申请">执行申请</option>
+                        <option value="再审申请">再审申请</option>
+                        <option value="行政诉讼">行政诉讼</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>案号（如有）</label>
+                <input type="text" id="caseNum" placeholder="如：（2024）深华法民初字第1234号">
+            </div>
+
+            <div class="section-title">📑 材料清单（按范本格式）</div>
+            <table class="ck-table">
+                <thead>
+                    <tr>
+                        <th class="num-col">序号</th>
+                        <th class="item-col">材料名称</th>
+                        <th class="qty-col">份数</th>
+                        <th class="ori-col">原件/复印件</th>
+                        <th class="note-col">备注</th>
+                    </tr>
+                </thead>
+                <tbody id="ckBody">
+                </tbody>
+            </table>
+            <button type="button" class="add-row-btn" onclick="addRow()">+ 添加材料项</button>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <label>提交人（当事人）</label>
+                <input type="text" id="submitter" placeholder="当事人签名">
+            </div>
+            <div class="form-group">
+                <label>提交日期</label>
+                <input type="date" id="submitDate">
+            </div>
+            <div class="form-group">
+                <label>接收人（法院工作人员）</label>
+                <input type="text" id="receiver" placeholder="法院工作人员签名">
+            </div>
+
+            <button type="button" class="btn" onclick="generate()">🔍 生成预览</button>
+            <button type="button" class="btn btn-secondary" onclick="download()">📥 下载Word文档</button>
+
+            <div class="result" id="result">
+                <h4>📋 当事人提交材料清单 · 预览</h4>
+                <pre id="preview"></pre>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 张大壮律师 | 专业 · 可靠 · 负责</p>
+        </footer>
+    </div>
+
+    <script>
+        var rowCount = 0;
+        window.currentDoc = '';
+
+        function padStr(str, len) {
+            str = String(str);
+            while (str.length < len) str += ' ';
+            return str.substring(0, len);
+        }
+
+        function addRow() {
+            var tbody = document.getElementById('ckBody');
+            rowCount++;
+            var tr = document.createElement('tr');
+            tr.id = 'row_' + rowCount;
+            tr.innerHTML =
+                '<td class="num-col">' + rowCount + '</td>' +
+                '<td class="item-col"><input type="text" id="item_' + rowCount + '" placeholder="如：民事起诉状"></td>' +
+                '<td class="qty-col"><input type="text" id="qty_' + rowCount + '" value="1" placeholder="份数"></td>' +
+                '<td class="ori-col"><select id="ori_' + rowCount + '"><option value="原件">原件</option><option value="复印件" selected>复印件</option><option value="原件+复印件">原件+复印件</option></select></td>' +
+                '<td class="note-col"><input type="text" id="note_' + rowCount + '" placeholder="备注"></td>';
+            tbody.appendChild(tr);
+        }
+
+        function generate() {
+            var partyName = document.getElementById('partyName').value.trim();
+            var caseType = document.getElementById('caseType').value;
+            var caseNum = document.getElementById('caseNum').value.trim();
+            var submitter = document.getElementById('submitter').value.trim();
+            var receiver = document.getElementById('receiver').value.trim();
+            var dateVal = document.getElementById('submitDate').value;
+            var dateStr = dateVal ? dateVal.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$1年$2月$3日') : '____年__月__日';
+            var today = new Date().toISOString().slice(0,10).replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$1年$2月$3日');
+
+            if (!partyName) { alert('请填写当事人名称'); return; }
+
+            var rows = [];
+            for (var i = 1; i <= rowCount; i++) {
+                var itemEl = document.getElementById('item_' + i);
+                if (itemEl && itemEl.value.trim()) {
+                    rows.push({
+                        num: i,
+                        item: itemEl.value.trim(),
+                        qty: (document.getElementById('qty_' + i) || {value: '1'}).value,
+                        ori: (document.getElementById('ori_' + i) || {}).value || '复印件',
+                        note: (document.getElementById('note_' + i) || {}).value || ''
+                    });
+                }
+            }
+
+            var lines = [];
+            lines.push('当事人提交材料清单');
+            lines.push('');
+            lines.push('案件类型：' + caseType + (caseNum ? '    案号：' + caseNum : ''));
+            lines.push('提交人（当事人）：' + partyName);
+            lines.push('');
+            lines.push('┌────┬────────────────────────┬────┬────────────┬──────────┐');
+            lines.push('│ 序号 │          材料名称           │ 份数 │ 原件/复印件 │   备注   │');
+            lines.push('├────┼────────────────────────┼────┼────────────┼──────────┤');
+
+            rows.forEach(function(r) {
+                var num = padStr(r.num, 4);
+                var item = padStr(r.item, 24);
+                var qty = padStr(r.qty, 4);
+                var ori = padStr(r.ori, 8);
+                var note = padStr(r.note || '—', 8);
+                lines.push('│' + num + ' │' + item + ' │' + qty + ' │' + ori + ' │' + note + ' │');
+            });
+
+            lines.push('└────┴────────────────────────┴────┴────────────┴──────────┘');
+            lines.push('');
+            lines.push('共 ' + rows.length + ' 项材料');
+            lines.push('');
+            lines.push('提交人（当事人）签名：' + (submitter || '________________'));
+            lines.push('法院接收人签名：' + (receiver || '________________'));
+            lines.push('提交日期：' + dateStr);
+
+            var doc = lines.join('\n');
+            document.getElementById('preview').textContent = doc;
+            document.getElementById('result').style.display = 'block';
+            window.currentDoc = doc;
+        }
+
+        function download() {
+            if (!window.currentDoc) { alert('请先生成预览'); return; }
+            var blob = new Blob(['\ufeff' + window.currentDoc], { type: 'application/msword' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = '提交材料清单_' + new Date().toISOString().slice(0,10) + '.doc';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // 默认添加常用材料行
+        var defaults = ['民事起诉状', '原告身份证明（身份证/营业执照）', '授权委托书及律师事务所函', '证据目录及证据材料', '送达地址确认书'];
+        defaults.forEach(function(item) { addRow(); document.getElementById('item_' + rowCount).value = item; });
+        document.getElementById('submitDate').valueAsDate = new Date();
+    </script>
+</body>
+</html>
