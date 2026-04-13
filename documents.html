@@ -55,6 +55,12 @@
                 <h3>代理意见</h3>
                 <p>庭审后提交的专业代理意见，阐述法律观点</p>
             </div>
+            <div class="doc-card" onclick="goPreservation()">
+                <div class="icon">🛡️</div>
+                <h3>财产保全申请</h3>
+                <p>申请冻结、查封、扣押被申请人财产</p>
+            </div>
+
             <div class="doc-card" onclick="goChecklist()">
                 <div class="icon">📋</div>
                 <h3>提交材料清单</h3>
@@ -84,6 +90,7 @@
         }
         // 直接跳转，不用弹窗
         function goLawsuit() { window.location.href = 'doc-form-lawsuit.html'; }
+        function goPreservation() { window.location.href = 'doc-form-preservation.html'; }
         function goChecklist() { window.location.href = 'doc-form-checklist.html'; }
         function goAddress() { window.location.href = 'doc-form-address-nat.html'; }
         function goEnforce() { window.location.href = 'doc-form-enforce.html'; }

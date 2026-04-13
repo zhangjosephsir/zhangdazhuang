@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>财产保全申请书 - 张大壮律师</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
+        header { background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 40px 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
+        header h1 { font-size: 1.6em; }
+        header p { font-size: 0.95em; margin-top: 8px; opacity: 0.9; }
+        .form-card { background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        .section-title { color: #1a5f7a; font-size: 1em; margin: 25px 0 15px; padding-bottom: 8px; border-bottom: 2px solid #57c5b6; font-weight: bold; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; color: #333; }
+        .required { color: #e74c3c; }
+        input, textarea, select { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1em; font-family: inherit; transition: border-color 0.3s; }
+        input:focus, textarea:focus { border-color: #159895; outline: none; }
+        textarea { min-height: 90px; resize: vertical; }
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .btn { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 16px; border: none; border-radius: 12px; font-size: 1.05em; font-weight: bold; cursor: pointer; transition: opacity 0.3s; }
+        .btn:hover { opacity: 0.88; }
+        .btn-secondary { background: #666; margin-top: 12px; }
+        .result { margin-top: 30px; padding: 25px; background: #f0f9f8; border-radius: 12px; border-left: 5px solid #159895; display: none; }
+        .result h4 { color: #1a5f7a; margin-bottom: 12px; }
+        .result pre { white-space: pre-wrap; font-size: 0.88em; line-height: 2; font-family: "Microsoft YaHei", monospace; background: #fff; padding: 15px; border-radius: 8px; overflow-x: auto; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.9em; }
+        .clue-block { background: #f8f9f8; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-top: 10px; }
+        .clue-block h5 { color: #1a5f7a; margin-bottom: 8px; font-size: 0.95em; }
+        @media (max-width: 600px) { .row-2 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="documents.html" class="back-link">← 返回文书列表</a>
+
+        <header>
+            <h1>🛡️ 财产保全申请书</h1>
+            <p>申请法院冻结、查封、扣押被申请人财产</p>
+        </header>
+
+        <div class="form-card">
+            <!-- 申请人 -->
+            <div class="section-title">📋 申请人（财产保全申请人）</div>
+            <div class="form-group">
+                <label>申请人名称<span class="required">*</span></label>
+                <input type="text" id="appName" placeholder="如：XXX有限公司 或 XXX（自然人）">
+            </div>
+            <div class="row-2">
+                <div class="form-group">
+                    <label>法定代表人 / 负责人</label>
+                    <input type="text" id="appRep" placeholder="如：张三">
+                </div>
+                <div class="form-group">
+                    <label>代理人（律师）</label>
+                    <input type="text" id="appLawyer" placeholder="如：李四，广东XX律师事务所律师">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>住所地 / 地址</label>
+                <input type="text" id="appAddr" placeholder="如：广东省深圳市XX区XXX路XX号">
+            </div>
+
+            <!-- 被申请人 -->
+            <div class="section-title">📋 被申请人（被保全人）</div>
+            <div class="form-group">
+                <label>被申请人名称<span class="required">*</span></label>
+                <input type="text" id="respName" placeholder="如：XXX有限公司 或 XXX（自然人）">
+            </div>
+            <div class="row-2">
+                <div class="form-group">
+                    <label>法定代表人 / 负责人</label>
+                    <input type="text" id="respRep" placeholder="如：张三">
+                </div>
+                <div class="form-group">
+                    <label>身份证号 / 统一社会信用代码</label>
+                    <input type="text" id="respId" placeholder="如：440XXXXXXXXXXXXXX">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>住所地 / 地址</label>
+                <input type="text" id="respAddr" placeholder="如：广东省广州市XX区XXX路XX号">
+            </div>
+
+            <!-- 如有第二被申请人 -->
+            <div class="form-group">
+                <label>第二被申请人（如有）</label>
+                <input type="text" id="resp2Name" placeholder="如：XXX有限公司">
+            </div>
+            <div class="row-2" id="resp2Details" style="display:none;">
+                <div class="form-group">
+                    <label>法定代表人</label>
+                    <input type="text" id="resp2Rep" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label>统一社会信用代码</label>
+                    <input type="text" id="resp2Id" placeholder="">
+                </div>
+            </div>
+
+            <!-- 保全信息 -->
+            <div class="section-title">🛡️ 保全内容</div>
+            <div class="form-group">
+                <label>保全标的金额（人民币）<span class="required">*</span></label>
+                <input type="text" id="amount" placeholder="如：215万元">
+            </div>
+            <div class="form-group">
+                <label>保全方式</label>
+                <select id="method">
+                    <option value="冻结被申请人名下银行存款">冻结被申请人名下银行存款</option>
+                    <option value="查封、扣押被申请人名下价值">查封、扣押被申请人名下价值</option>
+                    <option value="冻结银行存款，或查封、扣押其他财产">冻结银行存款，或查封、扣押其他财产</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>关联案件案号</label>
+                <input type="text" id="caseNum" placeholder="如：（2024）深华法民初字第XXXX号">
+            </div>
+            <div class="form-group">
+                <label>关联案件案由</label>
+                <input type="text" id="caseType" placeholder="如：建设工程分包合同纠纷">
+            </div>
+
+            <!-- 财产线索 -->
+            <div class="section-title">🔍 财产线索（如有）</div>
+            <div class="clue-block">
+                <h5>被申请人银行账户信息</h5>
+                <div class="form-group">
+                    <label>户名</label>
+                    <input type="text" id="bankName" placeholder="如：XXX有限公司 或 XXX（自然人）">
+                </div>
+                <div class="form-group">
+                    <label>开户行</label>
+                    <input type="text" id="bankBranch" placeholder="如：中国工商银行XXX支行">
+                </div>
+                <div class="form-group">
+                    <label>账号</label>
+                    <input type="text" id="bankAccount" placeholder="如：6222XXXXXXXX">
+                </div>
+            </div>
+            <div class="clue-block" style="margin-top:10px;">
+                <h5>其他财产线索（房产/车辆/股权等）</h5>
+                <div class="form-group">
+                    <label>财产类型及详情</label>
+                    <textarea id="otherClue" placeholder="如：被执行人名下粤BXXXXX车辆一台；或深圳市XX区XX花园X栋X号房产一处"></textarea>
+                </div>
+            </div>
+
+            <!-- 管辖 -->
+            <div class="section-title">🏛️ 管辖法院</div>
+            <div class="form-group">
+                <label>管辖法院<span class="required">*</span></label>
+                <input type="text" id="court" placeholder="如：广东省XX市XX区人民法院">
+            </div>
+
+            <button type="button" class="btn" onclick="generate()">🔍 生成预览</button>
+            <button type="button" class="btn btn-secondary" onclick="download()">📥 下载Word文档</button>
+
+            <div class="result" id="result">
+                <h4>🛡️ 财产保全申请书 · 预览</h4>
+                <pre id="preview"></pre>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 张大壮律师 | 专业 · 可靠 · 负责</p>
+        </footer>
+    </div>
+
+    <script>
+        function generate() {
+            var appName = document.getElementById('appName').value.trim();
+            var appRep = document.getElementById('appRep').value.trim();
+            var appLawyer = document.getElementById('appLawyer').value.trim();
+            var appAddr = document.getElementById('appAddr').value.trim();
+            var respName = document.getElementById('respName').value.trim();
+            var respRep = document.getElementById('respRep').value.trim();
+            var respId = document.getElementById('respId').value.trim();
+            var respAddr = document.getElementById('respAddr').value.trim();
+            var resp2Name = document.getElementById('resp2Name').value.trim();
+            var resp2Rep = document.getElementById('resp2Rep').value.trim();
+            var resp2Id = document.getElementById('resp2Id').value.trim();
+            var amount = document.getElementById('amount').value.trim();
+            var method = document.getElementById('method').value;
+            var caseNum = document.getElementById('caseNum').value.trim();
+            var caseType = document.getElementById('caseType').value.trim();
+            var bankName = document.getElementById('bankName').value.trim();
+            var bankBranch = document.getElementById('bankBranch').value.trim();
+            var bankAccount = document.getElementById('bankAccount').value.trim();
+            var otherClue = document.getElementById('otherClue').value.trim();
+            var court = document.getElementById('court').value.trim();
+            var today = new Date().toISOString().slice(0,10).replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$1年$2月$3日');
+
+            if (!appName) { alert('请填写申请人名称'); return; }
+            if (!respName) { alert('请填写被申请人名称'); return; }
+            if (!amount) { alert('请填写保全标的金额'); return; }
+            if (!court) { alert('请填写管辖法院'); return; }
+
+            var lines = [];
+            lines.push('财产保全申请书');
+            lines.push('');
+            lines.push('申请人（原告）：' + appName);
+            if (appRep) lines.push('法定代表人（负责人）：' + appRep);
+            if (appLawyer) lines.push('委托代理人：' + appLawyer);
+            if (appAddr) lines.push('住所地：' + appAddr);
+            lines.push('');
+            lines.push('被申请人（被告）：' + respName);
+            if (respRep) lines.push('法定代表人（负责人）：' + respRep);
+            if (respId) lines.push('身份证号/统一社会信用代码：' + respId);
+            if (respAddr) lines.push('住所地：' + respAddr);
+            if (resp2Name) {
+                lines.push('');
+                lines.push('被申请人二：' + resp2Name);
+                if (resp2Rep) lines.push('法定代表人（负责人）：' + resp2Rep);
+                if (resp2Id) lines.push('统一社会信用代码：' + resp2Id);
+            }
+            lines.push('');
+            lines.push('申请事项：');
+            lines.push('申请贵院' + method + '人民币' + amount + '，或查封、扣押被申请人名下价值人民币' + amount + '的其他财产。');
+            lines.push('');
+            lines.push('事实和理由：');
+            lines.push('贵院受理的申请人（原告）和被申请人（被告）' + (caseType ? '[' + caseType + ']' : '[案由]') + '案' + (caseNum ? '（' + caseNum + '）' : '') + '，申请人的诉讼请求如下：');
+            lines.push('一、请求……（请填写具体诉讼请求）');
+            lines.push('二、请求……');
+            lines.push('');
+            lines.push('为避免被申请人转移财产，申请人现依法向贵院申请财产保全，申请人自愿对本次保全行为提供担保及承担相应的法律责任，望贵院批准，保障申请人的合法权益。');
+            lines.push('');
+            if (bankName || bankAccount) {
+                lines.push('附：被申请人财产线索');
+                if (bankName) lines.push('户名：' + bankName + '；开户行：' + (bankBranch || '待查') + '；账号：' + (bankAccount || '待查'));
+                lines.push('');
+            }
+            if (otherClue) {
+                lines.push('其他财产线索：' + otherClue);
+                lines.push('');
+            }
+            lines.push('此致');
+            lines.push('');
+            lines.push(court);
+            lines.push('');
+            lines.push('申请人（签名或盖章）：' + appName);
+            lines.push('附：1. 财产保全担保函1份');
+            lines.push('      2. 关联案件起诉状副本1份' + (caseNum ? '（' + caseNum + '）' : ''));
+            lines.push('      3. 财产线索清单及相关证据');
+            lines.push('');
+            lines.push('提交日期：' + today);
+
+            var doc = lines.join('\n');
+            document.getElementById('preview').textContent = doc;
+            document.getElementById('result').style.display = 'block';
+            window.currentDoc = doc;
+        }
+
+        function download() {
+            if (!window.currentDoc) { alert('请先生成预览'); return; }
+            var blob = new Blob(['\ufeff' + window.currentDoc], { type: 'application/msword' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = '财产保全申请书_' + new Date().toISOString().slice(0,10) + '.doc';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
