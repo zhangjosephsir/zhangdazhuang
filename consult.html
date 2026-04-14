@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>免费咨询系统 - 张大壮律师</title>
+    <title>Free Legal Consultation - Attorney Zhang Joseph</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .lang-switch{position:fixed;top:16px;right:20px;z-index:1000;display:flex;gap:6px}
+        .lang-btn{padding:6px 16px;border:2px solid rgba(255,255,255,0.7);border-radius:20px;background:rgba(255,255,255,0.15);color:#fff;font-size:0.85em;cursor:pointer;font-weight:600;backdrop-filter:blur(8px);transition:all 0.2s;font-family:inherit}
+        .lang-btn:hover,.lang-btn.active{background:rgba(255,255,255,0.9);color:#1a5f7a}
+        [lang="zh-CN"] .en-only{display:none}
+        [lang="en"] .zh-only{display:none}
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
+        .back-link { display: inline-block; margin: 50px 0 20px; color: #159895; text-decoration: none; font-weight: bold; }
         footer { text-align: center; padding: 30px; color: #888; font-size: 0.95em; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: 30px; }
         .lawyer-intro { display: flex; align-items: center; gap: 20px; padding: 20px; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; }
         .lawyer-intro .avatar { font-size: 3em; }
@@ -25,131 +30,189 @@
         .consultation-form .role-card input { display: none; }
         .consultation-form .role-card .role-content { border: 2px solid #e0e0e0; border-radius: 12px; padding: 20px 15px; text-align: center; transition: all 0.3s; }
         .consultation-form .role-card .role-icon { font-size: 2em; display: block; margin-bottom: 8px; }
-        .stats-section {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            text-align: center;
-            padding: 40px 0;
-        }
-        .stat-item .number {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #159895;
-        }
-        .stat-item .label {
-            font-size: 1em;
-            color: #666;
-        }
-
+        .stats-section { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; padding: 40px 0; }
+        .stat-item .number { font-size: 2.5em; font-weight: bold; color: #159895; }
+        .stat-item .label { font-size: 1em; color: #666; }
         @media (max-width: 768px) {
             .lawyer-intro { flex-direction: column; text-align: center; }
-            .stats-section {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
-            }
-            .consultation-form {
-                padding: 20px;
-            }
+            .stats-section { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+            .consultation-form { padding: 20px; }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-link">&larr; 返回首页</a>
+<body lang="zh-CN">
 
-        <div class="lawyer-intro">
-            <div class="avatar">👨‍⚖️</div>
-            <div class="info">
-                <h2>张大壮律师</h2>
-                <p>三十年民事诉讼经验 | 胜诉率高 | 专业可靠</p>
-            </div>
-        </div>
-        
-        <div class="stats-section">
-            <div class="stat-item">
-                <div class="number">30+</div>
-                <div class="label">年执业经验</div>
-            </div>
-            <div class="stat-item">
-                <div class="number">1000+</div>
-                <div class="label">成功案例</div>
-            </div>
-            <div class="stat-item">
-                <div class="number">90%+</div>
-                <div class="label">客户满意度</div>
-            </div>
-            <div class="stat-item">
-                <div class="number">500+</div>
-                <div class="label">免费法律咨询</div>
-            </div>
-        </div>
+<div class="lang-switch">
+    <button class="lang-btn active" id="btn-zh" onclick="setLang('zh-CN')">中文</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
 
-        <div class="consultation-form">
-            <div class="form-header">
-                <h2>⚡ 免费法律咨询</h2>
-                <p>填写以下信息，点击提交后打开邮箱发送咨询（仅工作日回复）</p>
-            </div>
-            <form id="consultForm" onsubmit="submitForm(event)" autocomplete="off">
-                 <div class="form-row">
-                    <div class="form-group">
-                        <label>👤 您是 <span class="required">*</span></label>
-                        <div class="role-selector">
-                           <label class="role-card"><input type="radio" name="role" value="原告" required><div class="role-content"><span class="role-icon">⚖️</span><span class="role-text">原告</span></div></label>
-                           <label class="role-card"><input type="radio" name="role" value="被告"><div class="role-content"><span class="role-icon">🛡️</span><span class="role-text">被告</span></div></label>
-                           <label class="role-card"><input type="radio" name="role" value="其他"><div class="role-content"><span class="role-icon">💬</span><span class="role-text">其他</span></div></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>📋 纠纷类型</label>
-                        <select name="dispute_type" id="disputeType" onchange="toggleOtherInput()"><option value="">请选择</option><option>民间借贷</option><option>合同纠纷</option><option>劳动争议</option><option>其他</option></select>
-                        <input type="text" id="disputeTypeOther" name="dispute_type_other" placeholder="请输入纠纷类型" style="display:none; margin-top:10px;">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>📝 案情经过</label>
-                        <textarea name="description" rows="4"></textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>📧 邮箱 <span class="required">*</span></label>
-                        <input type="email" name="contact" required>
-                    </div>
-                </div>
-                <button type="submit" class="submit-btn"><span>📨 提交咨询</span></button>
-            </form>
-        </div>
+<div class="container">
+    <a href="index.html" class="back-link">
+        <span class="zh-only">&larr; 返回首页</span>
+        <span class="en-only">&larr; Back to Home</span>
+    </a>
 
-        <footer>
-            <p>© 2026 张大壮律师</p>
-            <p style="margin-top: 10px; font-size: 0.9em; color: #555;">
-                <span style="font-weight: bold;">本页被访问 <span id="busuanzi_value_page_pv"></span> 次</span> | 
-                <span style="font-weight: bold;">全站总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
-            </p>
-        </footer>
+    <div class="lawyer-intro">
+        <div class="avatar">👨‍⚖️</div>
+        <div class="info">
+            <h2 class="zh-only">张大壮律师</h2>
+            <h2 class="en-only">Attorney Zhang Joseph</h2>
+            <p class="zh-only">三十年民事诉讼经验 | 胜诉率高 | 专业可靠</p>
+            <p class="en-only">30 Years Civil Litigation | High Success Rate | Professional & Reliable</p>
+        </div>
     </div>
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <script>
-        function toggleOtherInput() {
-            var select = document.getElementById('disputeType');
-            var otherInput = document.getElementById('disputeTypeOther');
-            otherInput.style.display = (select.value === '其他') ? 'block' : 'none';
-        }
-        
-        function submitForm(event) {
-            event.preventDefault();
-            var form = document.getElementById('consultForm');
-            var formData = new FormData(form);
-            var subject = '法律咨询 - ' + (formData.get('role') || '未知角色');
-            var body = '纠纷类型: ' + (formData.get('disputeType') || '未选择') + '%0A' +
-                       '案情经过: ' + (formData.get('description') || '未填写') + '%0A' +
-                       '联系邮箱: ' + (formData.get('contact') || '未填写');
-            window.location.href = 'mailto:376500950@qq.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-        }
-    </script>
+
+    <div class="stats-section">
+        <div class="stat-item">
+            <div class="number">30+</div>
+            <div class="label"><span class="zh-only">年执业经验</span><span class="en-only">Years Experience</span></div>
+        </div>
+        <div class="stat-item">
+            <div class="number">1000+</div>
+            <div class="label"><span class="zh-only">成功案例</span><span class="en-only">Cases Won</span></div>
+        </div>
+        <div class="stat-item">
+            <div class="number">90%+</div>
+            <div class="label"><span class="zh-only">客户满意度</span><span class="en-only">Client Satisfaction</span></div>
+        </div>
+        <div class="stat-item">
+            <div class="number">500+</div>
+            <div class="label"><span class="zh-only">免费法律咨询</span><span class="en-only">Free Consultations</span></div>
+        </div>
+    </div>
+
+    <div class="consultation-form">
+        <div class="form-header">
+            <h2>
+                <span class="zh-only">⚡ 免费法律咨询</span>
+                <span class="en-only">⚡ Free Legal Consultation</span>
+            </h2>
+            <p class="zh-only">填写以下信息，点击提交后发送邮件（仅工作日回复）</p>
+            <p class="en-only">Fill in the form below and submit to send email (weekdays only)</p>
+        </div>
+        <form id="consultForm" onsubmit="submitForm(event)" autocomplete="off">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>
+                        <span class="zh-only">👤 您是 </span>
+                        <span class="en-only">👤 You are </span>
+                        <span class="required">*</span>
+                    </label>
+                    <div class="role-selector">
+                        <label class="role-card">
+                            <input type="radio" name="role" value="原告" required>
+                            <div class="role-content">
+                                <span class="role-icon">⚖️</span>
+                                <span class="role-text"><span class="zh-only">原告</span><span class="en-only">Plaintiff</span></span>
+                            </div>
+                        </label>
+                        <label class="role-card">
+                            <input type="radio" name="role" value="被告">
+                            <div class="role-content">
+                                <span class="role-icon">🛡️</span>
+                                <span class="role-text"><span class="zh-only">被告</span><span class="en-only">Defendant</span></span>
+                            </div>
+                        </label>
+                        <label class="role-card">
+                            <input type="radio" name="role" value="其他">
+                            <div class="role-content">
+                                <span class="role-icon">💬</span>
+                                <span class="role-text"><span class="zh-only">其他</span><span class="en-only">Other</span></span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>
+                        <span class="zh-only">📋 纠纷类型</span>
+                        <span class="en-only">📋 Dispute Type</span>
+                    </label>
+                    <select name="dispute_type" id="disputeType" onchange="toggleOtherInput()">
+                        <option value=""><span class="zh-only">请选择</span><span class="en-only">Select</span></option>
+                        <option value="民间借贷" class="zh-only">民间借贷</option><option value="Private Loan" class="en-only">Private Loan</option>
+                        <option value="合同纠纷" class="zh-only">合同纠纷</option><option value="Contract Dispute" class="en-only">Contract Dispute</option>
+                        <option value="劳动争议" class="zh-only">劳动争议</option><option value="Labor Dispute" class="en-only">Labor Dispute</option>
+                        <option value="其他" class="zh-only">其他</option><option value="Other" class="en-only">Other</option>
+                    </select>
+                    <input type="text" id="disputeTypeOther" name="dispute_type_other"
+                        data-zh-placeholder="请输入纠纷类型" data-en-placeholder="Enter dispute type"
+                        style="display:none; margin-top:10px;">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>
+                        <span class="zh-only">📝 案情经过</span>
+                        <span class="en-only">📝 Case Description</span>
+                    </label>
+                    <textarea name="description" rows="4" data-zh-placeholder="请简要描述案情" data-en-placeholder="Briefly describe your case" placeholder="请简要描述案情"></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>
+                        <span class="zh-only">📧 邮箱 </span>
+                        <span class="en-only">📧 Email </span>
+                        <span class="required">*</span>
+                    </label>
+                    <input type="email" name="contact" required data-zh-placeholder="您的邮箱地址" data-en-placeholder="Your email address" placeholder="您的邮箱地址">
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">
+                <span class="zh-only">📨 提交咨询</span>
+                <span class="en-only">📨 Submit Consultation</span>
+            </button>
+        </form>
+    </div>
+
+    <footer>
+        <p>
+            <span class="zh-only">© 2026 张大壮律师</span>
+            <span class="en-only">© 2026 Attorney Zhang Joseph</span>
+        </p>
+        <p style="margin-top: 10px; font-size: 0.9em; color: #555;">
+            <span class="zh-only">本页被访问</span><span class="en-only">Page views</span> <span id="busuanzi_value_page_pv"></span> |
+            <span class="zh-only">全站总访客</span><span class="en-only">Total visitors</span> <span id="busuanzi_value_site_uv"></span>
+        </p>
+    </footer>
+</div>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+function setLang(lang) {
+    document.body.setAttribute('lang', lang);
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh-CN');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('prefLang', lang);
+    // Update placeholders
+    document.querySelectorAll('[data-zh-placeholder]').forEach(el => {
+        el.placeholder = lang === 'zh-CN' ? el.dataset.zhPlaceholder : el.dataset.enPlaceholder;
+    });
+}
+var saved = localStorage.getItem('prefLang');
+if (saved) setLang(saved);
+
+function toggleOtherInput() {
+    var select = document.getElementById('disputeType');
+    var otherInput = document.getElementById('disputeTypeOther');
+    otherInput.style.display = (select.value === '其他' || select.value === 'Other') ? 'block' : 'none';
+}
+
+function submitForm(event) {
+    event.preventDefault();
+    var form = document.getElementById('consultForm');
+    var formData = new FormData(form);
+    var lang = document.body.getAttribute('lang');
+    var role = formData.get('role') || (lang === 'zh-CN' ? '未知角色' : 'Unknown');
+    var subject = (lang === 'zh-CN' ? '法律咨询 - ' : 'Legal Consultation - ') + role;
+    var body = (lang === 'zh-CN' ? '纠纷类型: ' : 'Dispute type: ') + (formData.get('disputeType') || (lang === 'zh-CN' ? '未选择' : 'Not selected')) + '%0A' +
+               (lang === 'zh-CN' ? '案情经过: ' : 'Case description: ') + (formData.get('description') || (lang === 'zh-CN' ? '未填写' : 'Not provided')) + '%0A' +
+               (lang === 'zh-CN' ? '联系邮箱: ' : 'Email: ') + (formData.get('contact') || (lang === 'zh-CN' ? '未填写' : 'Not provided'));
+    window.location.href = 'mailto:376500950@qq.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
+}
+</script>
 </body>
 </html>

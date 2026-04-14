@@ -15,8 +15,19 @@
         .highlight { background: #f0f4ff; padding: 15px; border-radius: 8px; margin: 15px 0; }
         .back-link { display: inline-block; margin-top: 20px; color: #667eea; text-decoration: none; }
     </style>
+
+        .lang-switch{position:fixed;top:16px;right:20px;z-index:1000;display:flex;gap:6px}
+        .lang-btn{padding:6px 16px;border:2px solid rgba(255,255,255,0.7);border-radius:20px;background:rgba(255,255,255,0.15);color:#fff;font-size:0.85em;cursor:pointer;font-weight:600;backdrop-filter:blur(8px);transition:all 0.2s;font-family:inherit}
+        .lang-btn:hover,.lang-btn.active{background:rgba(255,255,255,0.9);color:#1a5f7a}
+        [lang="zh-CN"] .en-only{display:none}
+        [lang="en"] .zh-only{display:none}
 </head>
-<body>
+<body lang="zh-CN">
+
+<div class="lang-switch">
+    <button class="lang-btn active" id="btn-zh" onclick="setLang('zh-CN')">中文</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
     <div class="container">
         <h1>案例：工伤待遇纠纷</h1>
         <div class="meta">发布时间：2025年3月25日</div>
@@ -53,5 +64,19 @@
         
         <a href="../index.html" class="back-link">← 返回首页</a>
     </div>
+
+<script>
+function setLang(lang) {
+    document.body.setAttribute('lang', lang);
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh-CN');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('prefLang', lang);
+    document.querySelectorAll('[data-zh-placeholder]').forEach(el => {
+        el.placeholder = lang === 'zh-CN' ? el.dataset.zhPlaceholder : el.dataset.enPlaceholder;
+    });
+}
+var saved = localStorage.getItem('prefLang');
+if (saved) setLang(saved);
+</script>
 </body>
 </html>

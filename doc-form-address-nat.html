@@ -31,8 +31,19 @@
         .notice { background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 12px 16px; font-size: 0.9em; color: #856404; margin-bottom: 20px; }
         @media (max-width: 600px) { .row-2, .row-3 { grid-template-columns: 1fr; } }
     </style>
+
+        .lang-switch{position:fixed;top:16px;right:20px;z-index:1000;display:flex;gap:6px}
+        .lang-btn{padding:6px 16px;border:2px solid rgba(255,255,255,0.7);border-radius:20px;background:rgba(255,255,255,0.15);color:#fff;font-size:0.85em;cursor:pointer;font-weight:600;backdrop-filter:blur(8px);transition:all 0.2s;font-family:inherit}
+        .lang-btn:hover,.lang-btn.active{background:rgba(255,255,255,0.9);color:#1a5f7a}
+        [lang="zh-CN"] .en-only{display:none}
+        [lang="en"] .zh-only{display:none}
 </head>
-<body>
+<body lang="zh-CN">
+
+<div class="lang-switch">
+    <button class="lang-btn active" id="btn-zh" onclick="setLang('zh-CN')">中文</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
     <div class="container">
         <a href="documents.html" class="back-link">← 返回文书列表</a>
 
@@ -183,5 +194,19 @@
             URL.revokeObjectURL(url);
         }
     </script>
+
+<script>
+function setLang(lang) {
+    document.body.setAttribute('lang', lang);
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh-CN');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('prefLang', lang);
+    document.querySelectorAll('[data-zh-placeholder]').forEach(el => {
+        el.placeholder = lang === 'zh-CN' ? el.dataset.zhPlaceholder : el.dataset.enPlaceholder;
+    });
+}
+var saved = localStorage.getItem('prefLang');
+if (saved) setLang(saved);
+</script>
 </body>
 </html>

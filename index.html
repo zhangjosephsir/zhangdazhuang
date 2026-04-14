@@ -3,21 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>张大壮律师 - 您的专属法律智能伙伴</title>
+    <title>Zhang Joseph - Your Trusted Legal AI Partner</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+
+        /* Language Switcher */
+        .lang-switch {
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 6px;
+        }
+        .lang-btn {
+            padding: 6px 16px;
+            border: 2px solid rgba(255,255,255,0.7);
+            border-radius: 20px;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            font-size: 0.85em;
+            cursor: pointer;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .lang-btn:hover, .lang-btn.active {
+            background: rgba(255,255,255,0.9);
+            color: #1a5f7a;
+        }
+
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        header { 
-            background: linear-gradient(135deg, #1a5f7a 0%, #159895 50%, #57c5b6 100%); 
-            color: white; 
-            padding: 60px 30px; 
-            border-radius: 20px; 
-            text-align: center; 
+        header {
+            background: linear-gradient(135deg, #1a5f7a 0%, #159895 50%, #57c5b6 100%);
+            color: white;
+            padding: 60px 30px;
+            border-radius: 20px;
+            text-align: center;
             margin-bottom: 30px;
         }
         header h1 { font-size: 2.5em; margin-bottom: 15px; }
         header p { font-size: 1.2em; opacity: 0.9; }
+
         .quadrant-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -42,66 +71,97 @@
             transform: translateY(-8px);
             box-shadow: 0 12px 40px rgba(21, 152, 149, 0.2);
         }
-        .quadrant-card .icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-            line-height: 1;
+        .quadrant-card .icon { font-size: 3em; margin-bottom: 20px; line-height: 1; }
+        .quadrant-card h2 { font-size: 1.5em; color: #1a5f7a; margin-bottom: 10px; }
+        .quadrant-card p { color: #666; font-size: 1em; }
+
+        footer {
+            text-align: center; padding: 30px; color: #888; font-size: 0.95em;
+            background: #fff; border-radius: 16px; margin-top: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
-        .quadrant-card h2 {
-            font-size: 1.5em;
-            color: #1a5f7a;
-            margin-bottom: 10px;
-        }
-        .quadrant-card p {
-            color: #666;
-            font-size: 1em;
-        }
-        footer { text-align: center; padding: 30px; color: #888; font-size: 0.95em; background: #fff; border-radius: 16px; margin-top: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+        /* Hide elements based on language */
+        [lang="zh-CN"] .en-only { display: none; }
+        [lang="en"] .zh-only { display: none; }
     </style>
 </head>
-<body>
+<body lang="zh-CN">
+
+    <!-- Language Switcher -->
+    <div class="lang-switch">
+        <button class="lang-btn active" id="btn-zh" onclick="setLang('zh-CN')">中文</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+
     <div class="container">
         <header>
-            <h1>张大壮律师</h1>
-            <p>三十年民事诉讼经验 | 您的专属法律智能伙伴</p>
+            <h1 class="zh-only">张大壮律师</h1>
+            <h1 class="en-only">Attorney Zhang Joseph</h1>
+            <p class="zh-only">三十年民事诉讼经验 | 您的专属法律智能伙伴</p>
+            <p class="en-only">30 Years Civil Litigation Experience | Your Trusted Legal AI Partner</p>
         </header>
 
         <div class="quadrant-container">
             <a href="consult.html" class="quadrant-card">
                 <div class="icon">💬</div>
-                <h2>免费咨询系统</h2>
-                <p>在线提交您的案情，获得专业法律建议</p>
+                <h2 class="zh-only">免费咨询系统</h2>
+                <h2 class="en-only">Free Legal Consultation</h2>
+                <p class="zh-only">在线提交您的案情，获得专业法律建议</p>
+                <p class="en-only">Submit your case online and get professional legal advice</p>
             </a>
             <a href="tools.html" class="quadrant-card">
                 <div class="icon">🛠️</div>
-                <h2>智能计算工具</h2>
-                <p>一站式计算诉讼费、律师费、利息</p>
+                <h2 class="zh-only">智能计算工具</h2>
+                <h2 class="en-only">Smart Legal Calculators</h2>
+                <p class="zh-only">一站式计算诉讼费、律师费、利息</p>
+                <p class="en-only">Calculate litigation fees, attorney costs & interest instantly</p>
             </a>
             <a href="documents.html" class="quadrant-card">
                 <div class="icon">📝</div>
-                <h2>律师办案工具</h2>
-                <p>自动生成起诉状、答辩状、证据清单等法律文书</p>
+                <h2 class="zh-only">律师办案工具</h2>
+                <h2 class="en-only">Legal Document Tools</h2>
+                <p class="zh-only">自动生成起诉状、答辩状、证据清单等法律文书</p>
+                <p class="en-only">Auto-generate complaints, defenses, evidence lists & more</p>
             </a>
             <a href="cases.html" class="quadrant-card">
                 <div class="icon">⚖️</div>
-                <h2>精选案例点评</h2>
-                <p>从真实案例中学习，洞悉法律智慧</p>
+                <h2 class="zh-only">精选案例点评</h2>
+                <h2 class="en-only">Case Studies & Analysis</h2>
+                <p class="zh-only">从真实案例中学习，洞悉法律智慧</p>
+                <p class="en-only">Learn from real cases and gain legal insights</p>
             </a>
             <a href="blog.html" class="quadrant-card">
                 <div class="icon">✍️</div>
-                <h2>深度随笔</h2>
-                <p>分享三十年执业感悟与法律思考</p>
+                <h2 class="zh-only">深度随笔</h2>
+                <h2 class="en-only">Legal Insights Blog</h2>
+                <p class="zh-only">分享三十年执业感悟与法律思考</p>
+                <p class="en-only">30 years of legal practice reflections & insights</p>
             </a>
         </div>
 
         <footer>
-            <p>© 2026 张大壮律师 | 专业 · 可靠 · 负责</p>
+            <p class="zh-only">© 2026 张大壮律师 | 专业 · 可靠 · 负责</p>
+            <p class="en-only">© 2026 Attorney Zhang Joseph | Professional · Reliable · Dedicated</p>
             <p style="margin-top: 10px; font-size: 0.9em; color: #555;">
-                <span style="font-weight: bold;">本页被访问 <span id="busuanzi_value_page_pv"></span> 次</span> | 
-                <span style="font-weight: bold;">全站总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+                <span style="font-weight: bold;"><span class="zh-only">本页被访问</span><span class="en-only">Page views</span> <span id="busuanzi_value_page_pv"></span></span> |
+                <span style="font-weight: bold;"><span class="zh-only">全站总访客</span><span class="en-only">Total visitors</span> <span id="busuanzi_value_site_uv"></span></span>
             </p>
         </footer>
     </div>
+
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script>
+        function setLang(lang) {
+            document.body.setAttribute('lang', lang);
+            document.documentElement.setAttribute('lang', lang);
+            document.getElementById('btn-zh').classList.toggle('active', lang === 'zh-CN');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            localStorage.setItem('prefLang', lang);
+        }
+        // Restore saved language preference
+        var saved = localStorage.getItem('prefLang');
+        if (saved) setLang(saved);
+    </script>
 </body>
-</html> 
+</html>

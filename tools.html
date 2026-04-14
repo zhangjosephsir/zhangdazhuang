@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>诉讼费、律师费、利息计算器 - 张大壮律师</title>
+    <title>Smart Legal Calculators - Attorney Zhang Joseph</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .lang-switch { position: fixed; top: 16px; right: 20px; z-index: 1000; display: flex; gap: 6px; }
+        .lang-btn { padding: 6px 16px; border: 2px solid rgba(255,255,255,0.7); border-radius: 20px; background: rgba(255,255,255,0.15); color: #fff; font-size: 0.85em; cursor: pointer; font-weight: 600; backdrop-filter: blur(8px); transition: all 0.2s; font-family: inherit; }
+        .lang-btn:hover, .lang-btn.active { background: rgba(255,255,255,0.9); color: #1a5f7a; }
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; }
-        footer { text-align: center; padding: 30px; color: #888; font-size: 0.95em; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: 30px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #159895; text-decoration: none; font-weight: bold; font-size: 0.95em; }
         header { background: linear-gradient(135deg, #1a5f7a 0%, #159895 50%, #57c5b6 100%); color: white; padding: 40px 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
         header h1 { font-size: 1.8em; }
         .tool { background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; border-left: 5px solid #159895; }
@@ -19,308 +21,328 @@
         input[type="number"], input[type="date"], select { width: 100%; padding: 14px 18px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 1em; }
         button { width: 100%; background: linear-gradient(135deg, #1a5f7a, #159895); color: white; padding: 18px; border: none; border-radius: 12px; font-size: 1.15em; font-weight: bold; cursor: pointer; }
         .result { margin-top: 25px; padding: 20px; background: linear-gradient(135deg, #e8f8f5, #d1f2eb); border-radius: 10px; border-left: 5px solid #159895; display: none; }
-        #lpr-status { display: none; } /* No longer needed */
+        .result h4 { color: #1a5f7a; margin-bottom: 10px; }
         .calculation-details { font-size: 0.9em; margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 15px; }
         .calculation-details p { margin: 0; padding: 2px 0; }
-        @media (max-width: 768px) {
-            .tool { padding: 20px; }
-        }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.95em; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: 30px; }
+        @media (max-width: 768px) { .tool { padding: 20px; } }
+
+        /* Bilingual visibility */
+        [lang="zh-CN"] .en-only { display: none; }
+        [lang="en"] .zh-only { display: none; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-link">&larr; 返回首页</a>
-        <header><h1>智能计算工具</h1></header>
+<body lang="zh-CN">
 
-        <!-- Litigation Fee Calculator -->
-        <div class="tool">
-            <h3>诉讼费计算器</h3>
-            <div class="form-group">
-                <label for="case-type">案件类型</label>
-                <select id="case-type" onchange="toggleAmountInput()">
-                    <option value="property">财产案件</option>
-                    <option value="divorce">离婚案件</option>
-                    <option value="personality">人格权案件</option>
-                    <option value="intellectual">知识产权案件</option>
-                    <option value="labor">劳动争议案件</option>
-                    <option value="security">管辖权异议</option>
-                </select>
-            </div>
-            <div class="form-group" id="amount-group">
-                <label for="dispute-amount">争议金额 (元)</label>
-                <input type="number" id="dispute-amount" placeholder="请输入案件争议金额">
-            </div>
-            <button onclick="calculateLitigationFee()">计算诉讼费</button>
-            <div id="litigation-result" class="result"></div>
+<div class="lang-switch">
+    <button class="lang-btn active" id="btn-zh" onclick="setLang('zh-CN')">中文</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<div class="container">
+    <a href="index.html" class="back-link">
+        <span class="zh-only">&larr; 返回首页</span>
+        <span class="en-only">&larr; Back to Home</span>
+    </a>
+
+    <header>
+        <h1>
+            <span class="zh-only">智能计算工具</span>
+            <span class="en-only">Smart Legal Calculators</span>
+        </h1>
+    </header>
+
+    <!-- Litigation Fee -->
+    <div class="tool">
+        <h3>
+            <span class="zh-only">诉讼费计算器</span>
+            <span class="en-only">Litigation Fee Calculator</span>
+        </h3>
+        <div class="form-group">
+            <label>
+                <span class="zh-only">案件类型</span>
+                <span class="en-only">Case Type</span>
+            </label>
+            <select id="case-type" onchange="toggleAmountInput()">
+                <option value="property" class="zh-only">财产案件</option>
+                <option value="property" class="en-only">Property Dispute</option>
+                <option value="divorce" class="zh-only">离婚案件</option>
+                <option value="divorce" class="en-only">Divorce Case</option>
+                <option value="personality" class="zh-only">人格权案件</option>
+                <option value="personality" class="en-only">Personality Rights</option>
+                <option value="intellectual" class="zh-only">知识产权案件</option>
+                <option value="intellectual" class="en-only">Intellectual Property</option>
+                <option value="labor" class="zh-only">劳动争议案件</option>
+                <option value="labor" class="en-only">Labor Dispute</option>
+                <option value="security" class="zh-only">管辖权异议</option>
+                <option value="security" class="en-only">Jurisdictional Objection</option>
+            </select>
         </div>
-
-        <!-- Preservation Fee Calculator -->
-        <div class="tool">
-            <h3>财产保全费计算器</h3>
-            <div class="form-group">
-                <label for="preservation-amount">保全财产金额 (元)</label>
-                <input type="number" id="preservation-amount" placeholder="请输入申请保全的财产金额">
-            </div>
-            <button onclick="calculatePreservationFee()">计算保全费</button>
-            <div id="preservation-result" class="result"></div>
+        <div class="form-group" id="amount-group">
+            <label>
+                <span class="zh-only">争议金额 (元)</span>
+                <span class="en-only">Dispute Amount (CNY)</span>
+            </label>
+            <input type="number" id="dispute-amount" data-zh-placeholder="请输入案件争议金额" data-en-placeholder="Enter dispute amount" placeholder="请输入案件争议金额">
         </div>
-
-        <!-- Lawyer Fee Calculator -->
-        <div class="tool">
-            <h3>律师费估算器 (风险代理)</h3>
-            <div class="form-group">
-                <label for="lawyer-amount">案件标的额 (元)</label>
-                <input type="number" id="lawyer-amount" placeholder="请输入案件标的额">
-            </div>
-            <button onclick="calculateLawyerFee()">估算律师费</button>
-            <div id="lawyer-result" class="result"></div>
-        </div>
-
-        <!-- Penalty/Interest Calculator -->
-        <div class="tool" id="penalty-calculator-tool">
-            <h3>违约金 / 逾期利息计算器 (专业版)</h3>
-            <div class="form-group"><label for="principal">本金 / 欠款金额 (元)</label><input type="number" id="principal" placeholder="请输入本金"></div>
-            <div class="form-group"><label for="start-date">开始计算日期</label><input type="date" id="start-date"></div>
-            <div class="form-group"><label for="end-date">计算截止日期</label><input type="date" id="end-date"></div>
-            <div class="form-group">
-                <label for="lpr-multiplier">LPR倍数 (银行同期LPR则为1倍)</label>
-                <input type="number" id="lpr-multiplier" value="1" step="0.1" placeholder="输入LPR的倍数，例如 1, 2, 4">
-            </div>
-            <button onclick="calculatePenalty()">开始计算</button>
-            <div id="penalty-result" class="result"></div>
-        </div>
-
-        <footer>
-            <p>© 2026 张大壮律师</p>
-            <p style="margin-top: 10px; font-size: 0.9em; color: #555;">
-                <span style="font-weight: bold;">本页被访问 <span id="busuanzi_value_page_pv"></span> 次</span> | 
-                <span style="font-weight: bold;">全站总访客 <span id="busuanzi_value_site_uv"></span> 人</span>
-            </p>
-        </footer>
+        <button onclick="calculateLitigationFee()">
+            <span class="zh-only">计算诉讼费</span>
+            <span class="en-only">Calculate</span>
+        </button>
+        <div id="litigation-result" class="result"></div>
     </div>
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <script>
-        // --- ALL-IN-ONE SCRIPT ---
 
-        // --- Litigation Fee Calculator Logic ---
-        function toggleAmountInput() {
-            const caseType = document.getElementById('case-type').value;
-            const amountGroup = document.getElementById('amount-group');
-            amountGroup.style.display = caseType === 'property' ? 'block' : 'none';
-        }
+    <!-- Preservation Fee -->
+    <div class="tool">
+        <h3>
+            <span class="zh-only">财产保全费计算器</span>
+            <span class="en-only">Property Preservation Fee Calculator</span>
+        </h3>
+        <div class="form-group">
+            <label>
+                <span class="zh-only">保全财产金额 (元)</span>
+                <span class="en-only">Preservation Amount (CNY)</span>
+            </label>
+            <input type="number" id="preservation-amount" data-zh-placeholder="请输入申请保全的财产金额" data-en-placeholder="Enter preservation amount" placeholder="请输入申请保全的财产金额">
+        </div>
+        <button onclick="calculatePreservationFee()">
+            <span class="zh-only">计算保全费</span>
+            <span class="en-only">Calculate</span>
+        </button>
+        <div id="preservation-result" class="result"></div>
+    </div>
 
-        function calculateLitigationFee() {
-            const caseType = document.getElementById('case-type').value;
-            const amount = parseFloat(document.getElementById('dispute-amount').value) || 0;
-            const resultDiv = document.getElementById('litigation-result');
-            let fee = 0;
-            let description = '';
+    <!-- Lawyer Fee -->
+    <div class="tool">
+        <h3>
+            <span class="zh-only">律师费估算器 (风险代理)</span>
+            <span class="en-only">Attorney Fee Estimator (Contingency)</span>
+        </h3>
+        <div class="form-group">
+            <label>
+                <span class="zh-only">案件标的额 (元)</span>
+                <span class="en-only">Case Amount (CNY)</span>
+            </label>
+            <input type="number" id="lawyer-amount" data-zh-placeholder="请输入案件标的额" data-en-placeholder="Enter case amount" placeholder="请输入案件标的额">
+        </div>
+        <button onclick="calculateLawyerFee()">
+            <span class="zh-only">估算律师费</span>
+            <span class="en-only">Estimate Fee</span>
+        </button>
+        <div id="lawyer-result" class="result"></div>
+    </div>
 
-            if (caseType === 'property') {
-                if (amount <= 10000) {
-                    fee = 50;
-                } else if (amount <= 100000) {
-                    fee = (amount - 10000) * 0.025 + 50;
-                } else if (amount <= 200000) {
-                    fee = (amount - 100000) * 0.02 + 2300;
-                } else if (amount <= 500000) {
-                    fee = (amount - 200000) * 0.015 + 4300;
-                } else if (amount <= 1000000) {
-                    fee = (amount - 500000) * 0.01 + 8800;
-                } else if (amount <= 2000000) {
-                    fee = (amount - 1000000) * 0.009 + 13800;
-                } else if (amount <= 5000000) {
-                    fee = (amount - 2000000) * 0.008 + 22800;
-                } else if (amount <= 10000000) {
-                    fee = (amount - 5000000) * 0.007 + 46800;
-                } else if (amount <= 20000000) {
-                    fee = (amount - 10000000) * 0.006 + 81800;
-                } else {
-                    fee = (amount - 20000000) * 0.005 + 141800;
-                }
-                description = `财产案件，诉讼标的额 ${amount.toFixed(2)} 元。`;
-            } else if (caseType === 'divorce') {
-                fee = 300;
-                if (amount > 200000) {
-                    fee += (amount - 200000) * 0.005;
-                }
-                description = '离婚案件。';
-            } else if (caseType === 'personality') {
-                fee = 400;
-                description = '人格权案件。';
-            } else if (caseType === 'intellectual') {
-                fee = 1000;
-                description = '知识产权案件。';
-            } else if (caseType === 'labor') {
-                fee = 10;
-                description = '劳动争议案件。';
-            } else if (caseType === 'security') {
-                fee = 100;
-                description = '管辖权异议。';
-            }
-            
-            resultDiv.innerHTML = `<h4>计算结果</h4><p>${description}</p><p><strong>预估诉讼费：¥ ${fee.toFixed(2)}</strong></p><p style="font-size:0.8em; color: #666; margin-top:10px;">* 案件受理费减半收取的，按50%计算。</p>`;
-            resultDiv.style.display = 'block';
-        }
+    <!-- Penalty/Interest -->
+    <div class="tool">
+        <h3>
+            <span class="zh-only">违约金 / 逾期利息计算器</span>
+            <span class="en-only">Penalty / Interest Calculator</span>
+        </h3>
+        <div class="form-group">
+            <label>
+                <span class="zh-only">本金 / 欠款金额 (元)</span>
+                <span class="en-only">Principal / Debt Amount (CNY)</span>
+            </label>
+            <input type="number" id="principal" data-zh-placeholder="请输入本金" data-en-placeholder="Enter principal" placeholder="请输入本金">
+        </div>
+        <div class="form-group">
+            <label>
+                <span class="zh-only">开始计算日期</span>
+                <span class="en-only">Start Date</span>
+            </label>
+            <input type="date" id="start-date">
+        </div>
+        <div class="form-group">
+            <label>
+                <span class="zh-only">计算截止日期</span>
+                <span class="en-only">End Date</span>
+            </label>
+            <input type="date" id="end-date">
+        </div>
+        <div class="form-group">
+            <label>
+                <span class="zh-only">LPR倍数 (银行同期LPR则为1倍)</span>
+                <span class="en-only">LPR Multiplier (1x for bank loan rate)</span>
+            </label>
+            <input type="number" id="lpr-multiplier" value="1" step="0.1" data-zh-placeholder="输入LPR的倍数，例如 1, 2, 4" data-en-placeholder="e.g. 1, 2, 4" placeholder="输入LPR的倍数，例如 1, 2, 4">
+        </div>
+        <button onclick="calculatePenalty()">
+            <span class="zh-only">开始计算</span>
+            <span class="en-only">Calculate</span>
+        </button>
+        <div id="penalty-result" class="result"></div>
+    </div>
 
-        // --- Preservation Fee Calculator Logic ---
-        function calculatePreservationFee() {
-            const amount = parseFloat(document.getElementById('preservation-amount').value) || 0;
-            const resultDiv = document.getElementById('preservation-result');
-            let fee = 0;
+    <footer>
+        <p>
+            <span class="zh-only">© 2026 张大壮律师</span>
+            <span class="en-only">© 2026 Attorney Zhang Joseph</span>
+        </p>
+        <p style="margin-top: 10px; font-size: 0.9em; color: #555;">
+            <span class="zh-only">本页被访问</span><span class="en-only">Page views</span> <span id="busuanzi_value_page_pv"></span> |
+            <span class="zh-only">全站总访客</span><span class="en-only">Total visitors</span> <span id="busuanzi_value_site_uv"></span>
+        </p>
+    </footer>
+</div>
 
-            if (amount <= 1000) {
-                fee = 30;
-            } else if (amount <= 100000) {
-                fee = (amount - 1000) * 0.01 + 30;
-            } else {
-                fee = (amount - 100000) * 0.005 + 1020;
-            }
-            
-            if (fee > 5000) {
-                fee = 5000;
-            }
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+function setLang(lang) {
+    document.body.setAttribute('lang', lang);
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh-CN');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('prefLang', lang);
 
-            resultDiv.innerHTML = `<h4>计算结果</h4><p>保全财产金额 ${amount.toFixed(2)} 元。</p><p><strong>预估保全费：¥ ${fee.toFixed(2)}</strong></p>`;
-            resultDiv.style.display = 'block';
-        }
+    // Update placeholders
+    document.querySelectorAll('input[data-zh-placeholder]').forEach(el => {
+        el.placeholder = lang === 'zh-CN' ? el.dataset.zhPlaceholder : el.dataset.enPlaceholder;
+    });
+}
+var saved = localStorage.getItem('prefLang');
+if (saved) setLang(saved);
 
-        // --- Lawyer Fee Calculator Logic ---
-        function calculateLawyerFee() {
-            const amount = parseFloat(document.getElementById('lawyer-amount').value) || 0;
-            const resultDiv = document.getElementById('lawyer-result');
-            let fee = 0;
+// Litigation Fee
+function toggleAmountInput() {
+    const caseType = document.getElementById('case-type').value;
+    document.getElementById('amount-group').style.display = caseType === 'property' ? 'block' : 'none';
+}
+function calculateLitigationFee() {
+    const caseType = document.getElementById('case-type').value;
+    const amount = parseFloat(document.getElementById('dispute-amount').value) || 0;
+    const resultDiv = document.getElementById('litigation-result');
+    const lang = document.body.getAttribute('lang');
+    let fee = 0;
 
-            if (amount <= 100000) {
-                fee = amount * 0.06;
-            } else if (amount <= 500000) {
-                fee = 100000 * 0.06 + (amount - 100000) * 0.05;
-            } else if (amount <= 1000000) {
-                fee = 100000 * 0.06 + 400000 * 0.05 + (amount - 500000) * 0.04;
-            } else if (amount <= 5000000) {
-                fee = 100000 * 0.06 + 400000 * 0.05 + 500000 * 0.04 + (amount - 1000000) * 0.03;
-            } else {
-                fee = 100000 * 0.06 + 400000 * 0.05 + 500000 * 0.04 + 4000000 * 0.03 + (amount - 5000000) * 0.02;
-            }
-            
-            resultDiv.innerHTML = `<h4>计算结果</h4><p>案件标的额 ${amount.toFixed(2)} 元。</p><p><strong>风险代理律师费（胜诉后）：¥ ${fee.toFixed(2)}</strong></p><p style="font-size:0.8em; color: #666; margin-top:10px;">* 此为参考标准，具体费用需与律师协商确定。</p>`;
-            resultDiv.style.display = 'block';
-        }
+    if (caseType === 'property') {
+        if (amount <= 10000) fee = 50;
+        else if (amount <= 100000) fee = (amount - 10000) * 0.025 + 50;
+        else if (amount <= 200000) fee = (amount - 100000) * 0.02 + 2300;
+        else if (amount <= 500000) fee = (amount - 200000) * 0.015 + 4300;
+        else if (amount <= 1000000) fee = (amount - 500000) * 0.01 + 8800;
+        else if (amount <= 2000000) fee = (amount - 1000000) * 0.009 + 13800;
+        else if (amount <= 5000000) fee = (amount - 2000000) * 0.008 + 22800;
+        else if (amount <= 10000000) fee = (amount - 5000000) * 0.007 + 46800;
+        else if (amount <= 20000000) fee = (amount - 10000000) * 0.006 + 81800;
+        else fee = (amount - 20000000) * 0.005 + 141800;
+        resultDiv.innerHTML = '<h4>' + (lang==='zh-CN'?'计算结果':'Result') + '</h4><p>' + (lang==='zh-CN'?'财产案件，标的额':'Property dispute, amount') + ' ¥' + amount.toFixed(2) + '.</p><p><strong>' + (lang==='zh-CN'?'预估诉讼费':'Estimated fee') + ': ¥' + fee.toFixed(2) + '</strong></p><p style="font-size:0.8em;color:#666;margin-top:10px;">* ' + (lang==='zh-CN'?'案件受理费减半收取的，按50%计算':'Fee may be halved if case qualifies') + '.</p>';
+    } else if (caseType === 'divorce') {
+        fee = 300 + (amount > 200000 ? (amount - 200000) * 0.005 : 0);
+        resultDiv.innerHTML = '<h4>' + (lang==='zh-CN'?'计算结果':'Result') + '</h4><p>' + (lang==='zh-CN'?'离婚案件':'Divorce case') + '.</p><p><strong>' + (lang==='zh-CN'?'预估诉讼费':'Estimated fee') + ': ¥' + fee.toFixed(2) + '</strong></p>';
+    } else if (caseType === 'personality') {
+        resultDiv.innerHTML = '<h4>' + (lang==='zh-CN'?'计算结果':'Result') + '</h4><p>' + (lang==='zh-CN'?'人格权案件':'Personality rights case') + '.</p><p><strong>' + (lang==='zh-CN'?'预估诉讼费':'Estimated fee') + ': ¥400</strong></p>';
+    } else if (caseType === 'intellectual') {
+        resultDiv.innerHTML = '<h4>' + (lang==='zh-CN'?'计算结果':'Result') + '</h4><p>' + (lang==='zh-CN'?'知识产权案件':'IP case') + '.</p><p><strong>' + (lang==='zh-CN'?'预估诉讼费':'Estimated fee') + ': ¥1000</strong></p>';
+    } else if (caseType === 'labor') {
+        resultDiv.innerHTML = '<h4>' + (lang==='zh-CN'?'计算结果':'Result') + '</h4><p>' + (lang==='zh-CN'?'劳动争议案件':'Labor dispute') + '.</p><p><strong>' + (lang==='zh-CN'?'预估诉讼费':'Estimated fee') + ': ¥10</strong></p>';
+    } else {
+        resultDiv.innerHTML = '<h4>' + (lang==='zh-CN'?'计算结果':'Result') + '</h4><p>' + (lang==='zh-CN'?'管辖权异议':'Jurisdictional objection') + '.</p><p><strong>' + (lang==='zh-CN'?'预估诉讼费':'Estimated fee') + ': ¥100</strong></p>';
+    }
+    resultDiv.style.display = 'block';
+}
 
-        // --- LPR Penalty/Interest Calculator Logic (HEART TRANSPLANT) ---
-        const lprHistory = [
-            { date: "2019-08-20", rate: 4.25 }, { date: "2019-09-20", rate: 4.20 },
-            { date: "2019-10-21", rate: 4.20 }, { date: "2019-11-20", rate: 4.15 },
-            { date: "2019-12-20", rate: 4.15 }, { date: "2020-01-20", rate: 4.15 },
-            { date: "2020-02-20", rate: 4.05 }, { date: "2020-03-20", rate: 4.05 },
-            { date: "2020-04-20", rate: 3.85 }, { date: "2020-05-20", rate: 3.85 },
-            { date: "2020-06-22", rate: 3.85 }, { date: "2020-07-20", rate: 3.85 },
-            { date: "2020-08-20", rate: 3.85 }, { date: "2020-09-21", rate: 3.85 },
-            { date: "2020-10-20", rate: 3.85 }, { date: "2020-11-20", rate: 3.85 },
-            { date: "2020-12-21", rate: 3.85 }, { date: "2021-01-20", rate: 3.85 },
-            { date: "2021-02-22", rate: 3.85 }, { date: "2021-03-22", rate: 3.85 },
-            { date: "2021-04-20", rate: 3.85 }, { date: "2021-05-20", rate: 3.85 },
-            { date: "2021-06-21", rate: 3.85 }, { date: "2021-07-20", rate: 3.85 },
-            { date: "2021-08-20", rate: 3.85 }, { date: "2021-09-22", rate: 3.85 },
-            { date: "2021-10-20", rate: 3.85 }, { date: "2021-11-22", rate: 3.85 },
-            { date: "2021-12-20", rate: 3.80 }, { date: "2022-01-20", rate: 3.70 },
-            { date: "2022-02-21", rate: 3.70 }, { date: "2022-03-21", rate: 3.70 },
-            { date: "2022-04-20", rate: 3.70 }, { date: "2022-05-20", rate: 3.70 },
-            { date: "2022-06-20", rate: 3.70 }, { date: "2022-07-20", rate: 3.70 },
-            { date: "2022-08-22", rate: 3.65 }, { date: "2022-09-20", rate: 3.65 },
-            { date: "2022-10-20", rate: 3.65 }, { date: "2022-11-21", rate: 3.65 },
-            { date: "2022-12-20", rate: 3.65 }, { date: "2023-01-20", rate: 3.65 },
-            { date: "2023-02-20", rate: 3.65 }, { date: "2023-03-20", rate: 3.65 },
-            { date: "2023-04-20", rate: 3.65 }, { date: "2023-05-22", rate: 3.65 },
-            { date: "2023-06-20", rate: 3.55 }, { date: "2023-07-20", rate: 3.55 },
-            { date: "2023-08-21", rate: 3.45 }, { date: "2023-09-20", rate: 3.45 },
-            { date: "2023-10-20", rate: 3.45 }, { date: "2023-11-20", rate: 3.45 },
-            { date: "2023-12-20", rate: 3.45 }, { date: "2024-01-22", rate: 3.45 },
-            { date: "2024-02-20", rate: 3.45 }, { date: "2024-03-20", rate: 3.45 },
-        ].map(item => ({ date: new Date(item.date), rate: item.rate }));
+// Preservation Fee
+function calculatePreservationFee() {
+    const amount = parseFloat(document.getElementById('preservation-amount').value) || 0;
+    const resultDiv = document.getElementById('preservation-result');
+    const lang = document.body.getAttribute('lang');
+    let fee = amount <= 1000 ? 30 : amount <= 100000 ? (amount - 1000) * 0.01 + 30 : (amount - 100000) * 0.005 + 1020;
+    fee = Math.min(fee, 5000);
+    resultDiv.innerHTML = '<h4>' + (lang==='zh-CN'?'计算结果':'Result') + '</h4><p>' + (lang==='zh-CN'?'保全金额':'Preservation amount') + ' ¥' + amount.toFixed(2) + '.</p><p><strong>' + (lang==='zh-CN'?'预估保全费':'Estimated preservation fee') + ': ¥' + fee.toFixed(2) + '</strong></p>';
+    resultDiv.style.display = 'block';
+}
 
-        function getLprForDate(date) {
-            let applicableLpr = lprHistory[0].rate;
-            for (const record of lprHistory) {
-                if (date >= record.date) {
-                    applicableLpr = record.rate;
-                } else {
-                    break;
-                }
-            }
-            return applicableLpr;
-        }
+// Lawyer Fee
+function calculateLawyerFee() {
+    const amount = parseFloat(document.getElementById('lawyer-amount').value) || 0;
+    const resultDiv = document.getElementById('lawyer-result');
+    const lang = document.body.getAttribute('lang');
+    let fee = 0;
+    if (amount <= 100000) fee = amount * 0.06;
+    else if (amount <= 500000) fee = 100000 * 0.06 + (amount - 100000) * 0.05;
+    else if (amount <= 1000000) fee = 100000 * 0.06 + 400000 * 0.05 + (amount - 500000) * 0.04;
+    else if (amount <= 5000000) fee = 100000 * 0.06 + 400000 * 0.05 + 500000 * 0.04 + (amount - 1000000) * 0.03;
+    else fee = 100000 * 0.06 + 400000 * 0.05 + 500000 * 0.04 + 4000000 * 0.03 + (amount - 5000000) * 0.02;
+    resultDiv.innerHTML = '<h4>' + (lang==='zh-CN'?'计算结果':'Result') + '</h4><p>' + (lang==='zh-CN'?'案件标的额':'Case amount') + ' ¥' + amount.toFixed(2) + '.</p><p><strong>' + (lang==='zh-CN'?'风险代理律师费（胜诉后）':'Contingency attorney fee (if win)') + ': ¥' + fee.toFixed(2) + '</strong></p><p style="font-size:0.8em;color:#666;margin-top:10px;">* ' + (lang==='zh-CN'?'此为参考标准，具体费用需与律师协商':'Reference only, actual fee to be negotiated') + '.</p>';
+    resultDiv.style.display = 'block';
+}
 
-        function calculatePenalty() {
-            const principal = parseFloat(document.getElementById('principal').value);
-            const startDateStr = document.getElementById('start-date').value;
-            const endDateStr = document.getElementById('end-date').value;
-            const multiplier = parseFloat(document.getElementById('lpr-multiplier').value);
-            const resultDiv = document.getElementById('penalty-result');
+// LPR Penalty Calculator
+const lprHistory = [
+    {date:"2019-08-20",rate:4.25},{date:"2019-09-20",rate:4.20},{date:"2019-10-21",rate:4.20},
+    {date:"2019-11-20",rate:4.15},{date:"2019-12-20",rate:4.15},{date:"2020-01-20",rate:4.15},
+    {date:"2020-02-20",rate:4.05},{date:"2020-03-20",rate:4.05},{date:"2020-04-20",rate:3.85},
+    {date:"2020-05-20",rate:3.85},{date:"2020-06-22",rate:3.85},{date:"2020-07-20",rate:3.85},
+    {date:"2020-08-20",rate:3.85},{date:"2020-09-21",rate:3.85},{date:"2020-10-20",rate:3.85},
+    {date:"2020-11-20",rate:3.85},{date:"2020-12-21",rate:3.85},{date:"2021-01-20",rate:3.85},
+    {date:"2021-02-22",rate:3.85},{date:"2021-03-22",rate:3.85},{date:"2021-04-20",rate:3.85},
+    {date:"2021-05-20",rate:3.85},{date:"2021-06-21",rate:3.85},{date:"2021-07-20",rate:3.85},
+    {date:"2021-08-20",rate:3.85},{date:"2021-09-22",rate:3.85},{date:"2021-10-20",rate:3.85},
+    {date:"2021-11-22",rate:3.85},{date:"2021-12-20",rate:3.80},{date:"2022-01-20",rate:3.70},
+    {date:"2022-02-21",rate:3.70},{date:"2022-03-21",rate:3.70},{date:"2022-04-20",rate:3.70},
+    {date:"2022-05-20",rate:3.70},{date:"2022-06-20",rate:3.70},{date:"2022-07-20",rate:3.70},
+    {date:"2022-08-22",rate:3.65},{date:"2022-09-20",rate:3.65},{date:"2022-10-20",rate:3.65},
+    {date:"2022-11-21",rate:3.65},{date:"2022-12-20",rate:3.65},{date:"2023-01-20",rate:3.65},
+    {date:"2023-02-20",rate:3.65},{date:"2023-03-20",rate:3.65},{date:"2023-04-20",rate:3.65},
+    {date:"2023-05-22",rate:3.65},{date:"2023-06-20",rate:3.55},{date:"2023-07-20",rate:3.55},
+    {date:"2023-08-21",rate:3.45},{date:"2023-09-20",rate:3.45},{date:"2023-10-20",rate:3.45},
+    {date:"2023-11-20",rate:3.45},{date:"2023-12-20",rate:3.45},{date:"2024-01-22",rate:3.45},
+    {date:"2024-02-20",rate:3.45},{date:"2024-03-20",rate:3.45},
+].map(item => ({date: new Date(item.date), rate: item.rate}));
 
-            if (isNaN(principal) || !startDateStr || !endDateStr || isNaN(multiplier)) {
-                resultDiv.innerHTML = '<h4>错误</h4><p>请填写所有必填项。</p>';
-                resultDiv.style.display = 'block';
-                return;
-            }
+function getLprForDate(date) {
+    let lpr = lprHistory[0].rate;
+    for (const record of lprHistory) {
+        if (date >= record.date) lpr = record.rate;
+        else break;
+    }
+    return lpr;
+}
 
-            const startDate = new Date(startDateStr);
-            const endDate = new Date(endDateStr);
+function calculatePenalty() {
+    const principal = parseFloat(document.getElementById('principal').value);
+    const startDateStr = document.getElementById('start-date').value;
+    const endDateStr = document.getElementById('end-date').value;
+    const multiplier = parseFloat(document.getElementById('lpr-multiplier').value);
+    const resultDiv = document.getElementById('penalty-result');
+    const lang = document.body.getAttribute('lang');
 
-            if (startDate > endDate) {
-                resultDiv.innerHTML = '<h4>错误</h4><p>开始日期不能晚于截止日期。</p>';
-                resultDiv.style.display = 'block';
-                return;
-            }
+    if (isNaN(principal) || !startDateStr || !endDateStr || isNaN(multiplier)) {
+        resultDiv.innerHTML = '<h4>' + (lang==='zh-CN'?'错误':'Error') + '</h4><p>' + (lang==='zh-CN'?'请填写所有必填项':'Please fill in all required fields') + '.</p>';
+        resultDiv.style.display = 'block'; return;
+    }
 
-            let totalInterest = 0;
-            let calculationHtml = '<div class="calculation-details"><h4>分段计息详情：</h4>';
-            
-            const segmentPoints = [...new Set([
-                startDate.toISOString().split('T')[0],
-                endDate.toISOString().split('T')[0],
-                ...lprHistory.map(h => h.date.toISOString().split('T')[0])
-            ])]
-            .map(d => new Date(d))
-            .filter(d => d >= startDate && d < endDate)
-            .sort((a, b) => a - b);
-            
-            segmentPoints.push(endDate);
-            const uniqueSegmentPoints = [...new Set(segmentPoints.map(d=>d.getTime()))].map(t => new Date(t)).sort((a,b)=>a-b);
+    const startDate = new Date(startDateStr);
+    const endDate = new Date(endDateStr);
+    if (startDate > endDate) {
+        resultDiv.innerHTML = '<h4>' + (lang==='zh-CN'?'错误':'Error') + '</h4><p>' + (lang==='zh-CN'?'开始日期不能晚于截止日期':'Start date cannot be after end date') + '.</p>';
+        resultDiv.style.display = 'block'; return;
+    }
 
+    let totalInterest = 0;
+    let calcHtml = '<div class="calculation-details"><h4>' + (lang==='zh-CN'?'分段计息详情':'Breakdown by period') + ':</h4>';
+    const pts = [...new Set([startDate.toISOString().split('T')[0], endDate.toISOString().split('T')[0],
+        ...lprHistory.map(h => h.date.toISOString().split('T')[0])])]
+        .map(d => new Date(d)).filter(d => d >= startDate && d < endDate).sort((a,b)=>a-b);
+    pts.push(endDate);
+    const uniquePts = [...new Set(pts.map(d=>d.getTime()))].map(t=>new Date(t)).sort((a,b)=>a-b);
 
-            for (let i = 0; i < uniqueSegmentPoints.length - 1; i++) {
-                let segmentStart = uniqueSegmentPoints[i];
-                let segmentEnd = uniqueSegmentPoints[i+1];
-                
-                const lprRate = getLprForDate(segmentStart);
-                const annualRate = (lprRate / 100) * multiplier;
-                
-                const timeDiff = segmentEnd.getTime() - segmentStart.getTime();
-                const daysInSegment = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-                if (daysInSegment <= 0) continue;
-
-                const segmentInterest = principal * (annualRate / 365) * daysInSegment;
-                totalInterest += segmentInterest;
-                
-                let displayEndDate = new Date(segmentEnd.getTime() - 86400000); // minus one day for display
-                if (segmentEnd.getTime() === endDate.getTime()) {
-                    displayEndDate = endDate;
-                }
-
-                calculationHtml += `<p>${segmentStart.toISOString().substring(0,10)} 至 ${displayEndDate.toISOString().substring(0,10)} (${daysInSegment}天) @ ${lprRate.toFixed(2)}% (x${multiplier}) = ¥ ${segmentInterest.toFixed(2)}</p>`;
-            }
-
-            calculationHtml += '</div>';
-
-            resultDiv.innerHTML = `
-                <h4>计算结果</h4>
-                <p><strong>应付总利息 / 违约金：</strong><br><strong>¥ ${totalInterest.toFixed(2)}</strong></p>
-                ${calculationHtml}
-            `;
-            resultDiv.style.display = 'block';
-        }
-    </script>
+    for (let i = 0; i < uniquePts.length - 1; i++) {
+        const segStart = uniquePts[i];
+        const segEnd = uniquePts[i+1];
+        const lprRate = getLprForDate(segStart);
+        const annualRate = (lprRate / 100) * multiplier;
+        const days = Math.ceil((segEnd - segStart) / 86400000);
+        if (days <= 0) continue;
+        const interest = principal * (annualRate / 365) * days;
+        totalInterest += interest;
+        const displayEnd = new Date(segEnd - 86400000);
+        const endStr = segEnd.getTime() === endDate.getTime() ? endDate.toISOString().substring(0,10) : displayEnd.toISOString().substring(0,10);
+        calcHtml += '<p>' + segStart.toISOString().substring(0,10) + ' ~ ' + endStr + ' (' + days + 'd) @ ' + lprRate.toFixed(2) + '% (x' + multiplier + ') = ¥' + interest.toFixed(2) + '</p>';
+    }
+    calcHtml += '</div>';
+    resultDiv.innerHTML = '<h4>' + (lang==='zh-CN'?'计算结果':'Result') + '</h4><p><strong>' + (lang==='zh-CN'?'应付总利息/违约金':'Total interest/penalty') + ':</strong><br><strong>¥' + totalInterest.toFixed(2) + '</strong></p>' + calcHtml;
+    resultDiv.style.display = 'block';
+}
+</script>
 </body>
 </html>
