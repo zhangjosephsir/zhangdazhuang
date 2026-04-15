@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Perspectives & Debates - Attorney Zhang Shunfeng</title>
+    <meta name="description" content="学术研究、新观点、新解释、判决争议——张顺锋律师与业界同行共同探讨法律前沿问题。">
+    <meta name="robots" content="index, follow">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; background: #f8f9fa; color: #333; }
+        .lang-switch{position:fixed;top:16px;right:20px;z-index:1000;display:flex;gap:6px}
+        .lang-btn{padding:6px 16px;border:2px solid rgba(255,255,255,0.7);border-radius:20px;background:rgba(255,255,255,0.15);color:#fff;font-size:0.85em;cursor:pointer;font-weight:600;backdrop-filter:blur(8px);transition:all 0.2s;font-family:inherit}
+        .lang-btn:hover,.lang-btn.active{background:rgba(255,255,255,0.9);color:#1a5f7a}
+        [lang="zh-CN"] .en-only{display:none}
+        [lang="en"] .zh-only{display:none}
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 50px 0 20px; color: #159895; text-decoration: none; font-weight: bold; }
+        .placeholder { text-align: center; padding: 80px 40px; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .placeholder h2 { font-size: 1.8em; color: #1a5f7a; margin-bottom: 15px; }
+        .placeholder p { color: #7f8c8d; }
+        footer { text-align: center; padding: 30px; color: #888; font-size: 0.95em; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-top: 30px; }
+    </style>
+</head>
+<body lang="zh-CN">
+
+<div class="lang-switch">
+    <button class="lang-btn active" id="btn-zh" onclick="setLang('zh-CN')">中文</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<div class="container">
+    <a href="index.html" class="back-link">
+        <span class="zh-only">&larr; 返回首页</span>
+        <span class="en-only">&larr; Back to Home</span>
+    </a>
+
+    <div class="placeholder">
+        <h2>
+            <span class="zh-only">⚖️ 学术与争鸣</span>
+            <span class="en-only">⚖️ Academic Perspectives & Debates</span>
+        </h2>
+        <p class="zh-only">暂无内容，敬请期待。</p>
+        <p class="en-only">More content coming soon. Stay tuned!</p>
+    </div>
+
+    <footer>
+        <p>
+            <span class="zh-only">© 2026 张顺锋律师 | 三十年民事诉讼经验</span>
+            <span class="en-only">© 2026 Attorney Zhang Shunfeng | 30 Years Civil Litigation</span>
+        </p>
+    </footer>
+</div>
+
+<script>
+function setLang(lang) {
+    document.body.setAttribute('lang', lang);
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh-CN');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    localStorage.setItem('prefLang', lang);
+}
+var saved = localStorage.getItem('prefLang');
+if (saved) setLang(saved);
+</script>
+</body>
+</html>
